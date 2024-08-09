@@ -1,0 +1,30 @@
+{
+  "features": [
+    {
+      "title": "Forum",
+      "href": "/forum"
+    },
+    {
+      "title": "Counseling",
+      "href": "/counseling"
+    },
+    {
+      "title": "Articles",
+      "href": "/articles"
+    },
+    {
+      "title": "Diary",
+      "href": "/diary"
+    }
+  ],
+  "contacts": [
+    {
+      "title": "example@mail.com",
+      "href": "/forum"
+    },
+    {
+      "title": "081-xxx-xxx",
+      "href": "/counseling"
+    }
+  ]
+}

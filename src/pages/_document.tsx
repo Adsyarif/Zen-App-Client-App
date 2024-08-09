@@ -1,4 +1,4 @@
-import { Navigation } from "@/components/common";
+import { Navigation, Footer } from "@/components/common";
 import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
@@ -9,7 +9,7 @@ export default function Document() {
         <Navigation />
         <Main />
         <NextScript />
-        {/* <Footer /> */}
+        <Footer />
       </body>
     </Html>
   );

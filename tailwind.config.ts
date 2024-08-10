@@ -20,6 +20,7 @@ const config: Config = {
         mocca: "#FAF6E3",
         leaf: "#22543D",
         star: "#F6F63D",
+
       },
     },
   },

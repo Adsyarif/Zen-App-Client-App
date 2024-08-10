@@ -12,7 +12,7 @@ interface Route {
 const Navigation: React.FC = () => {
   const { currentUser } = useContext<UserContextType>(AppContext);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [isLogin, setIsLogin] = useState<boolean>(true);
 
   const userLogin = (userInfo: typeof currentUser): void => {
     if (userInfo) {
@@ -29,8 +29,8 @@ const Navigation: React.FC = () => {
   };
 
   return (
-    <nav className="py-5 px-32 flex items-center justify-between">
-      <div className="text-leaf text-2xl font-bold">ZenZone</div>
+    <nav className="py-5 px-8 md:px-32 flex items-center justify-between md:h-40">
+      <div className="text-leaf text-3xl font-bold">ZenZone</div>
       <div className="block md:hidden">
         <button
           onClick={toggleMenu}
@@ -60,10 +60,10 @@ const Navigation: React.FC = () => {
         }`}
       >
         {isLogin && (
-          <div className="text-sm md:flex md:flex-grow md:flex-row">
+          <div className="text-sm md:justify-between gap-32 md:flex md:flex-grow md:flex-row">
             {routes.map((route: Route, index: number) => (
               <Link key={index} href={route.href}>
-                <p className="block mt-4 md:inline-block md:mt-0 text-leaf hover:text-lightGreen mr-4">
+                <p className="block mt-4 text-2xl md:inline-block md:mt-0 text-leaf hover:text-lightGreen">
                   {route.title}
                 </p>
               </Link>
@@ -75,25 +75,25 @@ const Navigation: React.FC = () => {
         <Link href="/profile">
           <div>
             <Image
-              src="/profile-pic (8).png"
+              src="/counselorImg.png"
               width={36}
               height={36}
               alt="Profile picture"
-              className="border rounded-full border-leaf"
+              className="w-14 h-14 border rounded-full border-leaf object-cover"
             />
           </div>
         </Link>
       ) : (
         <div className="flex gap-5">
           <Link href="/login">
-            <p className="inline-block text-sm px-4 py-2 leading-none border rounded bg-leaf font-bold text-cream hover:bg-cream hover:border-leaf hover:text-leaf mt-4 lg:mt-0">
+            <button className="w-24 h-11 text-sm px-4 py-2 leading-none border rounded-lg bg-leaf font-bold text-mocca hover:bg-cream hover:border-leaf hover:text-leaf mt-4 lg:mt-0">
               Login
-            </p>
+            </button>
           </Link>
           <Link href="/register">
-            <p className="inline-block text-sm px-4 py-2 leading-none border rounded text-leaf font-bold border-leaf hover:border-transparent hover:text-cream hover:bg-leaf mt-4 lg:mt-0">
+            <button className="w-24 h-11 text-sm px-4 py-2 leading-none border rounded-lg text-leaf font-bold border-leaf hover:border-transparent hover:text-cream hover:bg-leaf mt-4 lg:mt-0">
               Register
-            </p>
+            </button>
           </Link>
         </div>
       )}

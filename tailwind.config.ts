@@ -19,6 +19,7 @@ const config: Config = {
         cream: "#F4E9B2",
         mocca: "#FAF6E3",
         leaf: "#22543D",
+        star: "#F6F63D",
       },
     },
   },

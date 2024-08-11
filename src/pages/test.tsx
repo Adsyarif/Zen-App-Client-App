@@ -3,9 +3,9 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import CarouselReviewCard from "@/components/carouselReviewCard";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
+import CarouselReviewCard from "@/components/Counselor/carouselReviewCard";
 
 const style = {
   position: "absolute" as "absolute",

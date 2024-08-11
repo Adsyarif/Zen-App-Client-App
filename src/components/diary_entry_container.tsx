@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import IconButton from "@mui/material/IconButton";
-import AddReactionOutlinedIcon from "@mui/icons-material/AddReactionOutlined";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ZenZoneBrandLogo from "../../public/ZenZoneBrandPict.png";
+import DropdownMoodPicker from "./dropdown_mood_picker";
+import DropdownTripleDotsMenu from "./dropdown_triple_dots";
 
 const DiaryEntryContainer: React.FC = () => {
   const [diaryText, setDiaryText] = useState<string>("");
@@ -15,13 +14,9 @@ const DiaryEntryContainer: React.FC = () => {
     <div className="bg-green-900 text-lg font-semibold text-center items-center rounded-lg p-6 h-screen">
       <p className="text-white text-2xl mb-6">My Diary Entry</p>
       <div className="bg-gray-100 rounded-lg shadow-md p-4 w-full h-full max-h-[80vh] overflow-y-auto">
-        <div className="flex justify-between">
-          <IconButton>
-            <AddReactionOutlinedIcon className="w-10 h-10 text-green-900" />
-          </IconButton>
-          <IconButton>
-            <MoreVertIcon className="w-10 h-10 text-green-900" />
-          </IconButton>
+        <div className="flex justify-between ">
+          <DropdownMoodPicker />
+          <DropdownTripleDotsMenu />
         </div>
         <p className="text-green-900 text-left font-bold py-2">
           September 17th, 2020

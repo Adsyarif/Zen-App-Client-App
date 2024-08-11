@@ -3,9 +3,9 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import CarouselReviewCard from "@/components/carouselReviewCard";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
+import CarouselReviewCard from "@/components/Counselor/ReviewCard";
 
 const style = {
   position: "absolute" as "absolute",
@@ -18,7 +18,7 @@ const style = {
   p: 4,
 };
 
-export default function Review_Consoueling() {
+export default function Review_Counseling() {
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
@@ -64,7 +64,12 @@ export default function Review_Consoueling() {
               id="modal-modal-title"
               variant="h6"
               component="h2"
-              sx={{ textAlign: "center", fontWeight: "bold", fontSize: { xs: 24, sm: 28, md: 32 }, color: 'white' }}
+              sx={{
+                textAlign: "center",
+                fontWeight: "bold",
+                fontSize: { xs: 24, sm: 28, md: 32 },
+                color: "white",
+              }}
             >
               Add Review
             </Typography>

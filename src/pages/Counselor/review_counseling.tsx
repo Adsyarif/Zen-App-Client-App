@@ -5,7 +5,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
-import CarouselReviewCard from "@/components/Counselor/carouselReviewCard";
+import CarouselReviewCard from "@/components/Counselor/ReviewCard";
+
 
 const style = {
   position: "absolute" as "absolute",
@@ -18,7 +19,7 @@ const style = {
   p: 4,
 };
 
-export default function Review_Consoueling() {
+export default function Review_Counseling() {
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
 

@@ -30,7 +30,8 @@ const Navigation: React.FC = () => {
 
   return (
     <nav className="py-5 px-8 md:px-32 flex items-center justify-between md:h-40">
-      <div className="text-leaf text-3xl font-bold">ZenZone</div>
+      <Link href="/"><div className="text-leaf text-3xl font-bold">ZenZone</div></Link>
+    
       <div className="block md:hidden">
         <button
           onClick={toggleMenu}

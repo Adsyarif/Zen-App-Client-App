@@ -1,14 +1,64 @@
-// import { useFormik } from "formik";
-
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "@/providers/AppContext";
+import { useRouter } from "next/router";
 
 const SignIn = () => {
+  const router = useRouter();
+  // const [loginError, setLoginError] = useState('');
+  // const { auth, setAuth } = useContext(AppContext);
 
-  // const formik = useFormik({
-  //   initialValues: {
-  //     email: "",
-  //     password: ""
-  //   }
-  // })
+  const dummyUser = {
+    email: "testuser@example.com",
+    password: "TestPassword1!",
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("Required")
+        .min(12, "Email must be at least 12 characters")
+        .max(50, "Email must be at most 50 characters")
+        .matches(/@/, 'Email must contain "@"')
+        .matches(/\./, 'Email must contain "."'),
+      password: Yup.string()
+        .required("Required")
+        .min(8, "Password must be at least 8 characters")
+        .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+        .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+        .matches(/[0-9]/, "Password must contain at least one number")
+        .matches(
+          /[\W_]/,
+          "Password must contain at least one special character"
+        ),
+    }),
+    onSubmit: async (values, { setSubmitting, setErrors }) => {
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        // Check credentials against the dummy user
+        if (
+          values.email === dummyUser.email &&
+          values.password === dummyUser.password
+        ) {
+          alert("Login successful!");
+          router.push("/dashboard"); // Redirect to a different page, e.g., dashboard
+        } else {
+          throw new Error("Invalid email or password.");
+        }
+      } catch (error) {
+        setErrors({ password: "Invalid username or password" });
+      }
+      setSubmitting(false);
+    },
+  });
 
   return (
     <div className="m-10 h-full">
@@ -32,7 +82,7 @@ const SignIn = () => {
             </h1>
           </div>
           <div className="m-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form action="">
+            <form onSubmit={formik.handleSubmit}>
               <div className="flex flex-col">
                 <label
                   htmlFor="email"
@@ -61,9 +111,7 @@ const SignIn = () => {
                   />
                 </div>
                 <div className="text-white text-end">
-                  <p>
-                    Forgot Password
-                  </p>
+                  <p>Forgot Password</p>
                 </div>
               </div>
               <div className="mt-5 mb-5">

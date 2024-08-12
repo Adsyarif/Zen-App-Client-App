@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "date": "2019-08-24T14:15:22Z",
+    "psychologist": "Dr. Blabla",
+    "details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati facilis ipsa dignissimos, ex eligendi officiis possimus deleniti tempora non, exercitationem quis mollitia blanditiis qui aliquid commodi enim aut, similique odit!"
+  },
+  {
+    "id": 2,
+    "date": "2019-08-24T14:15:22Z",
+    "psychologist": "Dr. Blabla",
+    "details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati facilis ipsa dignissimos, ex eligendi officiis possimus deleniti tempora non, exercitationem quis mollitia blanditiis qui aliquid commodi enim aut, similique odit!"
+  },
+  {
+    "id": 3,
+    "date": "2019-08-24T14:15:22Z",
+    "psychologist": "Dr. Blabla",
+    "details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati facilis ipsa dignissimos, ex eligendi officiis possimus deleniti tempora non, exercitationem quis mollitia blanditiis qui aliquid commodi enim aut, similique odit!"
+  }
+]

@@ -26,8 +26,9 @@ interface UserProviderProps {
 
 export const AppProvider: FC<UserProviderProps> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [auth, setAuth] = useState<string>();
 
-  const value = { currentUser, setCurrentUser };
+  const value = { currentUser, setCurrentUser, auth, setAuth };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };

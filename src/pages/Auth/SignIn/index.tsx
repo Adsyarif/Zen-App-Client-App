@@ -1,18 +1,20 @@
-import * as Yup from "yup";
-import { useFormik } from "formik";
+import * as Yup from "yup"
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useFormik } from "formik";
 import { AppContext } from "@/providers/AppContext";
 import { useRouter } from "next/router";
+import { API_BASE } from "@/lib/projectApi";
+import { useState, useEffect } from "react";
 
 const SignIn = () => {
   const router = useRouter();
-  // const [loginError, setLoginError] = useState('');
   // const { auth, setAuth } = useContext(AppContext);
 
+  // jangan lupa dihapus dummy usernya 
   const dummyUser = {
     email: "testuser@example.com",
     password: "TestPassword1!",
+    token: "dummyToken1234567890"
   };
 
   const formik = useFormik({
@@ -34,44 +36,43 @@ const SignIn = () => {
         .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
         .matches(/[a-z]/, "Password must contain at least one lowercase letter")
         .matches(/[0-9]/, "Password must contain at least one number")
-        .matches(
-          /[\W_]/,
-          "Password must contain at least one special character"
-        ),
+        .matches(/[\W_]/,"Password must contain at least one special character"),
     }),
     onSubmit: async (values, { setSubmitting, setErrors }) => {
+      console.log("Form Values:", values);
       try {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-
-        // Check credentials against the dummy user
-        if (
-          values.email === dummyUser.email &&
-          values.password === dummyUser.password
-        ) {
-          alert("Login successful!");
-          router.push("/dashboard"); // Redirect to a different page, e.g., dashboard
-        } else {
-          throw new Error("Invalid email or password.");
-        }
-      } catch (error) {
-        setErrors({ password: "Invalid username or password" });
+        const response = await axios.post(`${API_BASE}account/login`, {
+            username: values.username,
+            password: values.password,
+        });
+        const token = response.data.data.access_token;
+        localStorage.setItem("token", token);
+        alert(response.data.status.message)
+        router.push("/Forum")
+      } catch(error) {
+        console.error("login failed:", error)
+        setErrors({ password: "Invalid email or password" });
       }
       setSubmitting(false);
-    },
+    } 
   });
+
+  useEffect(() => {
+    const getToken = localStorage.getItem("token");
+    if (getToken) {
+      router.push("/Forum");
+    }
+  }, []);
 
   return (
     <div className="m-10 h-full">
       <div className="flex flex-row">
         <div className="flex flex-col w-1/2 m-10">
-          <h1 className="text-4xl w-1/2 font-bold text-[#22543D] mb-8">
+          <h1 className="text-7xl font-bold text-[#22543D] mb-8">
             Welcome To Zen Zone
           </h1>
           <p className="font-medium text-[#22543D] mb-8">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate
-            odit iusto quae aut nemo delectus possimus debitis, reiciendis
-            dignissimos obcaecati minus excepturi? Suscipit facilis natus nihil,
-            amet fugiat itaque distinctio!
+          Lorem ipsum odor amet, consectetuer adipiscing elit. Scelerisque quam mi turpis suspendisse mus. Purus sit sodales nostra dui faucibus massa ultricies et at. Fermentum est hendrerit proin etiam urna consequat donec dui. Praesent dui consectetur faucibus penatibus penatibus vel pulvinar. Fames tellus natoque commodo blandit massa montes. Cursus neque consequat erat fringilla, hendrerit suspendisse eros.
           </p>
           <div></div>
         </div>
@@ -92,11 +93,15 @@ const SignIn = () => {
                 </label>
                 <div className="mt-2 mb-2">
                   <input
-                    className="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 px-2 py-1.5 text-[#22543D] placeholder:text-gray-400"
                     id="email"
                     type="email"
+                    {...formik.getFieldProps("email")}
                   />
                 </div>
+                {formik.touched.email && formik.errors.email ? (
+                  <div>{formik.errors.email}</div>
+                ) : null}
                 <label
                   htmlFor="password"
                   className="block text-sm font-medium leading-6 text-white"
@@ -105,11 +110,15 @@ const SignIn = () => {
                 </label>
                 <div className="mt-2 mb-2">
                   <input
-                    className="block w-full rounded-md border-0 px-2 py-1.5 text-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    className="block w-full rounded-md border-0 px-2 py-1.5 text-[#22543D] placeholder:text-gray-400"
                     id="password"
                     type="password"
+                    {...formik.getFieldProps("password")}
                   />
                 </div>
+                {formik.touched.password && formik.errors.password ? (
+                  <div>{formik.errors.password}</div>
+                ) : null}
                 <div className="text-white text-end">
                   <p>Forgot Password</p>
                 </div>
@@ -117,6 +126,7 @@ const SignIn = () => {
               <div className="mt-5 mb-5">
                 <button
                   type="submit"
+                  disabled={formik.isSubmitting}
                   className="flex w-full justify-center rounded-md bg-white px-3 py-1.5 text-sm font-semibold leading-6 text-[#22543D] shadow-sm hover:bg-[#A0C9B6]"
                 >
                   Sign in

@@ -1,13 +1,19 @@
 import Image from "next/image";
 import { RxDotFilled } from "react-icons/rx";
 
+interface ArticlesCardProps {
+  article: any;
+  onCardClick: (articleTitle: number) => void;
+}
+
 const summary = (text: string, maxLength = 160): string => {
   return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
 };
 
-export default function ArticlesCard({ article }: { article: any }) {
+export default function ArticlesCard({ article, onCardClick }: ArticlesCardProps) {
+
   return (
-    <button className="w-full md:w-72 p-2 flex flex-col">
+    <button onClick={() => onCardClick(article.id)} className="w-full md:w-72 p-2 flex flex-col">
       <Image
         src={"/articleImage.png"}
         width={320}

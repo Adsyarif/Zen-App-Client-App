@@ -1,0 +1,10 @@
+{
+  "id": 1,
+  "name": "John Doe",
+  "date-of-birth": "1999-08-24T14:15:22Z",
+  "phone-number": "08888888888",
+  "email": "johndoe@gmail.com",
+  "gender": "male",
+  "address": "Street Anonymousd RT.01 RW.02, Batu Ampar City, United State of America",
+  "imgUrl": "@/assets/img/user-profile.png"
+}

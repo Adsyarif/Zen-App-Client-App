@@ -2,7 +2,7 @@ import { FC, ButtonHTMLAttributes, ReactNode, PropsWithChildren } from "react";
 
 export const enum ButtonStyles {
   BaseButton = "border-none",
-  PrimaryButton = "bg-green-900 rounded-lg text-white p-2 my-5 font-semibold",
+  PrimaryButton = "bg-green-900 rounded-lg text-white p-2 my-5 font-semibold hover:bg-green-700",
 }
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {

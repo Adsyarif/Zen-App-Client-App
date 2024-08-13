@@ -97,7 +97,7 @@ const DropdownMoodPicker: React.FC = () => {
     };
   };
   return (
-    <div className="visible lg:hidden md:hidden text-center">
+    <div className="visible lg:hidden md:hidden text-left">
       <IconButton onClick={handleMenuOpen}>
         <AddReactionOutlinedIcon className="w-10 h-10 text-green-900"></AddReactionOutlinedIcon>
       </IconButton>
@@ -107,7 +107,7 @@ const DropdownMoodPicker: React.FC = () => {
         onClose={handleMenuCLose}
         sx={{
           "& .MuiPaper-root": {
-            backgroundColor: "transparent",
+            backgroundColor: "#FFFFFF",
             boxShadow: "none",
           },
         }}

@@ -11,19 +11,21 @@ const DiaryEntryContainer: React.FC = () => {
   };
 
   return (
-    <div className="bg-green-900 text-lg font-semibold text-center items-center rounded-lg p-6 h-screen">
+    <div className="bg-green-900 text-lg font-semibold text-center items-center rounded-lg p-6 h-screen md:w-full">
       <p className="text-white text-2xl mb-6">My Diary Entry</p>
       <div className="bg-gray-100 rounded-lg shadow-md p-4 w-full h-full max-h-[80vh] overflow-y-auto">
-        <div className="flex justify-between ">
-          <DropdownMoodPicker />
+        <DropdownMoodPicker />
+        <div className="flex flex-row justify-between">
+          <div className="flex flex-col">
+            <p className="text-green-900 text-left font-bold py-2 text-base">
+              September 17th, 2020
+            </p>
+            <p className="text-green-900 text-left font-bold py-2 text-base">
+              My current mood:
+            </p>
+          </div>
           <DropdownTripleDotsMenu />
         </div>
-        <p className="text-green-900 text-left font-bold py-2">
-          September 17th, 2020
-        </p>
-        <p className="text-green-900 text-left font-bold py-2">
-          My current mood:
-        </p>
         <div className="relative bg-white rounded-lg p-4">
           <div
             className="absolute inset-0"

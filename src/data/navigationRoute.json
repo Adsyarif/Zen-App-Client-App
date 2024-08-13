@@ -1,7 +1,7 @@
 [
   {
     "title": "Forum",
-    "href": "/forum"
+    "href": "/Forum"
   },
   {
     "title": "Counseling",
@@ -14,5 +14,9 @@
   {
     "title": "Diary",
     "href": "/Diary"
+  },
+  {
+    "title": "Profile",
+    "href": "/Profile"
   }
 ]

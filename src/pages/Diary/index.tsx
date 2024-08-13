@@ -1,8 +1,16 @@
+import { Navigation } from '@/components/common';
 import DiaryCard from '@/components/diary_card';
 
 const Diary = () => {
     return (
-        <div className="flex justify-center m-10"><DiaryCard /></div>
+        <>
+
+            <Navigation/>
+            <div className="flex justify-center m-10 ">
+                <DiaryCard />
+            </div>
+        </>
+        
     )
 }
 

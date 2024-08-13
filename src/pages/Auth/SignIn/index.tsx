@@ -4,18 +4,12 @@ import { useFormik } from "formik";
 import { AppContext } from "@/providers/AppContext";
 import { useRouter } from "next/router";
 import { API_BASE } from "@/lib/projectApi";
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const SignIn = () => {
   const router = useRouter();
-  // const { auth, setAuth } = useContext(AppContext);
-
-  // jangan lupa dihapus dummy usernya
-  const dummyUser = {
-    email: "testuser@example.com",
-    password: "TestPassword1!",
-    token: "dummyToken1234567890",
-  };
+  const { setCurrentUser } = useContext(AppContext);
+  const [error, setError] = useState("");
 
   const formik = useFormik({
     initialValues: {
@@ -44,17 +38,27 @@ const SignIn = () => {
     onSubmit: async (values, { setSubmitting, setErrors }) => {
       console.log("Form Values:", values);
       try {
-        const response = await axios.post(`${API_BASE}account/login`, {
+        const response = await axios.post(`${API_BASE}/account/login`, {
           email: values.email,
           password: values.password,
         });
-        const token = response.data.data.access_token;
-        localStorage.setItem("token", token);
-        alert(response.data.status.message);
+        const userData = response.data.data.account;
+        localStorage.setItem("currentUser", JSON.stringify({
+          email: userData.email,
+          account_id: userData.account_id,
+        }));
+
+        setCurrentUser({
+          email: userData.email,
+          account_id: userData.account_id,
+        });
+
+        console.log("User data after login:", userData);
         router.push("/Forum");
       } catch (error) {
-        console.error("login failed:", error);
+        console.error("Login failed:", error);
         setErrors({ password: "Invalid email or password" });
+        setError("Email atau password salah!");
       }
       setSubmitting(false);
     },
@@ -114,7 +118,9 @@ const SignIn = () => {
                   />
                 </div>
                 {formik.touched.email && formik.errors.email ? (
-                  <div className="text-amber-300 text-sm mt-1">{formik.errors.email}</div>
+                  <div className="text-amber-300 text-sm mt-1">
+                    {formik.errors.email}
+                  </div>
                 ) : null}
                 <label
                   htmlFor="password"
@@ -131,7 +137,9 @@ const SignIn = () => {
                   />
                 </div>
                 {formik.touched.password && formik.errors.password ? (
-                  <div className="text-amber-300 text-sm mt-1">{formik.errors.password}</div>
+                  <div className="text-amber-300 text-sm mt-1">
+                    {formik.errors.password}
+                  </div>
                 ) : null}
                 <div className="text-white text-end">
                   <a href="">Forgot Password</a>
@@ -145,6 +153,9 @@ const SignIn = () => {
                 >
                   Sign in
                 </button>
+                {error && (
+                  <p className="text-red-500 mt-2 text-center">{error}</p>
+                )}
               </div>
             </form>
           </div>

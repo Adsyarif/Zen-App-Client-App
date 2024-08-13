@@ -1,10 +1,14 @@
 import * as Yup from "yup";
-import { ErrorMessage, Field, Form, useFormik } from "formik";
+import { useFormik } from "formik";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { API_BASE } from "@/lib/projectApi";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "@/providers/AppContext";
-import { useRouter } from "next/router";
+import { GoCommentDiscussion } from "react-icons/go";
+import { IoPeopleCircleSharp } from "react-icons/io5";
+import { FaBookOpen } from "react-icons/fa";
+import { BsNewspaper } from "react-icons/bs";
 
 const SignUp = () => {
   const router = useRouter();
@@ -86,28 +90,26 @@ const SignUp = () => {
             hendrerit suspendisse eros.
           </p>
           <div>
-            <a href=""></a>
-            <a href=""></a>
-            <a href=""></a>
-            <a href=""></a>
+            <a href="#" className="bg-[#22543D] text-white"><GoCommentDiscussion/></a>
+            <a href="#" className="bg-[#22543D] text-white"><IoPeopleCircleSharp /></a>
+            <a href="#" className="bg-[#22543D] text-white"><FaBookOpen /></a>
+            <a href="#" className="bg-[#22543D] text-white"><BsNewspaper /></a>
           </div>
         </div>
         <div className="m-10 bg-[#22543D] flex-col w-1/2 rounded-md">
-          <div>
-            <h1 className="mt-10 text-center text-2xl font-bold text-white">
-              Sign Up
-            </h1>
-          </div>
           <div className="m-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <div className="text-center text-2xl font-bold text-white">
+              Sign Up
+            </div>
             <form onSubmit={formik.handleSubmit}>
               <div className="flex flex-col">
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-white"
+                  className="block font-medium leading-6 text-white"
                 >
                   e-mail
                 </label>
-                <div className="mt-2">
+                <div className="mt-1">
                   <input
                     className="block w-full rounded-md border-0 px-2 py-1.5 text-[#22543D] placeholder:text-gray-400"
                     id="email"
@@ -116,18 +118,18 @@ const SignUp = () => {
                   />
                 </div>
                 {formik.touched.email && formik.errors.email ? (
-                  <div className="text-amber-300 text-sm mt-1">
+                  <div className="text-amber-300 text-sm">
                     {formik.errors.email}
                   </div>
                 ) : null}
 
                 <label
                   htmlFor="role_id"
-                  className="block text-sm font-medium leading-6 text-white"
+                  className="mt-5 block text-sm font-medium leading-6 text-white"
                 >
                   role:
                 </label>
-                <div className="mt-2">
+                <div className="mt-1">
                   <select
                     className="block w-full rounded-md border-0 px-2 py-1.5 text-[#22543D] placeholder:text-gray-400"
                     id="role_id"
@@ -138,7 +140,7 @@ const SignUp = () => {
                     <option value="3">Counselor</option>
                   </select>
                   {formik.touched.role_id && formik.errors.role_id ? (
-                    <div className="text-amber-300 text-sm mt-1">
+                    <div className="text-amber-300 text-sm">
                       {formik.errors.role_id}
                     </div>
                   ) : null}
@@ -146,11 +148,11 @@ const SignUp = () => {
 
                 <label
                   htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-white"
+                  className="mt-5 block text-sm font-medium leading-6 text-white"
                 >
                   password
                 </label>
-                <div className="mt-2">
+                <div className="mt-1">
                   <input
                     className="block w-full rounded-md border-0 px-2 py-1.5 text-[#22543D] placeholder:text-gray-400"
                     id="password"
@@ -159,18 +161,18 @@ const SignUp = () => {
                   />
                 </div>
                 {formik.touched.password && formik.errors.password ? (
-                  <div className="text-amber-300 text-sm mt-1">
+                  <div className="text-amber-300 text-sm">
                     {formik.errors.password}
                   </div>
                 ) : null}
 
                 <label
                   htmlFor="confirmPassword"
-                  className="block text-sm font-medium leading-6 text-white"
+                  className="mt-5 block text-sm font-medium leading-6 text-white"
                 >
                   Confirm password
                 </label>
-                <div className="mt-2">
+                <div className="mt-1">
                   <input
                     className="block w-full rounded-md border-0 px-2 py-1.5 text-[#22543D] placeholder:text-gray-400"
                     id="confirmPassword"
@@ -180,13 +182,13 @@ const SignUp = () => {
                 </div>
                 {formik.touched.confirmPassword &&
                 formik.errors.confirmPassword ? (
-                  <div className="text-amber-300 text-sm mt-1">
+                  <div className="text-amber-300 text-sm">
                     {formik.errors.confirmPassword}
                   </div>
                 ) : null}
               </div>
 
-              <div>
+              <div className="mt-10">
                 <button
                   type="submit"
                   disabled={formik.isSubmitting}

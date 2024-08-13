@@ -9,6 +9,7 @@ import ArticleDescription from "@/components/Articles/ArticleDescription";
 import ArticlesCard from "@/components/Articles/ArticlesCard";
 import { useRouter } from "next/router";
 import data from "@/data/articlesData.json";
+import { Navigation } from "@/components/common";
 
 
 interface Content {
@@ -48,6 +49,7 @@ const ArticleDetail = ({ article }: { article: ArticlesData | null }) => {
 
   return (
     <>
+      <Navigation/>
       <div className="px-8 md:px-32">
         <BackButton onBackButton={handleBackClick}/>
         <div className="flex flex-col justify-center items-center py-2">

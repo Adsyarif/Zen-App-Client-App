@@ -1,6 +1,7 @@
 import ArticlesCard from "@/components/Articles/ArticlesCard";
 import HeaderArticles from "@/components/Articles/HeaderArticles";
 import HeaderImageArticles from "@/components/Articles/HeaderImageArticles";
+import { Navigation } from "@/components/common";
 import data from "@/data/articlesData.json";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
@@ -37,6 +38,8 @@ export default function Articles() {
   );
 
   return (
+    <>
+    <Navigation/>
     <div className="md:px-32">
       <HeaderImageArticles />
       <div className="p-4">
@@ -62,5 +65,7 @@ export default function Articles() {
         )}
       </div>
     </div>
+    </>
+    
   );
 }

@@ -12,15 +12,6 @@ import { BsNewspaper } from "react-icons/bs";
 
 const SignUp = () => {
   const router = useRouter();
-  // const [loginError, setLoginError] = useState('');
-  // const { auth, setAuth } = useContext(AppContext);
-
-  // const dummyUser = {
-  //   email: "testuser@example.com",
-  //   role_id: 2,
-  //   password: "TestPassword1!",
-  //   confirmPassword: "TestPassword1!",
-  // };
 
   const formik = useFormik({
     initialValues: {
@@ -57,7 +48,7 @@ const SignUp = () => {
     onSubmit: async (values, { setSubmitting, setErrors }) => {
       console.log("Form Values:", values);
       try {
-        const response = await axios.post("api/signup", {
+        const response = await axios.post(`${API_BASE}/account/sigunp`, {
           email: values.email,
           role_id: values.role_id,
           password: values.password,

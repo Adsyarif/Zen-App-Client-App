@@ -5,6 +5,7 @@ import {
   CounselorCard,
   Pagination,
 } from "@/components/Counselor";
+import { Navigation } from "@/components/common";
 
 interface Review {
   content: string;
@@ -57,6 +58,7 @@ const Counselor = () => {
 
   return (
     <>
+      <Navigation/>
       <div className="py-5 px-8 md:px-32 md:py-5 min-h-screen">
         <HeaderCounselor handleOnChange={handleOnChange} />
         <div className="w-full py-5 flex justify-evenly flex-wrap gap-2">

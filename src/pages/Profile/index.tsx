@@ -12,6 +12,7 @@ import consulationHistory from "@/data/consultationHistory.json";
 import profileData from "@/data/profileData.json";
 
 import profileImage from "@/assets/img/user-profile.png";
+import { Navigation } from "@/components/common";
 
 export interface DataPairProps {
   label: string;
@@ -45,9 +46,10 @@ const dateFormat: Intl.DateTimeFormatOptions = {
 export default function ProfilePage() {
   return (
     <>
-      <div className="flex flex-col lg:flex-row ">
+      <Navigation/>
+      <div className="flex flex-col lg:flex-row lg:mx-12">
         {/* notif bar on mobile */}
-        <div className="lg:hidden flex gap-3 text-white font-semibold justify-around text-2xl py-3 bg-darkGreen rounded-md mx-3">
+        <div className="lg:hidden flex gap-3 text-white font-semibold justify-around text-2xl py-3  bg-darkGreen rounded-md mx-3">
           <FaRegComment />
           <FaRegBookmark />
           <AiOutlineLike />
@@ -55,7 +57,7 @@ export default function ProfilePage() {
         </div>
 
         {/* profile data left */}
-        <div className="bg-teal-900 rounded-md p-3 m-3 flex flex-col ">
+        <div className="bg-teal-900 lg:w-full h-fit pb-20 rounded-md p-3 m-3 flex flex-col ">
           <div className="flex flex-col items-center">
             <div className="rounded-full size-20 bg-lightGreen flex items-center border-4 border-lightGreen">
               <Image src={profileImage} alt="profile image" />
@@ -81,7 +83,7 @@ export default function ProfilePage() {
         </div>
 
         {/* consultation data  */}
-        <div className="bg-teal-900 rounded-md sm:p-3 sm:m-3">
+        <div className="bg-teal-900 rounded-md p-1 m-3">
           {/* notif bar on desktop */}
           <div className="hidden lg:flex gap-3 text-white w-full font-semibold justify-around text-2xl py-3">
             <FaRegComment />

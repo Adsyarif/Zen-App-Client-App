@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import Image from "next/image";
 import userIcon from "@/assets/icon/icon-user.png";
 import { FaRegComment } from "react-icons/fa6";
-import { FaRegBookmark } from "react-icons/fa";
+import { FaRegBookmark, FaBookmark } from "react-icons/fa";
 import { AiOutlineLike, AiFillLike } from "react-icons/ai";
 import { IoMdMore } from "react-icons/io";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { FaBookmark } from "react-icons/fa";
 import Link from "next/link";
 
 export interface ReportCategory {
@@ -16,13 +15,13 @@ export interface ReportCategory {
   value: string;
 }
 
-export interface PostListProps {
+export interface PostReplyProps {
   postContent: string;
   username: string;
-  commentCount: number;
-  bookmarkCount: number;
-  likeCount: number;
   post_id: string;
+  commentCount?: number; 
+  bookmarkCount?: number; 
+  likeCount?: number; 
   isLiked: boolean;
   isBookmark: boolean;
   onReportPost: (postId: string, categoryId: number) => void;
@@ -34,22 +33,23 @@ export interface PostListProps {
   isCurrentUserPost?: boolean;
 }
 
-export function PostList({
+export function Comment({
   postContent,
   username,
+  post_id,
   commentCount = 0,
   bookmarkCount = 0,
   likeCount = 0,
-  post_id,
   isLiked,
   isBookmark,
   onReportPost,
   onLikeToggle,
   onBookmarkToggle,
   reportCategories,
+
   onDeletePost,
   isCurrentUserPost = false,
-}: PostListProps) {
+}: PostReplyProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -82,17 +82,15 @@ export function PostList({
   };
 
   return (
-    <div className="flex flex-col gap-3 border w-full border-slate-400 p-3 m-3 bg-mocca rounded-md">
-      <div className="flex gap-3 w-full">
+    <div className="flex justify-center flex-col gap-3 border border-slate-400 p-3  w-full rounded-md ">
+      <div className="flex gap-3">
         <div className="flex justify-center items-start">
           <Image src={userIcon} alt="User icon" height={50} width={50} />
         </div>
 
-        <div className="w-4/5">
+        <div className=" ">
           <h3 className="my-2 font-medium">{username}</h3>
-          <Link href={`/Forum/Post/${post_id}`} passHref>
-            <p>{postContent}</p>
-          </Link>
+          <p>{postContent}</p>
         </div>
 
         <div className="flex items-start justify-end ml-auto">
@@ -104,7 +102,7 @@ export function PostList({
             aria-haspopup="true"
             onClick={handleClick}
           >
-            <IoMdMore style={{margin:"opx"}}/>
+            <IoMdMore />
           </IconButton>
           <Menu
             id="long-menu"
@@ -118,7 +116,6 @@ export function PostList({
               style: {
                 backgroundColor: "#FAF6E3",
                 width: "fit-content",
-                borderRadius:"10px",
               },
             }}
           >
@@ -130,8 +127,8 @@ export function PostList({
                 </MenuItem> 
               )
             }
-
-            {!isCurrentUserPost && reportCategories.map((category) => (
+            
+            {reportCategories.map((category) => (
               <MenuItem
                 key={category.report_category_id}
                 style={{ color: "#FFFFFF", background:"#22543D", margin:"10px", borderRadius:"5px" }}
@@ -142,19 +139,16 @@ export function PostList({
             ))}
             
             {isCurrentUserPost && (
-              <MenuItem 
-                style={{color: "#FFFFFF", background:"#22543D", margin:"10px", borderRadius:"5px" }}
-                onClick={handleDeleteClick}>Delete Post</MenuItem>
+              <MenuItem onClick={handleDeleteClick}>Delete</MenuItem>
             )}
+
           </Menu>
         </div>
-      </div>
 
+      </div>
       <div className="flex justify-end gap-4">
-        <div className="flex gap-1 items-center cursor-pointer">
-          <Link href={`/Forum/Post/${post_id}`} passHref>
-            <FaRegComment size={20} />
-          </Link>
+        <div className="flex gap-1 items-center">
+          <FaRegComment size={20} />
           <p>{commentCount}</p>
         </div>
 
@@ -167,6 +161,7 @@ export function PostList({
           {isLiked ? <AiFillLike size={20} /> : <AiOutlineLike size={20} />}
           <p>{likeCount}</p>
         </div>
+
       </div>
     </div>
   );

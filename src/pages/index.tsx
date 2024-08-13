@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from 'react';
 import FeedbackModal from '@/components/FeedbackModal';
 import { useEffect, useState } from "react";
+import { Navigation } from "@/components/common";
 
 export default function HomePage () {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -103,6 +104,7 @@ export default function HomePage () {
 
   return (
     <>
+    <Navigation/>
     <div className="px-32">
       <div className="flex py-6 items-center">
         <div className="w-full md:w-1/2">

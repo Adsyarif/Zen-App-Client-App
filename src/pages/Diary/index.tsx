@@ -1,13 +1,63 @@
 import { Navigation } from '@/components/common';
-import DiaryCard from '@/components/diary_card';
+import { DiaryCard } from '@/components/diary_card';
+import { API_BASE } from '@/lib/projectApi';
+import axios, { Axios, AxiosResponse } from 'axios';
+import { useEffect, useState } from 'react';
+import { DiaryProps } from '@/components/diary_card';
+import { FaPlus } from 'react-icons/fa';
+import DatePicker from '@/components/common/DatePicker';
+import MoodPickerComponent from '@/components/mood_picker';
+import { Dayjs } from 'dayjs';
+
+
 
 const Diary = () => {
+    const[diary, setDiary] = useState<DiaryProps[]>([]);;
+
+    useEffect(() => {
+        const fetchDiaryList = async () => {
+            try {
+                const response: AxiosResponse<{
+                    data:DiaryProps[];
+                    status:{
+                        code: number;
+                        status: string;
+                    }
+                }> = await axios.get(`${API_BASE}/diary`)
+                const listDiary = response.data.data
+                // console.log("list diary", listDiary)
+
+                if(Array.isArray(listDiary)){
+                    const filteredDiary = listDiary.filter((diary: any) => diary.deleted_at === null);
+                    // console.log("filyer", filteredDiary)
+                    setDiary(filteredDiary);
+                } 
+            } catch (error) {
+                console.error("fetch diary list failed:", error);
+            }
+        }
+        fetchDiaryList();
+    }, []);
+    
     return (
         <>
-
             <Navigation/>
-            <div className="flex justify-center m-10 ">
-                <DiaryCard />
+            <div className='p-5 md:py-12 md:px-32 flex flex-row justify-between'>
+            <div className="flex w-full bg-leaf justify-center rounded-lg flex-col">
+                <div className="flex justify-between items-center p-10 gap-20">
+                    <p className="text-white text-2xl md:text-4xl pt-5 font-bold">My Diary List</p>
+                    <a href="/Diary/entry" className="text-2xl md:text-4xl align-center flex-end pt-6"><FaPlus style={{ color: 'white', fontSize: '24px' }}/></a>
+                </div>
+                {diary.map((props, index)=>(
+                    <DiaryCard {...props} key={index} />
+                ))}
+            </div>
+            <div className='hidden lg:block max-h-28 pl-10'>
+
+            <DatePicker type={'date'} label={''} onChange={function (date: Dayjs | null): void {
+                        throw new Error('Function not implemented.');
+                    } }/>
+            </div>
             </div>
         </>
         

@@ -1,3 +1,4 @@
+import { MoodStatus } from "@/providers/AppContext";
 import React, { useState } from "react";
 
 interface MoodItem {
@@ -6,76 +7,38 @@ interface MoodItem {
   moodCategory: "Happy" | "Unhappy";
 }
 
-const MoodPickerComponent: React.FC = () => {
+interface MoodPickerComponentProps {
+  moodCategories: MoodStatus[];
+}
+
+const MoodPickerComponent: React.FC<MoodPickerComponentProps> = ({ moodCategories }) => {
   const [selectMoodStatus, setSelectMoodStatus] = useState<number | null>(null);
 
   const handleSelectMoodStatus = (id: number) => {
     setSelectMoodStatus(id);
   };
-  const moodItems: MoodItem[] = [
-    {
-      id: 1,
-      moodStatus: "Excited",
-      moodCategory: "Happy",
-    },
-    {
-      id: 2,
-      moodStatus: "Happy",
-      moodCategory: "Happy",
-    },
-    {
-      id: 3,
-      moodStatus: "Sad",
-      moodCategory: "Unhappy",
-    },
-    {
-      id: 4,
-      moodStatus: "Stress",
-      moodCategory: "Unhappy",
-    },
-    {
-      id: 5,
-      moodStatus: "Angry",
-      moodCategory: "Unhappy",
-    },
-    {
-      id: 6,
-      moodStatus: "Hungry",
-      moodCategory: "Unhappy",
-    },
-    {
-      id: 7,
-      moodStatus: "Fun",
-      moodCategory: "Happy",
-    },
-    {
-      id: 8,
-      moodStatus: "Grateful",
-      moodCategory: "Happy",
-    },
-    {
-      id: 9,
-      moodStatus: "Anxious",
-      moodCategory: "Unhappy",
-    },
-    {
-      id: 10,
-      moodStatus: "Hopefull",
-      moodCategory: "Happy",
-    },
-  ];
+
+  const moodItems: MoodItem[] = moodCategories.map(mood => ({
+    id: mood.status_id,
+    moodStatus: mood.value,
+    moodCategory: mood.mood_category_id.mood_category_id === 1 ? "Happy" : "Unhappy", 
+  }));
+  console.log("tes",moodCategories);
+
+  
 
   const getColorMoodCategory = (moodCategory: "Happy" | "Unhappy"): string => {
+    console.log(moodCategory)
     switch (moodCategory) {
       case "Happy":
-        return "bg-green-400";
+        return "bg-green-400"; 
       case "Unhappy":
-        return "bg-blue-400";
+        return "bg-blue-400"; 
       default:
-        return "bg-gray-200";
+        return "bg-gray-200"; 
     }
   };
-
+  
   const randomMoodStatusPosition = (): React.CSSProperties => {
     const rowStart = Math.floor(Math.random() * 2) + 1;
     const colStart = Math.floor(Math.random() * 2) + 1;
@@ -86,7 +49,7 @@ const MoodPickerComponent: React.FC = () => {
   };
 
   return (
-    <div className="hidden lg:visible md:visible bg-green-900 text-lg font-semibold text-center items-center rounded-lg p-6 ">
+    <div className="hidden md:block md:visible bg-green-900 text-lg font-semibold text-center items-center rounded-lg p-6">
       <p className="text-white text-2xl mb-6">Pick your current mood</p>
       <div
         className="bg-gray-100 rounded-lg shadow-md grid gap-4 p-4"

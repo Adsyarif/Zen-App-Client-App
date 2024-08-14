@@ -32,7 +32,7 @@ const DropdownTripleDotsMenu = () => {
         onClose={handleMenuClose}
         sx={{
           "& .MuiPaper-root": {
-            backgroundColor: "transparent",
+            backgroundColor: "#FAF6E3",
             boxShadow: "none",
           },
         }}
@@ -45,7 +45,8 @@ const DropdownTripleDotsMenu = () => {
             alignItems: "center",
             justifyContent: "center",
             textAlign: "center",
-            gap: "2px",
+            gap: "1px",
+            width:"100%"
           }}
         >
           <Button

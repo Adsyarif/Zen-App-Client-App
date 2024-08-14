@@ -54,7 +54,7 @@ const Navigation: React.FC = () => {
           <div className="flex gap-5">
             {routes.map((route: Route, index: number) => (
               <Link key={index} href={route.href}>
-                <p className="text-2xl text-leaf  md:bg-mocca md:text-leaf  hover:text-lightGreen px-4 py-2 rounded-lg">
+                <p className="lg:text-2xl md:text-xl text-leaf  md:bg-mocca md:text-leaf  hover:text-lightGreen px-4 py-2 rounded-lg">
                   {route.title}
                 </p>
               </Link>

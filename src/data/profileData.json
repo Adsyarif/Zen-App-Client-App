@@ -6,5 +6,6 @@
   "email": "johndoe@gmail.com",
   "gender": "male",
   "address": "Street Anonymousd RT.01 RW.02, Batu Ampar City, United State of America",
-  "imgUrl": "@/assets/img/user-profile.png"
+  "imgUrl": "@/assets/img/user-profile.png",
+  "user_name":"johndoe"
 }

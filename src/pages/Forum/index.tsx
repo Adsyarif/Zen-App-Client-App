@@ -33,7 +33,8 @@ export default function ForumPage() {
 
       if (Array.isArray(data)) {
         const filteredPosts = data.filter((post: any) => post.deleted_at === null);
-        const formattedPosts: PostListProps[] = filteredPosts.map((post: any) => {
+        const sortedPosts = filteredPosts.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        const formattedPosts: PostListProps[] = sortedPosts.map((post: any) => {
           const isLiked = userLikes.some((like: any) => like.post_id === post.post_id);
           const isBookmark = userBookmark.some((bookmark: any) => bookmark.post_id === post.post_id);
           const isCurrentUserPost = post.account_id === currentUser?.account_id;

@@ -43,6 +43,9 @@ const SignIn = () => {
           password: values.password,
         });
         const userData = response.data.data.account;
+        const profileIncomplete = response.data.data.profile_incomplete;
+        console.log("Profile incomplete status:", profileIncomplete);
+
         localStorage.setItem("currentUser", JSON.stringify({
           email: userData.email,
           account_id: userData.account_id,
@@ -54,7 +57,12 @@ const SignIn = () => {
         });
 
         console.log("User data after login:", userData);
-        router.push("/Forum");
+        
+        if (profileIncomplete === true || profileIncomplete === "true") {
+          router.push("/createProfile");
+        } else {
+          router.push("/Forum");
+        }
       } catch (error) {
         console.error("Login failed:", error);
         setErrors({ password: "Invalid email or password" });

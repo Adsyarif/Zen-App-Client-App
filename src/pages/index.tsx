@@ -105,36 +105,40 @@ export default function HomePage () {
   return (
     <>
     <Navigation/>
-    <div className="px-32">
-      <div className="flex py-6 items-center">
-        <div className="w-full md:w-1/2">
-        <div className="text-6xl text-[#055254] font-bold">Zen Zone</div>
-        <div className="text-xl text-[#055254] font-medium">ZenZone provides a welcoming environment to discuss mental health challenges openly, offering professional guidance and community support to help you feel understood and empowered.</div>
-          <div className="flex gap-4">
-            <button className="rounded-md bg-leaf p-1 px-6 my-3 text-white font-medium" >
-              More Details
-            </button>
-            <button className="rounded p-1 px-6 my-3 font-medium text-[#055254] outline outline-[#055254]" >
-              Join Us
-            </button>
+    <div className="lg:px-32 m-12">
+        <div className="flex flex-col sm:flex-row justify-center py-6 items-center">
+          <div className="w-full sm:w-full md:w-1/2 ">
+            <div className="text-6xl text-[#055254] font-bold">Zen Zone</div>
+            <div className="text-xl text-[#055254] font-medium">
+              ZenZone provides a welcoming environment to discuss mental health challenges openly, offering professional guidance and community support to help you feel understood and empowered.
+            </div>
+            <div className="flex gap-4">
+              <button className="rounded-md bg-leaf p-1 px-6 my-3 text-white font-medium">
+                More Details
+              </button>
+              <button className="rounded p-1 px-6 my-3 font-medium text-[#055254] outline outline-[#055254]">
+                Join Us
+              </button>
+            </div>
+          </div>
+
+          <div className="w-full md:w-1/2 hidden sm:block">
+            <Image
+              src="/hero-image.png"
+              width={800}
+              height={800}
+              alt="Profile picture"
+              className=""
+            />
           </div>
         </div>
-        <div className=" w-full md:w-1/2 ">
-          <Image
-                src="/hero-image.png"
-                width={800}
-                height={800}
-                alt="Profile picture"
-                className=""
-              />
-          </div>
-        </div>
+
         <div className="flex justify-center items-center flex-col py-6">
           <div className="text-4xl font-bold">Information</div>
           <div className="">Kami akan memberikan solusi dari segala penyakit mental yang anda alami</div>
         </div>
         <div className="flex pb-6">
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-1/2 hidden sm:block">
             <Image
               src="/information.png"
               width={800}

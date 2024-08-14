@@ -46,7 +46,8 @@ const Counselor = () => {
         .includes(searchField.toLowerCase());
       const isDateMatch = dateFilter
         ? counselor.patientNames.some((patient) =>
-            dayjs(patient.appointmentDate).isSame(dateFilter, "day")
+            dayjs(patient.appointmentDate).isSame(dateFilter, "day") || 
+            dayjs(patient.appointmentDate).isBefore(dateFilter, "day")
           )
         : true;
 

@@ -22,7 +22,7 @@ const DropdownTripleDotsMenu = () => {
   };
 
   return (
-    <div className="visible lg:hidden md:hidden">
+    <div className="visible text-right">
       <IconButton onClick={handleMenuOpen}>
         <MoreVertIcon className="w-10 h-10 text-green-900" />
       </IconButton>
@@ -32,7 +32,7 @@ const DropdownTripleDotsMenu = () => {
         onClose={handleMenuClose}
         sx={{
           "& .MuiPaper-root": {
-            backgroundColor: "transparent",
+            backgroundColor: "#FFFFFF",
             boxShadow: "none",
           },
         }}
@@ -50,6 +50,12 @@ const DropdownTripleDotsMenu = () => {
         >
           <Button
             ButtonStyle={ButtonStyles.PrimaryButton}
+            onClick={() => handleButtonClick("Save")}
+          >
+            Save
+          </Button>
+          <Button
+            ButtonStyle={ButtonStyles.PrimaryButton}
             onClick={() => handleButtonClick("Edit")}
           >
             Edit
@@ -60,12 +66,7 @@ const DropdownTripleDotsMenu = () => {
           >
             Delete
           </Button>
-          <Button
-            ButtonStyle={ButtonStyles.PrimaryButton}
-            onClick={() => handleButtonClick("Save")}
-          >
-            Save
-          </Button>
+
           <Button
             ButtonStyle={ButtonStyles.PrimaryButton}
             onClick={() => handleButtonClick("Share")}

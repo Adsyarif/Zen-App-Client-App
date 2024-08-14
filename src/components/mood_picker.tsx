@@ -86,7 +86,7 @@ const MoodPickerComponent: React.FC = () => {
   };
 
   return (
-    <div className="hidden lg:visible md:visible bg-green-900 text-lg font-semibold text-center items-center rounded-lg p-6 ">
+    <div className="hidden md:block bg-green-900 text-lg font-semibold text-center items-center rounded-lg md:p-6">
       <p className="text-white text-2xl mb-6">Pick your current mood</p>
       <div
         className="bg-gray-100 rounded-lg shadow-md grid gap-4 p-4"

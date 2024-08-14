@@ -53,7 +53,7 @@ The Zenzone App is developed to address mental health issues by increasing aware
 
 ## Deployment
 
-- Backend Repository :
+- Backend Repository : https://github.com/Adsyarif/Zen-Zone-Server-App
 - Platform : 
 
 ## Tech stack
@@ -82,58 +82,50 @@ The Zenzone App is developed to address mental health issues by increasing aware
 
 ## User Flow
 
-![User Flow](./src/assets/doc/userFlow.png)
+![User Flow]()
 
 ## Pages
 
 - Homepage = "/homepage"
 
-  ![Home Page]()
-
-  **Usage**: Explore featured items and navigate through different sections of the platform such as banner, product links and login feature
+  **Usage**:  To provide an overview of what the platform offers and guide users to the main sections like Forums, Counseling, or Articles.
   
 - Register = "/register"
 
-  ![register]()
-
-  **Usage**: user signup for an account
+  **Usage**: To onboard new users by capturing essential information and creating an account.
   
 - Login = "/login"
 
-  ![login]()
+  **Usage**: To authenticate users and grant them access to the platform’s features.
 
-  **Usage**: user signin for an account
+- Forum = "/forum"
 
-- Results page (Based on gender and categories)
+  **Usage**: To foster community interaction by providing a platform for discussions on various topics related to the application’s focus.
+  
+- Consulting = "/consulting"
 
-  - "/:gender" , example : "/men" or "/women"
-  - "/:category/:gender", example : "tops/women"
+  **Usage**: To provide users with an easy way to find and book sessions with professional consultants or counselors.
+  
+- Article = "/article"
 
-    ![Results Page]()
+  **Usage**: To inform and engage users with high-quality content related to the platform’s niche.
 
-  **Usage**: After choosing which gender are they, user can manually filter spesific things for instance: Filter base on size, color and etc. (Read feature section)
+- Diary page = "/diary"
 
-- Product detail page : "/productDetail/:product_id" , example : "productDetail/35"
+  **Usage**: To allow users to manage their personal diaries within the application, providing easy access to past entries and the ability to add new ones.
 
-  ![Product Detail Page](./src/assets/doc/productDetailPage.png)
+- Profile = "/profile"
+
+  **Usage**: To show user profile account.
+  
 
 ## Feature
-
-### Filtering Options
-   - **Gender**: Filter products based on gender (e.g., Men, Women).
-   - **Color**: Select products based on available colors.
-   - **Size**: Filter by available sizes to find the perfect fit.
-   - **Material**: Choose products based on the material they are made of.
-   - **Brand**: Filter by brand to find items from preferred designers.
-   - **Availability**: Check product availability to ensure items are in stock.
-
   
-### Sorting Functionality
-  -  **Newest**: Sort products by the newest arrivals to stay updated with the latest trends.
-  -  **Price** : Sort products by price (e.g., low to high, high to low).
+### Login / Register functionality
+   -. Onboard new user to be listed on the database
   
-### WhatsApp integration for rental
-  - ** Rent through WhatsApp**: Use the **click-to-chat** API to rent products directly through WhatsApp for a seamless rental experience.
+### Forum Page
+   -. User can post
   
 ## Prerequisities
 
@@ -167,17 +159,7 @@ yarn build
 yarn preview
 
 ### Notes:
-- **`assets`**: Contains static resources such as documents, icons, and images.
-- **`components`**: Reusable React components categorized by their functionality.
-  - **`categories`**: Components related to categories.
-  - **`common`**: Commonly used UI components.
-  - **`Home`**: Components specific to the home page.
-  - **`ProductDetail`**: Components for the product detail page.
-  - **`Products`**: Components related to product listings and filters.
-- **`contexts`**: React contexts for managing global state.
-- **`data`**: Static or application-specific data.
-- **`pages`**: Components representing different pages in the application.
-- **`utils`**: Utility functions and helpers.
+
 
 ## Diagram Architecture
 
@@ -186,20 +168,17 @@ yarn preview
 
 ## Future Development Features
 
-### User Membership
+### 
 
-- **Login / Register**: Implement functionality for user membership, allowing users to create accounts, log in, and save their preferred products. This feature will enhance the user experience by personalizing interactions and enabling users to track their favorite items. Users will have the ability to securely register, log in, and manage their profile information, providing a personalized shopping experience.
 
-### Transaction History
 
-- **Implementasi Tabel Transaksi**: Add a transaction table to store and display the transaction history of users. This feature will allow users to review their past purchases and track their order history, contributing to better account management and user satisfaction. The transaction history will include details such as order date, items purchased, total amount, and order status, helping users keep track of their shopping activities and manage their expenditures.
+### 
 
-### Product Search
 
-- **Implementasi Search Product**: Integrate a search functionality into the header of the application, allowing users to quickly find products they are interested in. This feature will provide users with a search button and a search bar where they can enter keywords to locate specific products. The search functionality will include:
-  - **Search Bar**: A user-friendly input field in the header where users can type in search queries.
-  - **Real-Time Suggestions**: Display suggestions or autocomplete options as users type to help them find products faster.
-  - **Search Results**: Present relevant product results based on the search query, with the ability to filter or sort the results to refine their search.
+
+### 
+
+
 
 
 
@@ -209,21 +188,13 @@ Here is the list of our development team members:
 
 Project Team:
 
-1. Muhammad Adrisa Nur Syarif (Frontend Engineer)
+
 
 Frontend Engineer:
 
-1. Alfath Bagus Kurnia 	
-2. Christopher Jordan Lan Garcia
-3. Egbert Felica Wibianto
-4. Meirth Maulida Hartanti
-5. Muhammad Umar
-6. Siti Mujayanah					
-7. Widia Puspitasari 
+
 
 Backend Engineer:
-1. Desya Saskia Sarbini
-2. Widia Puspitasari (support)
 
 
 

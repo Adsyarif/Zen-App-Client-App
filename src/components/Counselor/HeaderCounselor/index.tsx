@@ -1,10 +1,26 @@
+import DatePicker from "@/components/common/DatePicker";
+import { Dayjs } from "dayjs";
+import { useState } from "react";
 import { FaCalendarAlt, FaSearch } from "react-icons/fa";
 
 interface Props {
-  handleOnChange: any;
+  handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onDateChange: (date: Dayjs | null) => void; 
 }
 
-const HeaderCounselor = ({ handleOnChange }: Props) => {
+const HeaderCounselor = ({ handleOnChange, onDateChange }: Props) => {
+  const [date, setDate] = useState<Dayjs | null>(null);
+  const [calendar, setCalendar] = useState(false);
+
+  const handleClick = () => {
+    setCalendar(!calendar);
+  };
+
+  const handleDateChange = (newDate: Dayjs | null) => {
+    setDate(newDate);
+    onDateChange(newDate);
+  };
+
   return (
     <div className="flex justify-between items-center ">
       <div className="flex items-center w-64 h-12 px-4 bg-leaf border rounded-lg">
@@ -17,8 +33,21 @@ const HeaderCounselor = ({ handleOnChange }: Props) => {
           onChange={handleOnChange}
         />
       </div>
-      <div>
-        <FaCalendarAlt size={24} className="text-leaf md:text-2xl" />
+      <div className="relative">
+        {!calendar && (
+          <FaCalendarAlt
+            size={24}
+            onClick={handleClick}
+            className="text-leaf md:text-2xl cursor-pointer"
+          />
+        )}
+        {calendar && (
+          <DatePicker
+            label="Select Date"
+            type="datetime" 
+            onChange={handleDateChange}
+          />
+        )}
       </div>
     </div>
   );

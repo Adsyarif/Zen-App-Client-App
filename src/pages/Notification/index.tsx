@@ -18,7 +18,7 @@ export default function Notification() {
 
   return (
     <div className="flex flex-col bg-mocca lg:mx-24 justify-center items-center">
-      <div className="bg-mocca w-full lg:w-3/5">
+      <div className="bg-mocca w-full lg:w-3/5 px-5 md:px-20">
       <button className="rounded-md bg-leaf p-2 px-6 my-4 text-white font-medium">
         My Notification
       </button>

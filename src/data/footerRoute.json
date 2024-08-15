@@ -2,29 +2,33 @@
   "features": [
     {
       "title": "Forum",
-      "href": "/forum"
+      "href": "/Forum"
     },
     {
       "title": "Counseling",
-      "href": "/counseling"
+      "href": "/Counselor"
     },
     {
       "title": "Articles",
-      "href": "/articles"
+      "href": "/Articles"
     },
     {
       "title": "Diary",
-      "href": "/diary"
+      "href": "/Diary"
+    },
+    {
+      "title": "Notification",
+      "href": "/Notification"
     }
   ],
   "contacts": [
     {
       "title": "example@mail.com",
-      "href": "/forum"
+      "href": "/Forum"
     },
     {
       "title": "081-xxx-xxx",
-      "href": "/counseling"
+      "href": "/Counselor"
     }
   ]
 }

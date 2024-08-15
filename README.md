@@ -40,12 +40,15 @@ The Zenzone App aims to bridge this gap by offering essential support and resour
 
 ## Problem Statement
 
--. Increasing Cases of Mental Disorders:
-Mental disorders such as stress, anxiety, depression, and other conditions are becoming more common, especially among the younger generation. Rapid changes in lifestyle, academic pressure, and social expectations can be triggering factors.
--. Lack of Access to Mental Health Services:
-Many people find it difficult to access quality and affordable mental health services. The limited number of mental health professionals and high service costs often become major obstacles for many individuals to get the help they need.
--. Negative Stigma:
-There is still a lot of negative stigma related to mental disorders in society, making people reluctant to acknowledge their problems or seek help. The fear of negative judgment or discrimination often prevents individuals from openly discussing their mental health and getting the necessary treatment.
+- **Increasing Cases of Mental Disorders**:  
+  Mental disorders such as stress, anxiety, depression, and other conditions are becoming more common, especially among the younger generation. Rapid changes in lifestyle, academic pressure, and social expectations can be triggering factors.
+
+- **Lack of Access to Mental Health Services**:  
+  Many people find it difficult to access quality and affordable mental health services. The limited number of mental health professionals and high service costs often become major obstacles for many individuals to get the help they need.
+
+- **Negative Stigma**:  
+  There is still a lot of negative stigma related to mental disorders in society, making people reluctant to acknowledge their problems or seek help. The fear of negative judgment or discrimination often prevents individuals from openly discussing their mental health and getting the necessary treatment.
+
 
 ## Solution
 
@@ -123,9 +126,57 @@ The Zenzone App is developed to address mental health issues by increasing aware
   
 ### Login / Register functionality
    -. Onboard new user to be listed on the database
-  
+
 ### Forum Page
-   -. User can post
+
+- **User Posts**:  
+  Users can post their thoughts on the app to share with others.
+
+  - **Comments**:  
+    Users can comment on posts to engage in discussions.
+
+  - **Replies**:  
+    Users can reply to comments, enabling discussions.
+
+  - **Report**:  
+    Users can report posts or comments that violate community guidelines.
+
+  - **Like**:  
+    Users can like posts or comments to show their support or agreement.
+
+### Counseling Page
+
+- **Counselor List**:  
+  The page displays a list of available counselors.
+
+  - **Filter by Calendar**:  
+    Users can filter counselors based on availability using a calendar.
+
+  - **Counselor Details**:  
+    Clicking on a counselor shows detailed information, including their profile, specialization, and experience.
+
+  - **Review Feature**:  
+    Users can give reviews and ratings to counselors based on their experience.
+
+### Artile Page
+- **Article List**
+  Counselor can post a article related regarding mental health
+
+### Diary Page
+- **User Diary**:  
+  Users can write their thoughts and track their mood for each diary entry.
+  
+- **Edit and Delete**:  
+  Users can edit or delete their diary entries as needed.
+
+### Profile Page
+
+
+
+
+
+
+
   
 ## Prerequisities
 
@@ -138,7 +189,7 @@ The Zenzone App is developed to address mental health issues by increasing aware
 
 ### Clone or pulling from repo
 
-(`git pull/clone https://github.com/Adsyarif/luxelend-client-side.git`)
+(`git pull/clone https://github.com/Adsyarif/Zen-App-Client-App.git`)
 
 ### Optional
 

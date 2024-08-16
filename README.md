@@ -7,7 +7,7 @@ The Zenzone App aims to bridge this gap by offering essential support and resour
 
 ## Table of Contents
 
-1. [Zen-App](#Zen-App)
+1. [Zen-App](#zen-app)
 2. [Problem Statement](#problem-statement)
 3. [Solution](#solution)
 4. [Deployment](#deployment)
@@ -16,26 +16,33 @@ The Zenzone App aims to bridge this gap by offering essential support and resour
    - [Libraries and Dependencies](#libraries-and-dependencies)
    - [Database](#database)
    - [Design Tools](#design-tools)
-6. [User FLow](#user-flow)
+6. [User Flow](#user-flow)
 7. [Pages](#pages)
-   - [Homepage](#homepage-)
-   - [Category Page](#category-page-)
-   - [Results Page](#results-page-based-on-gender-and-categories)
-   - [Product Detail Page](#product-detail-page--product_id-)
+   - [Homepage](#homepage)
+   - [Register](#register)
+   - [Login](#login)
+   - [Forum](#forum)
+   - [Consulting](#consulting)
+   - [Article Page](#article-page)
+   - [Diary Page](#diary-page)
+   - [Profile](#profile)
 8. [Feature](#feature)
-   - [Filtering Option](#filtering-option)
-   - [Sorting Functionality](#sorting-functionality)
-   - [WhatsApp Integration for Rental](#whatsapp-integration-for-rental)
+   - [Login / Register Functionality](#login--register-functionality)
+   - [Forum Page](#forum-page)
+   - [Counseling Page](#counseling-page)
+   - [Article Page](#article-page-1)
+   - [Diary Page](#diary-page-1)
+   - [Profile Page](#profile-page)
 9. [Prerequisites](#prerequisites)
 10. [Run in Local](#run-in-local)
-   - [Clone or Pulling from Repo](#clone-or-pulling-from-repo)
-   - [Optional Checkout](#optional)
-   - [Install Dependency](#instal-dependency)
-   - [Run](#run)
-   - [Test Build/Deployment](#test-builddeployment)
-11. [Folder Structure](#folder-structure)
-12. [Future Development Features](#future-development-features)
-13. [Team Developer]()
+    - [Clone or Pulling from Repo](#clone-or-pulling-from-repo)
+    - [Optional](#optional)
+    - [Install Dependency](#install-dependency)
+    - [Run](#run)
+    - [Test Build/Deployment](#test-builddeployment)
+11. [Future Development Features](#future-development-features)
+12. [Team Developer](#team-developer)
+
 
 
 ## Problem Statement
@@ -74,6 +81,7 @@ The Zenzone App is developed to address mental health issues by increasing aware
 - Yarn
 - Axios
 - Tailwind CSS
+- Material UI
 
 ### Database
 
@@ -170,13 +178,8 @@ The Zenzone App is developed to address mental health issues by increasing aware
   Users can edit or delete their diary entries as needed.
 
 ### Profile Page
-
-
-
-
-
-
-
+- **Profile Status**
+  Users can check his/her recent status posted
   
 ## Prerequisities
 
@@ -211,21 +214,12 @@ yarn preview
 
 ### Notes:
 
-
-## Diagram Architecture
-
-![Product Detail Page](./src/assets/doc/diagramArchitecture.png)
-
-
 ## Future Development Features
 
+### Booked List Page
+List page of counselor that user booked could be shown in the profile
+
 ### 
-
-
-
-### 
-
-
 
 ### 
 
@@ -237,18 +231,20 @@ yarn preview
 
 Here is the list of our development team members:
 
-Project Team:
+**Project Leader**:
+- Meirth Maulida Hartanti
 
+**Full Stack Engineers**:
+- Alfath Bagus Kurnia
+- Desya Saskia Sarbini
+- Muhammad Adrisa Nur Syarif
+- Widia Puspitasari
 
-
-Frontend Engineer:
-
-
-
-Backend Engineer:
-
-
-
+**Frontend Engineers**:
+- Christopher Jordan Lan Garcia
+- Egbert Felica Wibianto
+- Muhammad Umar
+- Siti Mujayanah
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

@@ -76,7 +76,7 @@ const DiaryEntryPage = () => {
       await axios.put(`${API_BASE}/diary/${accountId}/${diaryId}/edit`, {
         mood_status_id: selectMoodStatus,
         content: diaryText,
-        updated_at: selectedDate.toISOString(),
+        created_at: selectedDate.toISOString(),
       });
       alert("Diary entry updated successfully!");
     } catch (error) {

@@ -30,8 +30,8 @@ export function DiaryCard ({
 }: DiaryProps){
     const handleClick = () => {
         router.push({
-            pathname: '/diaryy/detail', // Halaman yang ingin dituju
-            query: { account_id, diary_id } // Kirim account_id dan diary_id sebagai query parameter
+            pathname: '/diaryy/detail', 
+            query: { account_id, diary_id } 
         });
     };
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

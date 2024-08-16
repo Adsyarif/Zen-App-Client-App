@@ -81,10 +81,10 @@ const SignUp = () => {
             hendrerit suspendisse eros.
           </p>
           <div>
-            <a href="#" className="bg-[#22543D] text-white"><GoCommentDiscussion/></a>
-            <a href="#" className="bg-[#22543D] text-white"><IoPeopleCircleSharp /></a>
-            <a href="#" className="bg-[#22543D] text-white"><FaBookOpen /></a>
-            <a href="#" className="bg-[#22543D] text-white"><BsNewspaper /></a>
+            <p className="bg-[#22543D] text-white"><GoCommentDiscussion/></p>
+            <p className="bg-[#22543D] text-white"><IoPeopleCircleSharp /></p>
+            <p className="bg-[#22543D] text-white"><FaBookOpen /></p>
+            <p className="bg-[#22543D] text-white"><BsNewspaper /></p>
           </div>
         </div>
         <div className="m-10 bg-[#22543D] flex-col w-1/2 rounded-md">

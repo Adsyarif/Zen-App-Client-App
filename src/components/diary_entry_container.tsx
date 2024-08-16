@@ -35,7 +35,7 @@ const DiaryEntryContainer: React.FC<DiaryEntryContainerProps> = ({
     setDiaryText(event.target.value);
   };
 
-  const formattedDate = selectedDate ? selectedDate.format("MMMM D, YYYY") : "No date selected";
+  const formattedDate = selectedDate ? selectedDate.format("DD-MMMM-YYYY") : "No date selected";
 
   return (
     <div className="bg-green-900 text-lg font-semibold text-center items-center rounded-lg p-6 h-screen">

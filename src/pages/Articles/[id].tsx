@@ -74,7 +74,7 @@ const ArticleDetail = ({ article }: { article: ArticlesData | null }) => {
       <div className="hidden lg:block px-32">
         <div className="flex justify-between items-center">
           <h3 className="font-bold text-xl">Recommend articles post</h3>
-          <a className="text-blue-600">See More</a>
+          <p className="text-blue-600">See More</p>
         </div>
         <div className="w-full py-5 flex justify-evenly flex-wrap gap-2">
           {displayedArticles.map((article, index) => (

@@ -8,6 +8,7 @@ import { FaPlus } from 'react-icons/fa';
 import DatePicker from '@/components/common/DatePicker';
 import { Dayjs } from 'dayjs';
 import { AppContext, UserContextType } from "@/providers/AppContext";
+import Link from 'next/link';
 
 const Diary = () => {
     const { currentUser } = useContext(AppContext); 
@@ -24,10 +25,12 @@ const Diary = () => {
                     }
                 }> = await axios.get(`${API_BASE}/diary/${currentUser?.account_id}`)
                 const listDiary = response.data.data
+
                 console.log("list diary", listDiary)
 
                 if(Array.isArray(listDiary)){
-                    const filteredDiary = listDiary.filter((diary: any) => diary.deleted_at === null);
+                    const sortedPosts = listDiary.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+                    const filteredDiary = sortedPosts.filter((diary: any) => diary.deleted_at === null);
 
                     setDiary(filteredDiary);
                 } 
@@ -46,7 +49,9 @@ const Diary = () => {
                     <div className="flex w-full bg-leaf justify-center rounded-lg flex-col">
                         <div className="flex justify-between items-center p-10 gap-20">
                             <p className="text-white text-2xl md:text-4xl pt-5 font-bold">My Diary List</p>
-                            <a href="/diaryy/entry" className="text-2xl md:text-4xl align-center flex-end pt-6"><FaPlus style={{ color: 'white', fontSize: '24px' }}/></a>
+                            <Link href={'/diaryy/entry'}> 
+                                <p className="text-2xl md:text-4xl align-center flex-end pt-6"><FaPlus style={{ color: 'white', fontSize: '24px' }}/></p>
+                            </Link>
                         </div>
                         {diary.map((props, index)=>(
                             <DiaryCard {...props} key={index} />

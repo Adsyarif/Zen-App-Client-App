@@ -30,7 +30,7 @@ export function DiaryCard ({
 }: DiaryProps){
     const handleClick = () => {
         router.push({
-            pathname: '/diaryy/detail', 
+            pathname: '/Diary/detail', 
             query: { account_id, diary_id } 
         });
     };

@@ -6,6 +6,7 @@ import {
   Pagination,
 } from "@/components/Counselor";
 import { Navigation } from "@/components/common";
+import Link from "next/link";
 
 interface Review {
   content: string;
@@ -59,11 +60,13 @@ const Counselor = () => {
   return (
     <>
       <Navigation/>
-      <div className="py-5 px-8 md:px-32 md:py-5 min-h-screen">
+      <div className="py-5 px-8 md:px-12 lg:px-32 md:py-5 min-h-screen">
         <HeaderCounselor handleOnChange={handleOnChange} />
-        <div className="w-full py-5 flex justify-evenly flex-wrap gap-2">
+        <div className="w-full py-5 grid md:grid-cols-2 lg:grid-cols-3 gap-y-5 ">
           {displayedCounselors.map((counselor, index) => (
+            <Link href={"/Counselor/detail"}>
             <CounselorCard key={index} counselor={counselor} />
+          </Link>
           ))}
         </div>
       </div>

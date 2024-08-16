@@ -59,7 +59,7 @@ const DiaryEntryPage = () => {
       setDiaryId(response.data.diary_id); 
       alert("Create New Diary Success!");
       console.log("result", response);
-      router.push("/diaryy");
+      router.push("/Diary");
     } catch (error) {
       console.error("Error creating diary entry:", error);
       alert("Terjadi kesalahan saat menyimpan diary.");

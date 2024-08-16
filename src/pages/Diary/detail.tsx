@@ -1,31 +1,28 @@
+import dayjs, { Dayjs } from 'dayjs';
+import router, { useRouter } from 'next/router';
+import { useState, useEffect, useContext } from 'react';
+import { API_BASE } from "@/lib/projectApi";
+import axios from 'axios';
+import { AppContext } from "@/providers/AppContext";
+import { MoodStatus } from "@/providers/AppContext";
+import { Navigation } from "@/components/common";
 import DiaryEntryContainer from "@/components/diary_entry_container";
 import MoodPickerComponent from "@/components/mood_picker";
 import DatePicker from "@/components/common/DatePicker";
-import dayjs, { Dayjs } from "dayjs";
-import { useEffect, useState, useContext  } from "react";
-import { Navigation } from "@/components/common";
-import { API_BASE } from "@/lib/projectApi";
-import axios from "axios";
-import { MoodStatus } from "@/providers/AppContext";
-import { AppContext } from "@/providers/AppContext";
-import { useRouter } from "next/router";
-
 
 const DiaryIDPage = () => {
   const { currentUser } = useContext(AppContext); 
   const accountId = currentUser?.account_id;
   const router = useRouter();
+  const { account_id, diary_id } = router.query;
+
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
   const [moodCategories, setMoodCategories] = useState<MoodStatus[]>([]);
   const [selectMoodStatus, setSelectMoodStatus] = useState<number | null>(null);
   const [moodText, setMoodText] = useState<string>("");
   const [diaryText, setDiaryText] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { account_id, diary_id  } = router.query;
-  // const diaryId = diary_id ? parseInt(diary_id as string, 10) : null;
-  const dateUpdate = selectedDate ? selectedDate.toISOString() : null;
-  
-  
+
   useEffect(() => {
     const fetchMood = async () => {
       try {
@@ -33,7 +30,7 @@ const DiaryIDPage = () => {
         const mood = response.data.data;
         setMoodCategories(mood);
       } catch (error) {
-        console.error("Error fetching genders:", error);
+        console.error("Error fetching moods:", error);
       }
     };
     fetchMood();
@@ -44,18 +41,18 @@ const DiaryIDPage = () => {
       const fetchDiaryEntry = async () => {
         try {
           const response = await axios.get(`${API_BASE}/diary/${account_id}/${diary_id}`);
-          const { content, mood_status_id, mood_text, value, created_at } = response.data.data;
-          
+          const { content, mood_status_id, value, created_at } = response.data.data;
+
           setDiaryText(content);
           setMoodText(value);
-  
+
           const selectedMood = moodCategories.find(mood => mood.status_id === mood_status_id);
           if (selectedMood) {
             setSelectMoodStatus(selectedMood.status_id);
-            setMoodText(selectedMood.value); 
+            setMoodText(selectedMood.value);
           }
 
-          const date = dayjs(created_at); 
+          const date = dayjs(created_at);
           setSelectedDate(date);
 
           setIsLoading(false);
@@ -68,8 +65,8 @@ const DiaryIDPage = () => {
     } else {
       setIsLoading(false);
     }
-  }, [diary_id, accountId, moodCategories]);
-  
+  }, [diary_id, account_id, moodCategories]);
+
   const handleDateChange = (date: Dayjs | null) => {
     setSelectedDate(date);
   };
@@ -79,38 +76,32 @@ const DiaryIDPage = () => {
     setMoodText(mood);
   };
 
-  const createDiaryEntry = async () => {
-    if (!selectMoodStatus || !diaryText || !accountId) {
+  const saveDiaryEntry = async () => {
+    if (!selectMoodStatus || !diaryText || !account_id) {
       alert("Please select a mood and enter some text before saving.");
       return;
     }
-  const editDiaryEntry = async () => {
-    if (!selectMoodStatus || !diaryText || !accountId || !dateUpdate) {
-      alert("Please select a mood and enter some text before saving.");
-      return;
-    }
-  
+
     const updatedDiary = {
-      updated_diary: dateUpdate,
+      created_at: selectedDate ? selectedDate.toISOString() : null,
       mood_status_id: selectMoodStatus,
       content: diaryText,
     };
-  
+
     try {
       if (diary_id) {
-        await axios.put(`${API_BASE}/diary/${accountId}/${diary_id}/edit`, updatedDiary);
-        alert("Update Diary is Success!");
+        await axios.put(`${API_BASE}/diary/${account_id}/${diary_id}/edit`, updatedDiary);
+        alert("Diary updated successfully!");
       } else {
-        await axios.post(`${API_BASE}/diary/${accountId}/create`, updatedDiary);
-        alert("Create New Diary Success!");
+        await axios.post(`${API_BASE}/diary/${account_id}/create`, updatedDiary);
+        alert("Diary created successfully!");
       }
-      router.push("/diaryy");
+      router.push("/Diary");
     } catch (error) {
       console.error("Error saving diary entry:", error);
-      alert("Terjadi kesalahan saat menyimpan diary.");
+      alert("An error occurred while saving the diary entry.");
     }
   };
-    
 
   const deleteDiaryEntry = async () => {
     try {
@@ -118,16 +109,15 @@ const DiaryIDPage = () => {
         alert("Diary ID is missing.");
         return;
       }
-      if (!accountId) {
+      if (!account_id) {
         alert("User is not logged in.");
         return;
       }
-      await axios.delete(`${API_BASE}/diary/${accountId}/${diary_id}/delete`, {
-      });
-      alert("Post deleted successfully.");
-      router.push("/diaryy")
+      await axios.delete(`${API_BASE}/diary/${account_id}/${diary_id}/delete`);
+      alert("Diary deleted successfully.");
+      router.push("/Diary");
     } catch (error) {
-      console.error("Error deleting post:", error);
+      console.error("Error deleting diary entry:", error);
     }
   };
 
@@ -136,16 +126,17 @@ const DiaryIDPage = () => {
       <Navigation />
       <div className="md:flex md:flex-row justify-between gap-5 p-8 lg:mx-32 lg:mb-24 items-start">
         <div className="w-full">
-          <DiaryEntryContainer 
+          <DiaryEntryContainer
             selectedDate={selectedDate}
             selectMoodStatus={selectMoodStatus}
             moodText={moodText}
             diaryText={diaryText}
             setMoodText={setMoodText}
             setDiaryText={setDiaryText}
-            onSave={createDiaryEntry}
-            onEdit={editDiaryEntry}
-            onDelete={deleteDiaryEntry} diaryId={null} 
+            onSave={saveDiaryEntry}
+            onEdit={saveDiaryEntry} 
+            onDelete={deleteDiaryEntry}
+            diaryId={diary_id ? parseInt(diary_id as string, 10) : null}
           />
         </div>
         <div className="flex flex-col gap-10">
@@ -158,12 +149,12 @@ const DiaryIDPage = () => {
           </div>
           <MoodPickerComponent
             moodCategories={moodCategories}
-            onMoodChange={handleMoodChange} 
+            onMoodChange={handleMoodChange}
           />
         </div>
       </div>
     </>
   );
 };
-}
-export default DiaryIDPage
+
+export default DiaryIDPage;

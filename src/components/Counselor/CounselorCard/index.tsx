@@ -32,7 +32,7 @@ const CounselorCard = ({ counselor }: { counselor: any }) => {
   const { reviews } = counselor;
 
   return (
-    <div className="border rounded-xl w-full md:w-72 bg-leaf p-2 flex flex-col">
+    <div className="  border rounded-xl w-full md:w-72 bg-leaf p-2 flex flex-col">
       <Image
         src={"/counselorImg.png"}
         width={320}

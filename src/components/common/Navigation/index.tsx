@@ -18,7 +18,7 @@ const Navigation: React.FC = () => {
   };
 
   return (
-    <nav className="py-5 px-8 lg:mx-12 flex items-center justify-between relative">
+    <nav className="py-5 px-8 md:px-32 flex items-center justify-between relative">
 
       <Link href="/">
         

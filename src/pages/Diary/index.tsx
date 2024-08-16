@@ -49,7 +49,7 @@ const Diary = () => {
                     <div className="flex w-full bg-leaf justify-center rounded-lg flex-col">
                         <div className="flex justify-between items-center p-10 gap-20">
                             <p className="text-white text-2xl md:text-4xl pt-5 font-bold">My Diary List</p>
-                            <Link href={'/diaryy/entry'}> 
+                            <Link href={'/Diary/entry'}> 
                                 <p className="text-2xl md:text-4xl align-center flex-end pt-6"><FaPlus style={{ color: 'white', fontSize: '24px' }}/></p>
                             </Link>
                         </div>

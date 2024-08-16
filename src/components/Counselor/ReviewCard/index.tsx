@@ -78,8 +78,8 @@ export default function CarouselReviewCard() {
   };
 
   return (
-    <div className="relative mx-auto text-center my-8 p-8">
-      <div className="relative w-full overflow-hidden">
+    <div className="relative mx-auto text-center ">
+      <div className="relative w-full overflow-hidden px-12">
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{
@@ -92,8 +92,8 @@ export default function CarouselReviewCard() {
               className="flex-none px-4"
               style={{ flexBasis: `${100 / visibleCards}%` }}
             >
-              <div className="bg-white p-6 shadow-lg rounded-lg text-left">
-                <p className="text-gray-700">"{item.text}"</p>
+              <div className="border border-black p-6 shadow-lg rounded-lg text-left">
+                <p className="text-gray-700">&quot;{item.text}&quot;</p>
                 <div className="flex items-center mb-4 my-2">
                   <img
                     className="w-10 h-10 rounded-full mr-4"
@@ -110,20 +110,23 @@ export default function CarouselReviewCard() {
           ))}
         </div>
       </div>
-      <button
-        onClick={prevSlide}
-        className="absolute top-1/2 w-10 left-4 transform -translate-y-1/2 bg-[#22543D] text-white p-2 rounded-full text-xl font-bold z-10"
-      >
-        <span className="sr-only">Previous</span>
-        &lt;
-      </button>
-      <button
-        onClick={nextSlide}
-        className="absolute top-1/2 w-10 right-4 transform -translate-y-1/2 bg-[#22543D] text-white p-2 rounded-full text-xl font-bold z-10"
-      >
-        <span className="sr-only">Next</span>
-        &gt;
-      </button>
+      <div>
+        <button
+          onClick={prevSlide}
+          className="absolute top-1/2 w-10 left-4 transform -translate-y-1/2 bg-[#22543D] text-white p-2 rounded-full text-xl font-bold z-10"
+        >
+          <span className="sr-only">Previous</span>
+          &lt;
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute top-1/2 w-10 right-4 transform -translate-y-1/2 bg-[#22543D] text-white p-2 rounded-full text-xl font-bold z-10"
+        >
+          <span className="sr-only">Next</span>
+          &gt;
+        </button>
+      </div>
+      
     </div>
   );
 }

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { StaticDatePicker } from "@mui/x-date-pickers";
 
 // type datetime untuk counseler page 
@@ -14,9 +14,10 @@ interface DatePickerProps {
   type: DATE_PICKER_TYPE;
   label: string;
   onChange: (date: Dayjs | null) => void;
+
 }
 
-const DatePicker = ({ label, type, onChange }: DatePickerProps) => {
+const DatePicker = ({ label, type, onChange}: DatePickerProps) => {
   const [date, setDate] = useState<Dayjs | null>(null);
 
   const handleChange = (newDate: Dayjs | null) => {

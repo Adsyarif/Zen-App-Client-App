@@ -6,6 +6,7 @@ import {
   Pagination,
 } from "@/components/Counselor";
 import { Navigation } from "@/components/common";
+import dayjs, { Dayjs } from "dayjs";
 
 interface Review {
   content: string;
@@ -14,12 +15,17 @@ interface Review {
   rating: number;
 }
 
+interface Patient {
+  name: string;
+  appointmentDate: string;
+}
+
 interface CounselorData {
   name: string;
   detail: string;
   specialist: string;
   maxPatient: number;
-  patientNames: string[];
+  patientNames: Patient[];
   reviews: Review[];
 }
 
@@ -28,17 +34,28 @@ const ITEMS_PER_PAGE = 12;
 const Counselor = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchField, setSearchField] = useState<string>("");
+  const [dateFilter, setDateFilter] = useState<Dayjs | null>(null);
   const [filteredCounselors, setFilteredCounselors] = useState<CounselorData[]>(
     data.counselors
   );
 
   useEffect(() => {
-    const filtered = data.counselors.filter((counselor) =>
-      counselor.specialist.toLowerCase().includes(searchField.toLowerCase())
-    );
+    const filtered = data.counselors.filter((counselor) => {
+      const isSpecialistMatch = counselor.specialist
+        .toLowerCase()
+        .includes(searchField.toLowerCase());
+      const isDateMatch = dateFilter
+        ? counselor.patientNames.some((patient) =>
+            dayjs(patient.appointmentDate).isSame(dateFilter, "day") || 
+            dayjs(patient.appointmentDate).isBefore(dateFilter, "day")
+          )
+        : true;
+
+      return isSpecialistMatch && isDateMatch;
+    });
     setFilteredCounselors(filtered);
     setCurrentPage(1);
-  }, [searchField]);
+  }, [searchField, dateFilter]);
 
   const totalCounselors = filteredCounselors.length;
   const totalPages = Math.ceil(totalCounselors / ITEMS_PER_PAGE);
@@ -51,6 +68,10 @@ const Counselor = () => {
     setSearchField(event.target.value);
   };
 
+  const handleDateChange = (newDate: Dayjs | null) => {
+    setDateFilter(newDate); // Update date filter
+  };
+
   const displayedCounselors = filteredCounselors.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
@@ -58,9 +79,13 @@ const Counselor = () => {
 
   return (
     <>
-      <Navigation/>
+      <Navigation />
       <div className="py-5 px-8 md:px-32 md:py-5 min-h-screen">
-        <HeaderCounselor handleOnChange={handleOnChange} />
+        <HeaderCounselor
+          handleOnChange={handleOnChange}
+          onDateChange={handleDateChange}
+        />{" "}
+        {/* Pass date change handler */}
         <div className="w-full py-5 flex justify-evenly flex-wrap gap-2">
           {displayedCounselors.map((counselor, index) => (
             <CounselorCard key={index} counselor={counselor} />
@@ -77,4 +102,3 @@ const Counselor = () => {
 };
 
 export default Counselor;
-

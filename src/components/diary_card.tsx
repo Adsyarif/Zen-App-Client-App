@@ -1,10 +1,12 @@
 import dayjs from 'dayjs';
+import router from 'next/router';
 import { useState } from 'react';
 import { FaPlus } from "react-icons/fa";
 
 
 export interface DiaryProps {
     account_id: number;
+    diary_id: number;
     content: string;
     created_at: string;
     mood_status_id: {
@@ -21,19 +23,22 @@ export interface DiaryProps {
 
 export function DiaryCard ({
     account_id,
+    diary_id,
     value,
     content,
     created_at,
 }: DiaryProps){
-    // const [diaryList, setDiaryList] = useState(dummyDiaryList);
-    const handleClick = (id: number) => {
-        console.log(`Diary card with ID ${id} clicked`)
-    }
+    const handleClick = () => {
+        router.push({
+            pathname: '/diaryy/detail', // Halaman yang ingin dituju
+            query: { account_id, diary_id } // Kirim account_id dan diary_id sebagai query parameter
+        });
+    };
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
 
     return (
-        <div className="flex flex-col w-full gap-2 text-lg font-semibold text-center items-center rounded-lg p-1 h-auto">
+        <div onClick={handleClick} style={{ cursor: 'pointer' }} className="flex flex-col w-full gap-2 text-lg font-semibold text-center items-center rounded-lg p-1 h-auto">
             <div className="w-full"> 
                     <div  className="diary-card flex-col bg-white shadow-md rounded-lg p-4 m-4">
                         <div className="flex  justify-between m-2">

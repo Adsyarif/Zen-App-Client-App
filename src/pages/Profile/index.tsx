@@ -15,6 +15,7 @@ import consultationOngoing from "@/data/consultationOngoing.json";
 import consulationHistory from "@/data/consultationHistory.json";
 import FeedbackModal from '@/components/profile/editModal';
 import EditModal from "@/components/profile/editModal";
+import Link from "next/link";
 
 export interface DataPairProps {
   label: string;
@@ -100,10 +101,20 @@ export default function ProfilePage() {
       <div className="flex flex-col lg:flex-row lg:mx-24 mx-12">
         {/* notif bar on mobile */}
         <div className="lg:hidden flex gap-3 text-white font10-semibold justify-around text-2xl py-3 bg-darkGreen rounded-md mx-3">
-          <FaRegComment />
-          <FaRegBookmark />
-          <AiOutlineLike />
-          <IoNotificationsOutline />
+          
+          <Link href={"/Profile/post"}>
+            <FaRegComment />
+          </Link>
+          <Link href={"/Profile/bookmark"}>
+            <FaRegBookmark />
+          </Link> 
+          <Link href={"/Profile/like"} >
+            <AiOutlineLike />
+          </Link>
+          <Link href={"/Profile/notification"}>
+            <IoNotificationsOutline />
+          </Link>
+          
         </div>
 
         {/* profile data left */}
@@ -184,10 +195,20 @@ export default function ProfilePage() {
         <div className="bg-teal-900 rounded-md p-3 pb-10 m-3">
           {/* notif bar on desktop */}
           <div className="hidden lg:flex gap-3 text-white w-full font-semibold justify-around text-2xl py-3">
-            <FaRegComment />
-            <FaRegBookmark />
-            <AiOutlineLike />
-            <IoNotificationsOutline />
+            
+            <Link href={"/Profile/post"}>
+              <FaRegComment />
+            </Link>
+            <Link href={"/Profile/bookmark"}>
+              <FaRegBookmark />
+            </Link> 
+            <Link href={"/Profile/like"} >
+              <AiOutlineLike />
+            </Link>
+            <Link href={"/Profile/notification"}>
+              <IoNotificationsOutline />
+            </Link>
+           
           </div>
           {/* consulation bar */}
           <div>

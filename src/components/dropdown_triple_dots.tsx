@@ -5,7 +5,14 @@ import Button, { ButtonStyles } from "@/common/button/button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
-const DropdownTripleDotsMenu = () => {
+interface DropdownTripleDotsMenuProps {
+  onSave: () => void;
+  onEdit: () => void;
+  onDelete: () => void;
+  diaryId: string;
+}
+
+const DropdownTripleDotsMenu: React.FC<DropdownTripleDotsMenuProps> = ({ onSave, onEdit, onDelete, diaryId  }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -17,12 +24,22 @@ const DropdownTripleDotsMenu = () => {
   };
 
   const handleButtonClick = (action: string) => {
-    console.log(`${action} button clicked`);
     handleMenuClose();
+    if (action === "Save") {
+      if (diaryId) {
+        onEdit(); 
+      } else {
+        onSave(); 
+      }
+    } else if (action === "Delete") {
+      onDelete();
+    } else {
+      console.log(`${action} button clicked`);
+    }
   };
 
   return (
-    <div className="visible lg:hidden md:hidden">
+    <div className="visible flex ">
       <IconButton onClick={handleMenuOpen}>
         <MoreVertIcon className="w-10 h-10 text-green-900" />
       </IconButton>
@@ -46,21 +63,9 @@ const DropdownTripleDotsMenu = () => {
             justifyContent: "center",
             textAlign: "center",
             gap: "1px",
-            width:"100%"
+            width: "100%",
           }}
         >
-          <Button
-            ButtonStyle={ButtonStyles.PrimaryButton}
-            onClick={() => handleButtonClick("Edit")}
-          >
-            Edit
-          </Button>
-          <Button
-            ButtonStyle={ButtonStyles.PrimaryButton}
-            onClick={() => handleButtonClick("Delete")}
-          >
-            Delete
-          </Button>
           <Button
             ButtonStyle={ButtonStyles.PrimaryButton}
             onClick={() => handleButtonClick("Save")}
@@ -69,9 +74,9 @@ const DropdownTripleDotsMenu = () => {
           </Button>
           <Button
             ButtonStyle={ButtonStyles.PrimaryButton}
-            onClick={() => handleButtonClick("Share")}
+            onClick={() => handleButtonClick("Delete")}
           >
-            Share
+            Delete
           </Button>
         </MenuItem>
       </Menu>

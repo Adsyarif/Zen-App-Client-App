@@ -1,5 +1,5 @@
-import { MoodStatus } from "@/providers/AppContext";
 import React, { useState } from "react";
+import { MoodStatus } from "@/providers/AppContext";
 
 interface MoodItem {
   id: number;
@@ -9,13 +9,15 @@ interface MoodItem {
 
 interface MoodPickerComponentProps {
   moodCategories: MoodStatus[];
+  onMoodChange: (id: number, mood: string) => void; // Add this prop for handling mood change
 }
 
-const MoodPickerComponent: React.FC<MoodPickerComponentProps> = ({ moodCategories }) => {
+const MoodPickerComponent: React.FC<MoodPickerComponentProps> = ({ moodCategories, onMoodChange }) => {
   const [selectMoodStatus, setSelectMoodStatus] = useState<number | null>(null);
 
-  const handleSelectMoodStatus = (id: number) => {
+  const handleSelectMoodStatus = (id: number, moodStatus: string) => {
     setSelectMoodStatus(id);
+    onMoodChange(id, moodStatus); // Trigger mood change in parent component
   };
 
   const moodItems: MoodItem[] = moodCategories.map(mood => ({
@@ -23,12 +25,8 @@ const MoodPickerComponent: React.FC<MoodPickerComponentProps> = ({ moodCategorie
     moodStatus: mood.value,
     moodCategory: mood.mood_category_id.mood_category_id === 1 ? "Happy" : "Unhappy", 
   }));
-  console.log("tes",moodCategories);
-
-  
 
   const getColorMoodCategory = (moodCategory: "Happy" | "Unhappy"): string => {
-    console.log(moodCategory)
     switch (moodCategory) {
       case "Happy":
         return "bg-green-400"; 
@@ -38,7 +36,7 @@ const MoodPickerComponent: React.FC<MoodPickerComponentProps> = ({ moodCategorie
         return "bg-gray-200"; 
     }
   };
-  
+
   const randomMoodStatusPosition = (): React.CSSProperties => {
     const rowStart = Math.floor(Math.random() * 2) + 1;
     const colStart = Math.floor(Math.random() * 2) + 1;
@@ -68,7 +66,7 @@ const MoodPickerComponent: React.FC<MoodPickerComponentProps> = ({ moodCategorie
                 moodItem.moodCategory
               )}`}
               style={randomMoodStatusPosition()}
-              onClick={() => handleSelectMoodStatus(moodItem.id)}
+              onClick={() => handleSelectMoodStatus(moodItem.id, moodItem.moodStatus)} // Pass mood status text
             >
               {moodItem.moodStatus}
             </div>

@@ -16,7 +16,6 @@ export default function CompleteProfilePage() {
   const [genderCategories, setgenderCategories] = useState([]);
   const router = useRouter();
 
-  // Fetch gender options from the API when the component mounts
   useEffect(() => {
     const fetchGenders = async () => {
       try {

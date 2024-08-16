@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import Link from "next/link";
 import routes from "@/data/navigationRoute.json";
 import { AppContext } from "@/providers/AppContext";
+import Image from "next/image";
 
 interface Route {
   href: string;
@@ -20,7 +21,14 @@ const Navigation: React.FC = () => {
     <nav className="py-5 px-8 lg:mx-12 flex items-center justify-between relative">
 
       <Link href="/">
-        <div className="text-leaf text-3xl font-bold">ZenZone</div>
+        
+        <Image
+            src="/logo.png"
+            width={100}
+            height={100}
+            alt="Profile picture"
+            className="p-0"
+          />
       </Link>
 
 

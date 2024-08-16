@@ -104,11 +104,13 @@ export default function HomePage () {
 
   return (
     <>
+    <Navigation/>
+    
     <div className="px-8 md:px-32">
       <div className="relative flex flex-col md:flex-row py-6 items-center">
         <div className="w-full md:w-1/2 p-4 md:p-0 relative z-10">
           <div className="text-4xl md:text-6xl text-[#055254] font-bold">Zen Zone</div>
-          <div className="text-lg md:text-xl text-[#055254] font-medium mt-4">
+          <div className="text-lg md:text-3xl text-[#055254] font-medium mt-4">
             ZenZone provides a welcoming environment to discuss mental health challenges openly, offering professional guidance and community support to help you feel understood and empowered.
           </div>
           <div className="flex gap-4 mt-6">
@@ -133,8 +135,8 @@ export default function HomePage () {
       </div>
 
       <div className="flex justify-center items-center flex-col py-6">
-        <div className="text-4xl font-bold">Information</div>
-        <div className="">Kami akan memberikan solusi dari segala penyakit mental yang anda alami</div>
+        <div className="text-2xl md:text-4xl font-bold">Information</div>
+        <div className="text-lg md:text-3xl">Kami akan memberikan solusi dari segala penyakit mental yang anda alami</div>
       </div>
       <div className="flex flex-col md:flex-row pb-6">
         <div className="w-full md:w-1/2">
@@ -147,7 +149,7 @@ export default function HomePage () {
           />
         </div>
         <div className="flex flex-col w-full md:w-1/2">
-          <div className="flex gap-4 pl-4 pt-4 md:pt-0">
+          <div className="flex gap-4 pl-4 pt-4 md:pt-0 ">
             <div className="w-12">
               <Image
                 src="/forums.png"
@@ -158,8 +160,8 @@ export default function HomePage () {
               />
             </div>
             <div>
-              <div className="font-bold text-xl">Forums</div>
-              <div className="text-justify">
+              <div className="text-2xl font-bold md:text-3xl">Forums</div>
+              <div className="text-lg text-justify md:text-2xl">
                 Kami menyediakan sebuah fitur Forums dimana anda bisa bertanya dan mengetahui pengalaman/saran dari orang-orang lain yang memiliki penyakit mental, anda bisa menggunakan fitur ini untuk saling berinteraksi dengan para pengguna lainnya.
               </div>
             </div>
@@ -175,8 +177,8 @@ export default function HomePage () {
               />
             </div>
             <div>
-              <div className="font-bold text-xl">Consouelling</div>
-              <div className="text-justify">
+              <div className="text-2xl font-bold md:text-3xl">Consouelling</div>
+              <div className=" text-lg text-justify md:text-2xl">
                 Kami menyediakan sebuah fitur Consouelling dimana anda bisa berkonsultasi dan mendapatkan saran dari para profesional untuk mengatasi masalah kesehatan mental.
               </div>
             </div>
@@ -192,8 +194,8 @@ export default function HomePage () {
               />
             </div>
             <div>
-              <div className="font-bold text-xl">Diary</div>
-              <div className="text-justify">
+              <div className="text-2xl font-bold md:text-3xl">Diary</div>
+              <div className="text-lg text-justify md:text-2xl">
                 Kami menyediakan sebuah fitur Diary dimana anda bisa menuliskan pengalaman pribadi anda terkait kesehatan mental.
               </div>
             </div>
@@ -209,8 +211,8 @@ export default function HomePage () {
               />
             </div>
             <div>
-              <div className="font-bold text-xl">Articles</div>
-              <div className="text-justify">
+              <div className="text-2xl font-bold md:text-3xl">Articles</div>
+              <div className="text-lg text-justify md:text-2xl">
                 Kami menyediakan berbagai artikel tentang kesehatan mental yang dapat membantu anda memahami dan mengatasi masalah kesehatan mental.
               </div>
             </div>
@@ -222,8 +224,8 @@ export default function HomePage () {
 
       <div className="flex flex-col md:flex-row gap-6 pb-4">
         <div className="w-full md:w-1/2 order-2 md:order-1">
-          <div className="font-bold text-4xl">Forums</div>
-          <div className="text-justify mt-4 md:mt-0">
+          <div className="text-2xl font-bold md:text-3xl">Forums</div>
+          <div className="text-lg text-justify mt-4 md:mt-0 md:text-2xl">
             Kami menyediakan sebuah fitur Forums dimana anda bisa bertanya dan mengetahui pengalaman/saran dari orang-orang lain yang memiliki penyakit mental, anda bisa menggunakan fitur ini untuk saling berinteraksi dengan para pengguna lainnya.
           </div>
         </div>
@@ -284,8 +286,8 @@ export default function HomePage () {
         
         {/* Text section */}
         <div className="flex flex-col justify-center w-full md:w-1/2 order-2 md:order-2 mt-4 md:mt-0">
-          <div className="font-bold text-4xl">Consouelling</div>
-          <div className="text-justify mt-4 md:mt-0">
+          <div className="text-2xl font-bold md:text-3xl">Consouelling</div>
+          <div className="text-lg text-justify mt-4 md:mt-0 md:text-2xl">
             Kami menyediakan sebuah fitur Forums dimana anda bisa bertanya dan mengetahui pengalaman/saran dari orang-orang lain yang memiliki penyakit mental, anda bisa menggunakan fitur ini untuk saling berinteraksi dengan para pengguna lainnya.
           </div>
         </div>
@@ -295,8 +297,8 @@ export default function HomePage () {
       <div className="flex flex-col md:flex-row gap-6 pb-4">
         {/* Text section */}
         <div className="flex flex-col justify-center w-full md:w-1/2 order-2 md:order-1">
-          <div className="font-bold text-4xl">Diary</div>
-          <div className="text-justify mt-4 md:mt-0">
+          <div className="text-2xl font-bold md:text-3xl">Diary</div>
+          <div className="text-lg text-justify mt-4 md:mt-0 md:text-2xl ">
             Kami menyediakan sebuah fitur Forums dimana anda bisa bertanya dan mengetahui pengalaman/saran dari orang-orang lain yang memiliki penyakit mental, anda bisa menggunakan fitur ini untuk saling berinteraksi dengan para pengguna lainnya.
           </div>
         </div>
@@ -357,7 +359,7 @@ export default function HomePage () {
               className=""
             />
             <div className="absolute top-1/2 left-10 transform -translate-y-1/2 p-4 rounded-lg text-white">
-              <div className="text-l font-bold">Featured</div>
+              <div className="text-l font-bold ">Featured</div>
               <div className="text-2xl font-bold">Judul Artikel</div>
               <div>Article description</div>
             </div>
@@ -381,8 +383,8 @@ export default function HomePage () {
         
         {/* Text section */}
         <div className="flex flex-col justify-center w-full md:w-1/2 order-2 md:order-2 mt-4 md:mt-0">
-          <div className="font-bold text-4xl">Articles</div>
-          <div className="text-justify mt-4 md:mt-0">
+          <div className="text-2xl font-bold md:text-3xl">Articles</div>
+          <div className="text-lg text-justify mt-4 md:mt-0 md:text-2xl">
             Kami menyediakan sebuah fitur Forums dimana anda bisa bertanya dan mengetahui pengalaman/saran dari orang-orang lain yang memiliki penyakit mental, anda bisa menggunakan fitur ini untuk saling berinteraksi dengan para pengguna lainnya.
           </div>
         </div>
@@ -390,7 +392,7 @@ export default function HomePage () {
 
 
       <div className="flex justify-start w-full">
-        <div className="font-bold text-4xl">Feedback</div>
+        <div className="text-2xl font-bold md:text-3xl">Feedback</div>
       </div>
       <div className="relative mx-auto text-center p-4">
         <div className="relative w-full overflow-hidden">
@@ -427,14 +429,14 @@ export default function HomePage () {
       </div>
 
       <div className="gap-6 pb-4">
-        <div className="text-4xl font-bold flex justify-center">
+        <div className="text-2xl md:text-3xl font-bold flex justify-center">
           You can also leave a feedback for us by filling the form
         </div>
         
         <div className="flex flex-col-reverse md:flex-row py-6">
           {/* Text section */}
           <div className="flex flex-col justify-center w-full md:w-1/2 order-1 md:order-2 mt-4 md:mt-0">
-            <div className="text-justify">
+            <div className="text-lg text-justify">
               feedback yang kamu berikan sangat berarti bagi kami untuk menganalisa
               kekurangan maupun kelebihan sehingga kami bisa semakin berkembang dari
               feedback yang telah anda kirimkan

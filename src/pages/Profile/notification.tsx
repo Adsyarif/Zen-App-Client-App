@@ -49,7 +49,7 @@ export default function Notification() {
       <Navigation />
       <div className="min-h-screen flex flex-col bg-mocca lg:mx-24 justify-start items-center">
         <div className="bg-mocca w-full lg:w-3/5 px-5 md:px-20">
-          <button className="rounded-md bg-leaf p-2 px-6 my-4 text-white font-medium">
+          <button className="md:text-2xl rounded-md bg-leaf p-2 px-6 my-4 text-white font-medium">
             My Notification
           </button>
           {notifications.map((prop, i) => (

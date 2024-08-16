@@ -67,7 +67,6 @@ const DropdownMoodPicker: React.FC = () => {
     },
   ];
 
-  // logic for handleMood moodStatus menu
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEI(event.currentTarget);
   };
@@ -79,7 +78,6 @@ const DropdownMoodPicker: React.FC = () => {
     handleMenuCLose();
   };
 
-  //   logic for moodCategory color
   const getColorMoodCategory = (moodCategory: "Happy" | "Unhappy"): string => {
     switch (moodCategory) {
       case "Happy":
@@ -90,7 +88,7 @@ const DropdownMoodPicker: React.FC = () => {
         return "bg-gray-200";
     }
   };
-  //   logic for random positions of moodStatus
+
   const randomMoodStatusPosition = (): React.CSSProperties => {
     return {
       margin: "2px",

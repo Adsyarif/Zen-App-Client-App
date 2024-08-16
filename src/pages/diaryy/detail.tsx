@@ -83,7 +83,7 @@ const DiaryIDPage = () => {
     }
 
     const updatedDiary = {
-      updated_diary: selectedDate ? selectedDate.toISOString() : null,
+      created_at: selectedDate ? selectedDate.toISOString() : null,
       mood_status_id: selectMoodStatus,
       content: diaryText,
     };

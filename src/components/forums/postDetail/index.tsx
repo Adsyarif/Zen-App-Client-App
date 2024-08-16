@@ -88,12 +88,12 @@ export function Comment({
           <Image src={userIcon} alt="User icon" height={50} width={50} />
         </div>
 
-        <div className=" ">
+        <div className="md:text-xl ">
           <h3 className="my-2 font-medium">{username}</h3>
           <p>{postContent}</p>
         </div>
 
-        <div className="flex items-start justify-end ml-auto">
+        <div className=" flex items-start justify-end ml-auto">
           <IconButton
             aria-label="more"
             id="long-button"

@@ -69,7 +69,7 @@ export function CommentList({
                     <div className="flex justify-center items-start">
                         <Image src={userIcon} alt="User icon" height={25} width={25} />
                     </div>
-                    <div className="w-4/5">
+                    <div className="w-4/5 md:text-xl">
                         <h3 className="my-2 font-medium">{username}</h3>
                         <p>{commentContent}</p>
                     </div>

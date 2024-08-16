@@ -96,10 +96,6 @@ const SignIn = () => {
             hendrerit suspendisse eros.
           </p>
           <div>
-            <a href=""></a>
-            <a href=""></a>
-            <a href=""></a>
-            <a href=""></a>
           </div>
         </div>
         <div className="m-10 bg-[#22543D] flex-col w-1/2 rounded-md">
@@ -150,7 +146,7 @@ const SignIn = () => {
                   </div>
                 ) : null}
                 <div className="text-white text-end">
-                  <a href="">Forgot Password</a>
+                  <p>Forgot Password</p>
                 </div>
               </div>
               <div className="mt-5 mb-5">

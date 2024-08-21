@@ -28,7 +28,7 @@ const CounselorDetail = ({ counselor }: any) => {
   return (
     <div className=" text-black">
       <div
-        className="my-3 mx-7 text-black flex gap-5 aligh-center"
+        className="my-3 mx-7 text-black flex gap-5 aligh-center hover:cursor-pointer"
         onClick={() => router.push("/Counselor")}
       >
         <svg
@@ -37,7 +37,7 @@ const CounselorDetail = ({ counselor }: any) => {
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="size-6 h-8"
+          className="size-6 h-8 hover:pointer"
         >
           <path
             strokeLinecap="round"

@@ -2,6 +2,28 @@ import React from "react";
 import { useRouter } from "next/router";
 
 const CounselorDetail = ({ counselor }: any) => {
+  const renderStars = (score: number, maxStars = 5): string => {
+    const starFull = "★";
+    const starEmpty = "☆";
+    return starFull.repeat(score) + starEmpty.repeat(maxStars - score);
+  };
+
+  const avgRate = (reviews: []) => {
+    const rattingCollection: any[] = [];
+    reviews.map((review) => {
+      const score = review["rating"];
+      rattingCollection.push(score);
+    });
+
+    if (rattingCollection.length === 0) {
+      return 0;
+    }
+    const total = rattingCollection.reduce((acc, nilai) => acc + nilai, 0);
+
+    const average = total / rattingCollection.length;
+    return Math.floor(average);
+  };
+
   const router = useRouter();
   return (
     <div className=" text-black">
@@ -34,7 +56,14 @@ const CounselorDetail = ({ counselor }: any) => {
           <div className="flex flex-col self-center gap-1">
             <div className="text-2xl font-bold">{counselor.name}</div>
             <div className="text-xl font-semibold">Counseling doctor</div>
-            <div>⭐⭐⭐⭐⭐</div>
+            <div className="flex items-center">
+              <p className="text-2xl text-leaf ">
+                {renderStars(avgRate(counselor.reviews))}
+              </p>
+              <p className="text-lg text-leaf ml-2">
+                ({counselor.reviews.length})
+              </p>
+            </div>
             <div className="text-xl font-semibold">{counselor.specialist}</div>
           </div>
         </div>

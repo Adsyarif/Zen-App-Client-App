@@ -11,7 +11,7 @@ interface Route {
 }
 
 const Navigation: React.FC = () => {
-  const { currentUser } = useContext(AppContext);
+  const currentUser = useContext(AppContext);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleMenu = (): void => {

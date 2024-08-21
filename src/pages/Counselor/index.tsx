@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import {
   HeaderCounselor,
   CounselorCard,
@@ -27,21 +27,11 @@ const Counselor = () => {
   useEffect(() => {
     const fetchCounselorData = async () => {
       try {
-        const response = await fetch("/data/counselorData.json"); // Change this to API endpoint
+        const response = await fetch("/data/counselorData.json"); // Ganti aja ini API
         const data = await response.json();
-
-        const counselorsWithAvgRating = data.counselors.map(
-          (counselor: CounselorData) => ({
-            ...counselor,
-            avgRating: avgRate(counselor.reviews),
-          })
-        );
-        const sortedCounselors = counselorsWithAvgRating.sort(
-          (a: any, b: any) => b.avgRating - a.avgRating
-        );
-
-        setCounselors(sortedCounselors);
-        setFilteredCounselors(sortedCounselors);
+        console.log(data);
+        setCounselors(data.counselors);
+        setFilteredCounselors(data.counselors);
       } catch (error) {
         console.error("Failed to fetch counselor data", error);
       }
@@ -99,16 +89,13 @@ const Counselor = () => {
   return (
     <>
       <Navigation />
-      <Navigation />
       <div className="py-5 px-8 md:px-12 lg:px-32 md:py-5 min-h-screen">
         <HeaderCounselor handleOnChange={handleOnChange} />
-        <div className="w-full py-5 grid md:grid-cols-2 lg:grid-cols-3 gap-y-5">
-          {displayedCounselors.map((counselor) => (
-            <CounselorCard
-              key={counselor.counselor_id}
-              counselor={counselor}
-              handleClick={() => handleClick(counselor.counselor_id, counselor)}
-            />
+        <div className="w-full py-5 grid md:grid-cols-2 lg:grid-cols-3 gap-y-5 ">
+          {displayedCounselors.map((counselor, index) => (
+            <Link href={"/Counselor/detail"} key={index}>
+              <CounselorCard counselor={counselor} />
+            </Link>
           ))}
         </div>
       </div>

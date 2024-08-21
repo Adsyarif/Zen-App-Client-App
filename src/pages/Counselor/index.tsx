@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   HeaderCounselor,
   CounselorCard,
@@ -17,6 +17,8 @@ const Counselor = () => {
   const getCounselor = context.currentCounselor;
   const setCounselor = context.setCurrentCounselor;
 
+  // console.log(getCounselor);
+
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchField, setSearchField] = useState<string>("");
   const [counselors, setCounselors] = useState<CounselorData[]>([]);
@@ -27,9 +29,8 @@ const Counselor = () => {
   useEffect(() => {
     const fetchCounselorData = async () => {
       try {
-        const response = await fetch("/data/counselorData.json"); // Ganti aja ini API
+        const response = await fetch("/data/counselorData.json"); // Change this to API endpoint
         const data = await response.json();
-        console.log(data);
         setCounselors(data.counselors);
         setFilteredCounselors(data.counselors);
       } catch (error) {
@@ -91,11 +92,13 @@ const Counselor = () => {
       <Navigation />
       <div className="py-5 px-8 md:px-12 lg:px-32 md:py-5 min-h-screen">
         <HeaderCounselor handleOnChange={handleOnChange} />
-        <div className="w-full py-5 grid md:grid-cols-2 lg:grid-cols-3 gap-y-5 ">
-          {displayedCounselors.map((counselor, index) => (
-            <Link href={"/Counselor/detail"} key={index}>
-              <CounselorCard counselor={counselor} />
-            </Link>
+        <div className="w-full py-5 grid md:grid-cols-2 lg:grid-cols-3 gap-y-5">
+          {displayedCounselors.map((counselor) => (
+            <CounselorCard
+              key={counselor.counselor_id}
+              counselor={counselor}
+              handleClick={() => handleClick(counselor.counselor_id, counselor)}
+            />
           ))}
         </div>
       </div>

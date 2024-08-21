@@ -409,7 +409,7 @@ export default function HomePage () {
                 style={{ flexBasis: `${100 / visibleCards}%` }}
               >
                 <div className="bg-white p-6 shadow-lg rounded-lg text-left">
-                  <p className="text-gray-700">"{item.text}"</p>
+                  <p className="text-gray-700">{item.text}</p>
                   <div className="flex items-center mb-4 my-2">
                     <img
                       className="w-10 h-10 rounded-full mr-4"

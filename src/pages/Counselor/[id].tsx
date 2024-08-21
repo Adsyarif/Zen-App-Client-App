@@ -48,12 +48,12 @@ export default function Review_Counseling() {
       <Navigation />
       <div className="bg-[#FAF6E3] min-h-screen w-screen md:px-32 py-12">
         <CounselorDetail counselor={selectedCounselor} />
-        <div className="flex justify-between py-2">
-          <h1 className="px-8 text-2xl text-black font-bold ">Review</h1>
+        <div className="flex justify-between">
+          <h1 className="px-8 text-4xl text-black font-bold py-8">Reviews</h1>
 
           <div
             onClick={handleOpen}
-            className=" text-4xl  text-leaf hover:cursor-pointer px-5 "
+            className=" text-4xl text-leaf hover:cursor-pointer px-5 "
           >
             <AddCircleIcon style={{ fontSize: "32" }} />
           </div>
@@ -141,7 +141,7 @@ export default function Review_Counseling() {
             </Box>
           </Modal>
         </div>
-        <CarouselReviewCard />
+        <CarouselReviewCard counselor={selectedCounselor} />
       </div>
     </>
   );

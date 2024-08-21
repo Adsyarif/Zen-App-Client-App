@@ -1,53 +1,16 @@
 import { useEffect, useState } from "react";
 
-export default function CarouselReviewCard() {
+export default function CarouselReviewCard({ counselor }: any) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(3);
 
-  const items = [
-    {
-      id: 1,
-      name: "John Doe",
-      time: "8 Agustus 2024",
-      src: "https://randomuser.me/api/portraits/men/1.jpg",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      time: "8 Agustus 2024",
-      src: "https://randomuser.me/api/portraits/women/2.jpg",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.",
-    },
-    {
-      id: 3,
-      name: "Michael Johnson",
-      time: "8 Agustus 2024",
-      src: "https://randomuser.me/api/portraits/men/3.jpg",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.",
-    },
-    {
-      id: 4,
-      name: "Emily Davis",
-      time: "8 Agustus 2024",
-      src: "https://randomuser.me/api/portraits/women/4.jpg",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.",
-    },
-    {
-      id: 5,
-      name: "William Brown",
-      time: "8 Agustus 2024",
-      src: "https://randomuser.me/api/portraits/men/5.jpg",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.",
-    },
-    {
-      id: 6,
-      name: "Sophia Wilson",
-      time: "8 Agustus 2024",
-      src: "https://randomuser.me/api/portraits/women/6.jpg",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.",
-    },
-  ];
+  const items = counselor.reviews;
+
+  const renderStars = (score: number, maxStars = 5): string => {
+    const starFull = "★";
+    const starEmpty = "☆";
+    return starFull.repeat(score) + starEmpty.repeat(maxStars - score);
+  };
 
   const updateVisibleCards = () => {
     if (window.innerWidth < 768) {
@@ -86,23 +49,26 @@ export default function CarouselReviewCard() {
             transform: `translateX(-${(currentIndex * 100) / visibleCards}%)`,
           }}
         >
-          {items.map((item) => (
+          {items.map((item: any, index: any) => (
             <div
-              key={item.id}
+              key={index}
               className="flex-none px-4"
               style={{ flexBasis: `${100 / visibleCards}%` }}
             >
               <div className="border border-black p-6 shadow-lg rounded-lg text-left">
-                <p className="text-gray-700">&quot;{item.text}&quot;</p>
+                <p className="text-gray-700">&quot;{item.content}&quot;</p>
                 <div className="flex items-center mb-4 my-2">
                   <img
                     className="w-10 h-10 rounded-full mr-4"
-                    src={item.src}
+                    src="/profile people.png"
                     alt={item.name}
                   />
                   <div>
                     <p className="font-semibold text-black">{item.name}</p>
-                    <p className="text-sm text-gray-500">{item.time}</p>
+                    <p className="text-2xl text-leaf">
+                      {renderStars(item.rating)}
+                    </p>
+                    <p className="text-sm text-gray-500">{item.date}</p>
                   </div>
                 </div>
               </div>
@@ -126,7 +92,6 @@ export default function CarouselReviewCard() {
           &gt;
         </button>
       </div>
-      
     </div>
   );
 }

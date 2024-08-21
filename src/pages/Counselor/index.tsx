@@ -1,31 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   HeaderCounselor,
   CounselorCard,
   Pagination,
 } from "@/components/Counselor";
 import { Navigation } from "@/components/common";
-import Link from "next/link";
-
-interface Review {
-  content: string;
-  name: string;
-  date: string;
-  rating: number;
-}
-
-interface CounselorData {
-  name: string;
-  detail: string;
-  specialist: string;
-  maxPatient: number;
-  patientNames: string[];
-  reviews: Review[];
-}
+import { useRouter } from "next/router";
+import { AppContext } from "@/providers/AppContext";
+import { CounselorData, UserContextType } from "@/providers/AppContext";
 
 const ITEMS_PER_PAGE = 12;
 
 const Counselor = () => {
+  const router = useRouter();
+  const context = useContext(AppContext);
+  const getCounselor = context.currentCounselor;
+  const setCounselor = context.setCurrentCounselor;
+
+  // console.log(getCounselor);
+
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchField, setSearchField] = useState<string>("");
   const [counselors, setCounselors] = useState<CounselorData[]>([]);
@@ -36,9 +29,8 @@ const Counselor = () => {
   useEffect(() => {
     const fetchCounselorData = async () => {
       try {
-        const response = await fetch("/data/counselorData.json"); // Ganti aja ini API
+        const response = await fetch("/data/counselorData.json"); // Change this to API endpoint
         const data = await response.json();
-        console.log(data);
         setCounselors(data.counselors);
         setFilteredCounselors(data.counselors);
       } catch (error) {
@@ -57,6 +49,12 @@ const Counselor = () => {
     setCurrentPage(1);
   }, [searchField, counselors]);
 
+  const handleClick = (id: number, counselor: CounselorData) => {
+    router.push(`/Counselor/${id}`);
+    setCounselor(counselor);
+  };
+
+  // Pagination calculations
   const totalCounselors = filteredCounselors.length;
   const totalPages = Math.ceil(totalCounselors / ITEMS_PER_PAGE);
 
@@ -64,25 +62,27 @@ const Counselor = () => {
     setCurrentPage(page);
   };
 
-  const handleOnChange = (event: { target: { value: string } }) => {
-    setSearchField(event.target.value);
-  };
-
   const displayedCounselors = filteredCounselors.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
   );
+
+  const handleOnChange = (event: { target: { value: string } }) => {
+    setSearchField(event.target.value);
+  };
 
   return (
     <>
       <Navigation />
       <div className="py-5 px-8 md:px-12 lg:px-32 md:py-5 min-h-screen">
         <HeaderCounselor handleOnChange={handleOnChange} />
-        <div className="w-full py-5 grid md:grid-cols-2 lg:grid-cols-3 gap-y-5 ">
-          {displayedCounselors.map((counselor, index) => (
-            <Link href={"/Counselor/detail"} key={index}>
-              <CounselorCard counselor={counselor} />
-            </Link>
+        <div className="w-full py-5 grid md:grid-cols-2 lg:grid-cols-3 gap-y-5">
+          {displayedCounselors.map((counselor) => (
+            <CounselorCard
+              key={counselor.counselor_id}
+              counselor={counselor}
+              handleClick={() => handleClick(counselor.counselor_id, counselor)}
+            />
           ))}
         </div>
       </div>

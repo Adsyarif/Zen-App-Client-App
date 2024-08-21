@@ -4,11 +4,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import CarouselReviewCard from "@/components/Counselor/ReviewCard";
 import CounselorDetail from "@/components/counselor_detail";
 import { Navigation } from "@/components/common";
-import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { useRouter } from "next/router";
+import { AppContext, CounselorData } from "@/providers/AppContext";
 
 const style = {
   position: "absolute" as "absolute",
@@ -24,6 +26,8 @@ const style = {
 export default function Review_Counseling() {
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
+  const context = useContext(AppContext);
+  const selectedCounselor: CounselorData | null = context.currentCounselor;
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -38,19 +42,22 @@ export default function Review_Counseling() {
     alert(`Submitted: ${inputValue}`);
     handleClose;
   };
+
   return (
     <>
-      <Navigation/>
+      <Navigation />
       <div className="bg-[#FAF6E3] min-h-screen w-screen md:px-32 py-12">
-        <CounselorDetail/>
+        <CounselorDetail counselor={selectedCounselor} />
         <div className="flex justify-between py-2">
           <h1 className="px-8 text-2xl text-black font-bold ">Review</h1>
-          
-          <div onClick={handleOpen}
-            className=" text-4xl  text-leaf hover:cursor-pointer px-5 ">
-            <AddCircleIcon style={{fontSize:"32"}} />
+
+          <div
+            onClick={handleOpen}
+            className=" text-4xl  text-leaf hover:cursor-pointer px-5 "
+          >
+            <AddCircleIcon style={{ fontSize: "32" }} />
           </div>
-          
+
           <Modal
             open={open}
             onClose={handleClose}
@@ -137,6 +144,5 @@ export default function Review_Counseling() {
         <CarouselReviewCard />
       </div>
     </>
-    
   );
 }

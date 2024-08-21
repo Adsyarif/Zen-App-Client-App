@@ -13,7 +13,6 @@ const shortDescription = (text: string, maxLength = 100): string => {
 const avgRate = (reviews: []) => {
   const rattingCollection: any[] = [];
   reviews.map((review) => {
-    console.log(review);
     const score = review["rating"];
     rattingCollection.push(score);
   });
@@ -27,12 +26,15 @@ const avgRate = (reviews: []) => {
   return Math.floor(average);
 };
 
-const CounselorCard = ({ counselor }: { counselor: any }) => {
+const CounselorCard = ({ counselor, handleClick }: any) => {
   const isAvailable = counselor.maxPatient > counselor.patientNames.length;
   const { reviews } = counselor;
 
   return (
-    <div className="  border rounded-xl w-full md:w-72 bg-leaf p-2 flex flex-col">
+    <div
+      className="border rounded-xl w-full md:w-72 bg-leaf p-2 flex flex-col"
+      onClick={handleClick}
+    >
       <Image
         src={"/counselorImg.png"}
         width={320}

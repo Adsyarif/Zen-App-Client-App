@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import data from "@/data/counselorData.json";
 import {
   HeaderCounselor,
   CounselorCard,
@@ -29,17 +28,34 @@ const ITEMS_PER_PAGE = 12;
 const Counselor = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchField, setSearchField] = useState<string>("");
+  const [counselors, setCounselors] = useState<CounselorData[]>([]);
   const [filteredCounselors, setFilteredCounselors] = useState<CounselorData[]>(
-    data.counselors
+    []
   );
 
   useEffect(() => {
-    const filtered = data.counselors.filter((counselor) =>
+    const fetchCounselorData = async () => {
+      try {
+        const response = await fetch("/data/counselorData.json"); // Ganti aja ini API
+        const data = await response.json();
+        console.log(data);
+        setCounselors(data.counselors);
+        setFilteredCounselors(data.counselors);
+      } catch (error) {
+        console.error("Failed to fetch counselor data", error);
+      }
+    };
+
+    fetchCounselorData();
+  }, []);
+
+  useEffect(() => {
+    const filtered = counselors.filter((counselor) =>
       counselor.specialist.toLowerCase().includes(searchField.toLowerCase())
     );
     setFilteredCounselors(filtered);
     setCurrentPage(1);
-  }, [searchField]);
+  }, [searchField, counselors]);
 
   const totalCounselors = filteredCounselors.length;
   const totalPages = Math.ceil(totalCounselors / ITEMS_PER_PAGE);
@@ -60,15 +76,13 @@ const Counselor = () => {
   return (
     <>
       <Navigation />
+      <Navigation />
       <div className="py-5 px-8 md:px-12 lg:px-32 md:py-5 min-h-screen">
         <HeaderCounselor handleOnChange={handleOnChange} />
         <div className="w-full py-5 grid md:grid-cols-2 lg:grid-cols-3 gap-y-5 ">
           {displayedCounselors.map((counselor, index) => (
-            <Link key={`$counselor-link-${index}`} href={"/Counselor/detail"}>
-              <CounselorCard
-                key={`$counselor-card-${index}`}
-                counselor={counselor}
-              />
+            <Link href={"/Counselor/detail"} key={index}>
+              <CounselorCard counselor={counselor} />
             </Link>
           ))}
         </div>

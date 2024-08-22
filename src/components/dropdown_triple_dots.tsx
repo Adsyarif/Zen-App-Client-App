@@ -33,6 +33,8 @@ const DropdownTripleDotsMenu: React.FC<DropdownTripleDotsMenuProps> = ({ onSave,
       }
     } else if (action === "Delete") {
       onDelete();
+    } else if (action === "share") {
+
     } else {
       console.log(`${action} button clicked`);
     }
@@ -77,6 +79,12 @@ const DropdownTripleDotsMenu: React.FC<DropdownTripleDotsMenuProps> = ({ onSave,
             onClick={() => handleButtonClick("Delete")}
           >
             Delete
+          </Button>
+          <Button
+            ButtonStyle={ButtonStyles.PrimaryButton}
+            onClick={() => handleButtonClick("Share")}
+          >
+            Share
           </Button>
         </MenuItem>
       </Menu>

@@ -80,9 +80,9 @@ const SignIn = () => {
   }, []);
 
   return (
-    <div className="m-10 h-full">
-      <div className="flex flex-row">
-        <div className="flex flex-col w-1/2 m-10">
+    <div className="lg:m-12 md:m-12 min-h-screen flex items-center justify-center">
+      <div className="flex flex-col  lg:flex-row md:flex-row items-center">
+        <div className=" flex-col w-1/2 md:m-10 hidden md:block">
           <h1 className="text-7xl font-bold text-[#22543D] mb-8">
             Welcome To Zen Zone
           </h1>
@@ -98,70 +98,72 @@ const SignIn = () => {
           <div>
           </div>
         </div>
-        <div className="m-10 bg-[#22543D] flex-col w-1/2 rounded-md">
-          <div>
-            <h1 className="mt-10 text-center text-2xl font-bold text-white">
-              Sign In
-            </h1>
-          </div>
-          <div className="m-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form onSubmit={formik.handleSubmit}>
-              <div className="flex flex-col">
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium leading-6 text-white"
-                >
-                  e-mail
-                </label>
-                <div className="mt-2">
-                  <input
-                    className="block w-full rounded-md border-0 px-2 py-1.5 text-[#22543D] placeholder:text-gray-400"
-                    id="email"
-                    type="email"
-                    {...formik.getFieldProps("email")}
-                  />
-                </div>
-                {formik.touched.email && formik.errors.email ? (
-                  <div className="text-amber-300 text-sm mt-1">
-                    {formik.errors.email}
+        <div className="lg:m-10 md:m-10 p-4 md:w-1/3 w-full bg-[#22543D]  rounded-md  ">
+          <div className="flex flex-col items-center justify-center mb-10 " >
+            <div>
+              <h1 className="mt-10 text-center text-2xl font-bold text-white">
+                Sign In
+              </h1>
+            </div>
+            <div className="m-10 sm:mx-auto w-full sm:max-w-sm">
+              <form onSubmit={formik.handleSubmit}>
+                <div className="flex flex-col">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    e-mail
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      className="block w-full rounded-md border-0 px-2 py-1.5 text-[#22543D] placeholder:text-gray-400"
+                      id="email"
+                      type="email"
+                      {...formik.getFieldProps("email")}
+                    />
                   </div>
-                ) : null}
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium leading-6 text-white"
-                >
-                  password
-                </label>
-                <div className="mt-2">
-                  <input
-                    className="block w-full rounded-md border-0 px-2 py-1.5 text-[#22543D] placeholder:text-gray-400"
-                    id="password"
-                    type="password"
-                    {...formik.getFieldProps("password")}
-                  />
-                </div>
-                {formik.touched.password && formik.errors.password ? (
-                  <div className="text-amber-300 text-sm mt-1">
-                    {formik.errors.password}
+                  {formik.touched.email && formik.errors.email ? (
+                    <div className="text-amber-300 text-sm mt-1">
+                      {formik.errors.email}
+                    </div>
+                  ) : null}
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium leading-6 text-white"
+                  >
+                    password
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      className="block w-full rounded-md border-0 px-2 py-1.5 text-[#22543D] placeholder:text-gray-400"
+                      id="password"
+                      type="password"
+                      {...formik.getFieldProps("password")}
+                    />
                   </div>
-                ) : null}
-                <div className="text-white text-end">
-                  <p>Forgot Password</p>
+                  {formik.touched.password && formik.errors.password ? (
+                    <div className="text-amber-300 text-sm mt-1">
+                      {formik.errors.password}
+                    </div>
+                  ) : null}
+                  <div className="text-white text-end">
+                    <p>Forgot Password</p>
+                  </div>
                 </div>
-              </div>
-              <div className="mt-5 mb-5">
-                <button
-                  type="submit"
-                  disabled={formik.isSubmitting}
-                  className="flex w-full justify-center rounded-md bg-white px-3 py-1.5 text-sm font-semibold leading-6 text-[#22543D] shadow-sm hover:bg-[#A0C9B6]"
-                >
-                  Sign in
-                </button>
-                {error && (
-                  <p className="text-red-500 mt-2 text-center">{error}</p>
-                )}
-              </div>
-            </form>
+                <div className="mt-5 mb-5">
+                  <button
+                    type="submit"
+                    disabled={formik.isSubmitting}
+                    className="flex w-full justify-center rounded-md bg-white px-3 py-1.5 text-sm font-semibold leading-6 text-[#22543D] shadow-sm hover:bg-[#A0C9B6]"
+                  >
+                    Sign in
+                  </button>
+                  {error && (
+                    <p className="text-red-500 mt-2 text-center">{error}</p>
+                  )}
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>

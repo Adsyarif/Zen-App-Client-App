@@ -6,10 +6,6 @@ const renderStars = (score: number, maxStars = 5): string => {
   return starFull.repeat(score) + starEmpty.repeat(maxStars - score);
 };
 
-const shortDescription = (text: string, maxLength = 100): string => {
-  return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
-};
-
 const avgRate = (reviews: []) => {
   const rattingCollection: any[] = [];
   reviews.map((review) => {
@@ -24,6 +20,10 @@ const avgRate = (reviews: []) => {
 
   const average = total / rattingCollection.length;
   return Math.floor(average);
+};
+
+const shortDescription = (text: string, maxLength = 100): string => {
+  return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
 };
 
 const CounselorCard = ({ counselor, handleClick }: any) => {

@@ -131,6 +131,8 @@ const DiaryIDPage = () => {
     }
   };
 
+  
+
   return (
     <>
       <Navigation />
@@ -145,7 +147,8 @@ const DiaryIDPage = () => {
             setDiaryText={setDiaryText}
             onSave={createDiaryEntry}
             onEdit={editDiaryEntry}
-            onDelete={deleteDiaryEntry} diaryId={null} 
+            onDelete={deleteDiaryEntry} 
+            diaryId={null} 
           />
         </div>
         <div className="flex flex-col gap-10">

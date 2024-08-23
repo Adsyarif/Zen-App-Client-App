@@ -126,7 +126,7 @@ export default function Review_Counseling() {
                   size={24}
                   color2={"#ffd700"}
                   value={rating}
-                  onChange={(newRating) => setRating(newRating)}
+                  onChange={(newRating: number) => setRating(newRating)}
                 />
               </div>
               <Box

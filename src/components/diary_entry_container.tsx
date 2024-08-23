@@ -14,6 +14,7 @@ interface DiaryEntryContainerProps {
   onSave: () => void;
   onDelete: () => void;
   onEdit: () => void;
+  onShare?:()=> void;
   diaryId: number | null;
 }
 
@@ -29,6 +30,7 @@ const DiaryEntryContainer: React.FC<DiaryEntryContainerProps> = ({
   onSave,
   onDelete,
   onEdit,
+  onShare,
   diaryId
 }) => {
   const handleDiaryChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -55,7 +57,7 @@ const DiaryEntryContainer: React.FC<DiaryEntryContainerProps> = ({
               </p>
             </div>
             <div className=" flex items-center">
-              <DropdownTripleDotsMenu onSave={onSave} onEdit={onEdit} onDelete={onDelete} diaryId={diaryId ? diaryId.toString() : ""}  />
+              <DropdownTripleDotsMenu onSave={onSave} onEdit={onEdit} onDelete={onDelete} onShare={onShare ?? (() => {})} diaryId={diaryId ? diaryId.toString() : ""}  />
             </div>
           </div>
         </div>

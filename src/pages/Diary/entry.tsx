@@ -20,7 +20,6 @@ const DiaryEntryPage = () => {
   const [selectMoodStatus, setSelectMoodStatus] = useState<number | null>(null);
   const [moodText, setMoodText] = useState<string>("");
   const [diaryText, setDiaryText] = useState<string>("");
-  const [isShared, setIsShared] = useState<boolean>(false);
   const [diaryId, setDiaryId] = useState<number | null>(null); // Ensure diaryId is set when needed
 
   useEffect(() => {
@@ -109,25 +108,6 @@ const DiaryEntryPage = () => {
     }
   };
 
-  const shareDiaryEntry = async () => {
-    try {
-      // check missing diary requirement.
-      if (!diaryId || !accountId) {
-        alert("Missing diary ID or account ID.");
-        return;
-      }
-      // send put request ke server
-      await axios.put(`/diary/${accountId}/${diaryId}/share`, {
-        share: true
-      });
-        // merubah state isShared lokal jadi selalu true
-      setIsShared(true)
-      alert("Diary entry shared successfully!");
-    } catch (error) {
-      console.error("Error sharing diary entry:", error);
-      alert("Error occurred while sharing diary entry.");
-    }
-  };  
 
   return (
     <>
@@ -143,7 +123,6 @@ const DiaryEntryPage = () => {
             setMoodText={setMoodText}
             onSave={createDiaryEntry}
             onEdit={editDiaryEntry}
-            onShare={shareDiaryEntry}
             diaryId={diaryId}
             onDelete={() => deleteDiaryEntry(diaryId)}
           />

@@ -21,6 +21,7 @@ const DiaryIDPage = () => {
   const [selectMoodStatus, setSelectMoodStatus] = useState<number | null>(null);
   const [moodText, setMoodText] = useState<string>("");
   const [diaryText, setDiaryText] = useState<string>("");
+  const [isShared, setIsShared] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -121,6 +122,22 @@ const DiaryIDPage = () => {
     }
   };
 
+  
+  const shareDiaryEntry = async () => {
+    try {
+      // send put request ke server
+      await axios.put(`${API_BASE}/diary/${accountId}/${diary_id}/share`, {
+        share: true
+      });
+        // merubah state isShared lokal jadi selalu true
+      setIsShared(true)
+      alert("Diary entry shared successfully!");
+    } catch (error) {
+      console.error("Error sharing diary entry:", error);
+      alert("Error occurred while sharing diary entry.");
+    }
+  };  
+
   return (
     <>
       <Navigation />
@@ -136,6 +153,7 @@ const DiaryIDPage = () => {
             onSave={saveDiaryEntry}
             onEdit={saveDiaryEntry} 
             onDelete={deleteDiaryEntry}
+            onShare={shareDiaryEntry}
             diaryId={diary_id ? parseInt(diary_id as string, 10) : null}
           />
         </div>

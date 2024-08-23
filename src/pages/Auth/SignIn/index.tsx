@@ -46,10 +46,13 @@ const SignIn = () => {
         const profileIncomplete = response.data.data.profile_incomplete;
         console.log("Profile incomplete status:", profileIncomplete);
 
-        localStorage.setItem("currentUser", JSON.stringify({
-          email: userData.email,
-          account_id: userData.account_id,
-        }));
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify({
+            email: userData.email,
+            account_id: userData.account_id,
+          })
+        );
 
         setCurrentUser({
           email: userData.email,
@@ -57,7 +60,7 @@ const SignIn = () => {
         });
 
         console.log("User data after login:", userData);
-        
+
         if (profileIncomplete === true || profileIncomplete === "true") {
           router.push("/createProfile");
         } else {
@@ -95,8 +98,7 @@ const SignIn = () => {
             blandit massa montes. Cursus neque consequat erat fringilla,
             hendrerit suspendisse eros.
           </p>
-          <div>
-          </div>
+          <div></div>
         </div>
         <div className="lg:m-10 md:m-10 p-4 md:w-1/3 w-full bg-[#22543D]  rounded-md  ">
           <div className="flex flex-col items-center justify-center mb-10 " >

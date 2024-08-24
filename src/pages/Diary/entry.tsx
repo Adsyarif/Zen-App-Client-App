@@ -108,6 +108,7 @@ const DiaryEntryPage = () => {
     }
   };
 
+
   return (
     <>
       <Navigation />

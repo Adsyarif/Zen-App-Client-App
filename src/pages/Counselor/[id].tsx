@@ -11,7 +11,9 @@ import { Navigation } from "@/components/common";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { useRouter } from "next/router";
 import { AppContext, CounselorData } from "@/providers/AppContext";
+
 import ReactStars from "react-stars";
+
 
 const style = {
   position: "absolute" as "absolute",
@@ -29,7 +31,9 @@ export default function Review_Counseling() {
   const [inputValue, setInputValue] = useState("");
   const context = useContext(AppContext);
   const selectedCounselor: CounselorData | null = context.currentCounselor;
+
   const [rating, setRating] = React.useState(0);
+
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -48,7 +52,9 @@ export default function Review_Counseling() {
   return (
     <>
       <Navigation />
+
       <div className="bg-[#FAF6E3] md:px-32 py-12">
+
         <CounselorDetail counselor={selectedCounselor} />
         <div className="flex justify-between">
           <h1 className="px-8 text-4xl text-black font-bold py-8">Reviews</h1>
@@ -120,6 +126,7 @@ export default function Review_Counseling() {
                 InputProps={{ style: { color: "black" } }}
                 InputLabelProps={{ style: { color: "white" } }}
               />
+
               <div className="flex justify-center">
                 <ReactStars
                   count={5}
@@ -129,6 +136,7 @@ export default function Review_Counseling() {
                   onChange={(newRating: number) => setRating(newRating)}
                 />
               </div>
+
               <Box
                 sx={{ display: "flex", justifyContent: "center", marginTop: 2 }}
               >

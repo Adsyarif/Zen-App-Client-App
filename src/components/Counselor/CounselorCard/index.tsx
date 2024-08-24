@@ -26,6 +26,7 @@ const shortDescription = (text: string, maxLength = 100): string => {
   return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
 };
 
+
 const CounselorCard = ({ counselor, handleClick }: any) => {
   const isAvailable = counselor.maxPatient > counselor.patientNames.length;
   const { reviews } = counselor;

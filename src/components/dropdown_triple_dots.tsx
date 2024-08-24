@@ -9,10 +9,17 @@ interface DropdownTripleDotsMenuProps {
   onSave: () => void;
   onEdit: () => void;
   onDelete: () => void;
+  onShare: () => void;
   diaryId: string;
 }
 
-const DropdownTripleDotsMenu: React.FC<DropdownTripleDotsMenuProps> = ({ onSave, onEdit, onDelete, diaryId  }) => {
+const DropdownTripleDotsMenu: React.FC<DropdownTripleDotsMenuProps> = ({
+  onSave,
+  onEdit,
+  onDelete,
+  onShare,
+  diaryId,
+}) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -27,15 +34,18 @@ const DropdownTripleDotsMenu: React.FC<DropdownTripleDotsMenuProps> = ({ onSave,
     handleMenuClose();
     if (action === "Save") {
       if (diaryId) {
-        onEdit(); 
+        onEdit();
       } else {
-        onSave(); 
+        onSave();
       }
     } else if (action === "Delete") {
       onDelete();
-    } else {
-      console.log(`${action} button clicked`);
-    }
+    } else if (action === "Share")
+      if (onShare) {
+        onShare(); 
+      } else {
+        console.log(`${action} button clicked`);
+      }
   };
 
   return (
@@ -77,6 +87,12 @@ const DropdownTripleDotsMenu: React.FC<DropdownTripleDotsMenuProps> = ({ onSave,
             onClick={() => handleButtonClick("Delete")}
           >
             Delete
+          </Button>
+          <Button
+            ButtonStyle={ButtonStyles.PrimaryButton}
+            onClick={() => handleButtonClick("Share")}
+          >
+            Share
           </Button>
         </MenuItem>
       </Menu>

@@ -99,6 +99,8 @@ const Counselor = () => {
   return (
     <>
       <Navigation />
+
+
       <div className="py-5 px-8 md:px-12 lg:px-32 md:py-5 min-h-screen">
         <HeaderCounselor handleOnChange={handleOnChange} />
         <div className="w-full py-5 grid md:grid-cols-2 lg:grid-cols-3 gap-y-5">

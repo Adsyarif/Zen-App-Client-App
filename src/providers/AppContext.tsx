@@ -5,6 +5,7 @@ import React, {
   ReactNode,
   FC,
 } from "react";
+import { string } from "yup";
 
 export interface ReportCategory {
   report_category_id: number;
@@ -25,11 +26,15 @@ export interface MoodStatus {
   };
 }
 
-interface Review {
+export interface Review {
   content: string;
   name: string;
   date: string;
   rating: number;
+  review_counselor_id: string;
+  user_first_name: string;
+  user_last_name: string;
+  created_at: string;
 }
 
 export interface CounselorData {
@@ -39,7 +44,7 @@ export interface CounselorData {
   specialist: string;
   maxPatient: number;
   patientNames: string[];
-  reviews: Review[];
+  // reviews: Review[];
   available_time: string;
 }
 

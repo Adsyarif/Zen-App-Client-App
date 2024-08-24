@@ -1,0 +1,7 @@
+.custom404 {
+  background-image: linear-gradient(
+      rgba(239, 234, 241, 0.836),
+      rgba(235, 231, 233, 0.9)
+    ),
+    url(/hero-image.png);
+}

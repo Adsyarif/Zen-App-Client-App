@@ -17,7 +17,7 @@ export default function HeaderDetailTitle(
           className="w-10 h-10 p-1 rounded-full object-cover object-center"
         />
         <h3 className="flex text-base font-semibold">
-          Publisher <RxDotFilled /> 31 July 2024
+          {article.author} <RxDotFilled /> {article.created_at}
         </h3>
       </div>
     </>

@@ -2,9 +2,31 @@ import ArticlesCard from "@/components/Articles/ArticlesCard";
 import HeaderArticles from "@/components/Articles/HeaderArticles";
 import HeaderImageArticles from "@/components/Articles/HeaderImageArticles";
 import { Navigation } from "@/components/common";
-import data from "@/data/articlesData.json";
+import { API_BASE } from "@/lib/projectApi";
+import axios from "axios";
 import { useRouter } from "next/router";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+
+
+export interface ArticleProps {
+  article_id: number;
+  title: string;
+  author: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string;
+  summary: string;
+  content: {
+    article_content_id: number;
+    article_id: number;
+    sub_title: string;
+    paragraph: string;
+    created_at: string;
+    updated_at: string;
+    deleted_at: string;
+  }[];
+  tag: string;
+}
 
 const ITEMS_PER_PAGE = 12;
 
@@ -12,20 +34,38 @@ export default function Articles() {
   const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
   const [filter,setFilter] = useState("");
-  const [filteredArticles, setFilteredArticles] = useState(data.articles);
+  const [articles, setArticles] = useState<ArticleProps[]>([])
+  const [articleContent, setArticleContent] = useState<ArticleProps[]>([])
+  const [filteredArticles, setFilteredArticles] = useState<ArticleProps[]>([]);
+
+  useEffect(() => {
+    const fetchArticles = async () => {
+      try {
+        const response = await axios.get(`${API_BASE}/articles`);
+        const data = response.data.data;
+        console.log(data)
+        setArticles(data);
+        setFilteredArticles(data);
+      } catch (error) {
+        console.error("Failed to fetch articles:", error)
+      }
+    };
+    
+    fetchArticles();
+  }, []);
 
   const applyFilter = useCallback((filter: string) => {
     setFilter(filter);
     if (filter === "") {
-      setFilteredArticles(data.articles);
+      setFilteredArticles(articles);
     } else {
-      setFilteredArticles(data.articles.filter(Article => Article.tag === filter));
+      setFilteredArticles(articles.filter(article => article.tag === filter));
     }
     setCurrentPage(1);
-  }, []);
+  }, [articles]);
 
-  const handleCardClick = (articleId: number) => {
-    router.push(`/Articles/${articleId}`);
+  const handleCardClick = (article_id: number) => {
+    router.push(`/Articles/${article_id}`);
   };
 
   const handleLoadMore = () => {
@@ -35,7 +75,7 @@ export default function Articles() {
   const displayedArticles = filteredArticles.slice(
     0,
     currentPage * ITEMS_PER_PAGE
-  );
+  ) || [];
 
   return (
     <>

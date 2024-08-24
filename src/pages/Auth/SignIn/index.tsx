@@ -44,13 +44,17 @@ const SignIn = () => {
         });
         const userData = response.data.data.account;
         const profileIncomplete = response.data.data.profile_incomplete;
-        console.log("Profile incomplete status:", profileIncomplete);
+        const counselorIncomplete = response.data.data.counselor_incomplete
+        const roleId = userData.role_id;
+        console.log("Profile incomplete status:", profileIncomplete, counselorIncomplete);
+        console.log("Role ID:", roleId);
 
         localStorage.setItem(
           "currentUser",
           JSON.stringify({
             email: userData.email,
             account_id: userData.account_id,
+            role_id: roleId, 
           })
         );
 
@@ -61,8 +65,10 @@ const SignIn = () => {
 
         console.log("User data after login:", userData);
 
-        if (profileIncomplete === true || profileIncomplete === "true") {
+        if (roleId === 2 && (profileIncomplete === true || profileIncomplete === "true")) {
           router.push("/createProfile");
+        } else if (roleId === 3 && (counselorIncomplete === true || counselorIncomplete === "true")) {
+          router.push("/counselor_page");
         } else {
           router.push("/Forum");
         }

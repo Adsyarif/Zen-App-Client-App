@@ -5,6 +5,7 @@ import { Navigation } from "@/components/common";
 const CounselorPage = () => {
   return (
     <div>
+      <Navigation/>
       <CounselorProfileCard />
     </div>
   );

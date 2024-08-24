@@ -73,7 +73,7 @@ const CounselorProfileCard = () => {
                     src="/counselorImg.png"
                     width={320}
                     height={120}
-                    className="object-cover object-center rounded-full border-8 border-[#C1D8C3] rounded-full w-24 h-24"
+                    className="object-cover object-center border-8 border-[#C1D8C3] rounded-full w-24 h-24"
                     alt="Counselor Image"
                 />
             </div>

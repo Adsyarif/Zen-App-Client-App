@@ -1,5 +1,4 @@
 import { GetStaticProps, GetStaticPaths } from "next";
-import articlesData from "@/data/articlesData.json";
 import BackButton from "@/components/Articles/BackButton";
 import HeaderDetailTitle from "@/components/Articles/HeaderDetailTitle";
 import HeaderDetailImage from "@/components/Articles/HeaderDetailImage";
@@ -8,35 +7,42 @@ import ShareArticle from "@/components/Articles/ShareArticle";
 import ArticleDescription from "@/components/Articles/ArticleDescription";
 import ArticlesCard from "@/components/Articles/ArticlesCard";
 import { useRouter } from "next/router";
-import data from "@/data/articlesData.json";
 import { Navigation } from "@/components/common";
+import axios from "axios";
+import { API_BASE } from "@/lib/projectApi";
+import { ArticleProps } from ".";
+import { useEffect, useState } from "react";
 
-
-interface Content {
-  sub_title: string;
-  paragraph: string;
-}
-
-interface ArticlesData {
-  id: number;
-  title: string;
-  author: string;
-  published_date: string;
-  summary: string;
-  content: Content[];
-  tag: string;
-}
 
 const ITEMS_PER_PAGE = 4;
 
-const ArticleDetail = ({ article }: { article: ArticlesData | null }) => {
+const ArticleDetail = ({ article }: { article: ArticleProps | null }) => {
   const router = useRouter();
-  const articleData = data.articles;
+  const [recommendArticles, setRecommendArticles] = useState<ArticleProps[]>([]);
 
-  const displayedArticles = articleData.slice(0, ITEMS_PER_PAGE);
+  useEffect(() => {
+    if (article) {
+      const fetchRecommendArticles = async () => {
+        try {
+          const response = await axios.get(`${API_BASE}/articles`);
+          const allArticles = response.data.data;
 
-  const handleCardClick = (articleId: number) => {
-    router.push(`/Articles/${articleId}`);
+          const relatedArticles = allArticles.filter(
+            (item: ArticleProps) => item.tag === article.tag && item.article_id !== article.article_id
+          ).slice(0, ITEMS_PER_PAGE);
+
+          setRecommendArticles(relatedArticles);
+        } catch (error) {
+          console.error("Failed to fetch recommend articles:", error);
+        }
+      };
+
+      fetchRecommendArticles();
+    }
+  }, [article])
+
+  const handleCardClick = (article_id: number) => {
+    router.push(`/Articles/${article_id}`);
   };
 
   const handleBackClick = () => {
@@ -77,10 +83,10 @@ const ArticleDetail = ({ article }: { article: ArticlesData | null }) => {
           <p className="text-blue-600">See More</p>
         </div>
         <div className="w-full py-5 flex justify-evenly flex-wrap gap-2">
-          {displayedArticles.map((article, index) => (
+          {recommendArticles.map((recommendArticle) => (
             <ArticlesCard
-              key={index}
-              article={article}
+              key={recommendArticle.article_id}
+              article={recommendArticle}
               onCardClick={handleCardClick}
             />
           ))}
@@ -92,25 +98,59 @@ const ArticleDetail = ({ article }: { article: ArticlesData | null }) => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { id } = context.params as { id: string };
-  const article =
-    articlesData.articles.find((article) => article.id === Number(id)) || null;
 
-  return {
-    props: {
-      article,
-    },
-  };
+  try {
+    const [articleResponse, contentResponse] = await Promise.all([
+      axios.get(`${API_BASE}/articles/${id}`),
+      axios.get(`${API_BASE}/articles/content/${id}`)
+    ])
+    const articles = articleResponse.data.data || null;
+    const contents = contentResponse.data.data || [];
+
+    const article = articles.find((item: ArticleProps) => item.article_id === parseInt(id)) || null;
+
+    const articleWithContent = {
+      ...article,
+      content: contents,
+    };
+    
+    return {
+      props: {
+        article: articleWithContent,
+      },
+    };
+  } catch (error) {
+    console.error("Failed to fetch article:", error);
+    return {
+      props: {
+        article: null,
+      },
+    };
+  }
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = articlesData.articles.map((article) => ({
-    params: { id: article.id.toString() },
-  }));
+  try {
+    const response = await axios.get(`${API_BASE}/articles`);
+    const articles = response.data.data || null;
 
-  return {
-    paths,
-    fallback: "blocking",
-  };
+    const paths = articles.map((article: ArticleProps) => ({
+      params: { id: article.article_id.toString() },
+    }));
+    
+    return {
+      paths,
+      fallback: "blocking",
+    };
+  } catch (error) {
+    console.error("Failed to fetch article:", error);
+
+    return {
+      paths: [],
+      fallback: "blocking",
+    };
+  }
+
 };
 
 export default ArticleDetail;

@@ -3,7 +3,6 @@ import Link from "next/link";
 import routes from "@/data/navigationRoute.json";
 import { AppContext } from "@/providers/AppContext";
 import Image from "next/image";
-import { API_BASE } from "@/lib/projectApi";
 
 interface Route {
   href: string;
@@ -11,7 +10,7 @@ interface Route {
 }
 
 const Navigation: React.FC = () => {
-  const currentUser = useContext(AppContext);
+  const { currentUser } = useContext(AppContext);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleMenu = (): void => {
@@ -20,15 +19,18 @@ const Navigation: React.FC = () => {
 
   return (
     <nav className="py-5 px-8 md:px-32 flex items-center justify-between relative">
+
       <Link href="/">
+        
         <Image
-          src="/logo.png"
-          width={100}
-          height={100}
-          alt="Profile picture"
-          className="p-0"
-        />
+            src="/logo.png"
+            width={100}
+            height={100}
+            alt="Profile picture"
+            className="p-0"
+          />
       </Link>
+
 
       <div className="block md:hidden z-30">
         <button
@@ -54,6 +56,7 @@ const Navigation: React.FC = () => {
         </button>
       </div>
 
+
       <div className="hidden md:flex md:justify-center md:items-center flex-grow">
         {currentUser && (
           <div className="flex gap-5">
@@ -67,6 +70,7 @@ const Navigation: React.FC = () => {
           </div>
         )}
       </div>
+
 
       <div
         className={`fixed top-0 right-0 bg-leaf  z-20 w-48 h-3/2 md:hidden transition-transform ${
@@ -107,9 +111,10 @@ const Navigation: React.FC = () => {
         </div>
       </div>
 
+
       {!currentUser && (
         <div className="flex gap-5 z-10">
-          <Link href={`/Auth/SignIn`}>
+          <Link href="/Auth/SignIn">
             <button className="w-24 h-11 text-sm px-4 py-2 leading-none border rounded-lg bg-leaf font-bold text-mocca hover:bg-cream hover:border-leaf hover:text-leaf mt-4 lg:mt-0">
               Login
             </button>

@@ -16,6 +16,7 @@ import consulationHistory from "@/data/consultationHistory.json";
 import FeedbackModal from '@/components/profile/editModal';
 import EditModal from "@/components/profile/editModal";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export interface DataPairProps {
   label: string;
@@ -46,8 +47,9 @@ const dateFormat: Intl.DateTimeFormatOptions = {
 
 export default function ProfilePage() {
   const [userData, setUserData] = useState<any>(null);
-  const { currentUser } = useContext(AppContext);
+  const { currentUser, setCurrentUser } = useContext(AppContext);
   const [isModalVisible, setModalVisible] = useState(false);
+  const router = useRouter();
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -94,6 +96,12 @@ export default function ProfilePage() {
   if (!userData) {
     return <p>Loading...</p>;
   }
+
+  const LogOut = () => {
+    setCurrentUser(null);
+    localStorage.removeItem("currentUser");
+    router.push("/");
+  };
 
   return (
     <>
@@ -179,6 +187,10 @@ export default function ProfilePage() {
           <div className="flex flex-row justify-end gap-3 text-slate-50 mt-3">
             <button onClick={toggleModal} className="bg-teal-600 rounded-xl p-1 px-5">
               Edit
+            </button>
+
+            <button onClick={LogOut} className="bg-red-400 rounded-xl p-1 px-5">
+              Logout
             </button>
           </div>
           {isModalVisible && (

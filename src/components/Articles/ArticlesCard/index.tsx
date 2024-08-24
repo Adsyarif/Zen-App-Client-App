@@ -1,4 +1,5 @@
 import { ArticleProps } from "@/pages/Articles";
+import dayjs from "dayjs";
 import Image from "next/image";
 import { RxDotFilled } from "react-icons/rx";
 
@@ -7,7 +8,11 @@ interface ArticlesCardProps {
   onCardClick: (id: number) => void;
 }
 
-const summary = (text: string, maxLength = 160): string => {
+const title = (text: string, maxLength = 40): string => {
+  return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+};
+
+const summary = (text: string, maxLength = 120): string => {
   return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
 };
 
@@ -23,7 +28,7 @@ export default function ArticlesCard({ article, onCardClick }: ArticlesCardProps
         className="w-full h-64 md:h-80 p-1 mb-4 object-cover object-center"
       />
       <div className="text-black">
-        <h2 className="text-xl font-semibold">{article.title}</h2>
+        <h2 className="text-xl font-semibold">{title(article.title)}</h2>
         <p className="min-h-[80px] text-sm mt-2">{summary(article.summary)}</p>
         <div className="flex justify-start items-center">
           <Image
@@ -34,7 +39,7 @@ export default function ArticlesCard({ article, onCardClick }: ArticlesCardProps
             className="w-12 h-12 p-1 rounded-full object-cover object-center"
           />
           <h3 className="flex font-semibold">
-            {article.author} <RxDotFilled /> {article.created_at}
+            {article.author} <RxDotFilled /> {dayjs(article.created_at).format("DD-MMMM-YYYY")}
           </h3>
         </div>
       </div>

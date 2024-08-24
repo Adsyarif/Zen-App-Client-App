@@ -1,9 +1,10 @@
+import { ArticleProps } from "@/pages/Articles";
 import Image from "next/image";
 import { RxDotFilled } from "react-icons/rx";
 
 interface ArticlesCardProps {
-  article: any;
-  onCardClick: (articleTitle: number) => void;
+  article: ArticleProps;
+  onCardClick: (id: number) => void;
 }
 
 const summary = (text: string, maxLength = 160): string => {
@@ -13,7 +14,7 @@ const summary = (text: string, maxLength = 160): string => {
 export default function ArticlesCard({ article, onCardClick }: ArticlesCardProps) {
 
   return (
-    <button onClick={() => onCardClick(article.id)} className="w-full md:w-72 p-2 flex flex-col">
+    <button onClick={() => onCardClick(article.article_id)} className="w-full md:w-72 p-2 flex flex-col">
       <Image
         src={"/articleImage.png"}
         width={320}
@@ -33,7 +34,7 @@ export default function ArticlesCard({ article, onCardClick }: ArticlesCardProps
             className="w-12 h-12 p-1 rounded-full object-cover object-center"
           />
           <h3 className="flex font-semibold">
-            {article.author} <RxDotFilled /> {article.published_date}
+            {article.author} <RxDotFilled /> {article.created_at}
           </h3>
         </div>
       </div>

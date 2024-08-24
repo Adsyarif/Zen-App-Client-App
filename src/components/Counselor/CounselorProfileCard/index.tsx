@@ -38,7 +38,7 @@ const CounselorProfileCard = () => {
                 title: "M.Psi",
                 certification: "Konsultan Psikologi bidang SDM",
                 phone_number: "628325553789",
-                gender: "male",
+                gender_name: "male"
             });
         }
     }, [currentUser]);
@@ -67,41 +67,39 @@ const CounselorProfileCard = () => {
     }
 
     return (
-        <>
-            <div className="flex flex-col gap-3 bg-teal-900 w-1/3 m-10 p-10 rounded-md h-fit">
-                <div className="flex justify-center w-full">
-                    <Image
-                        src="/counselorImg.png"
-                        width={320}
-                        height={120}
-                        className="object-cover object-center rounded-full border-8 border-[#C1D8C3] rounded-full w-24 h-24"
-                        alt="Counselor Image"
-                    />
-                </div>
-                <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
-                    <p>username:</p>
-                    <p>{counselorData.username}</p>
-                </div>
-                <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
-                    <p>counselor name:</p>
-                    <p>{`${counselorData.first_name} ${counselorData.last_name}`}</p>
-                </div>
-                <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
-                    <p>title:</p>
-                    <p>{counselorData.title}</p>
-                </div>
-                <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
-                    <p>phone number:</p>
-                    <p>{counselorData.phone_number}</p>
-                </div>
-                <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
-                    <p>certification number:</p>
-                    <p>{counselorData.certification}</p>
-                </div>
-                <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
-                    <p>gender:</p>
-                    <p>{counselorData.gender_name}</p>
-                </div>
+        <div className="flex flex-col gap-3 bg-teal-900 w-1/3 m-10 p-10 rounded-md h-fit">
+            <div className="flex justify-center w-full">
+                <Image
+                    src="/counselorImg.png"
+                    width={320}
+                    height={120}
+                    className="object-cover object-center rounded-full border-8 border-[#C1D8C3] rounded-full w-24 h-24"
+                    alt="Counselor Image"
+                />
+            </div>
+            <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
+                <p>username:</p>
+                <p>{counselorData.username}</p>
+            </div>
+            <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
+                <p>counselor name:</p>
+                <p>{`${counselorData.first_name} ${counselorData.last_name}`}</p>
+            </div>
+            <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
+                <p>title:</p>
+                <p>{counselorData.title}</p>
+            </div>
+            <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
+                <p>phone number:</p>
+                <p>{counselorData.phone_number}</p>
+            </div>
+            <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
+                <p>certification:</p>
+                <p>{counselorData.certification}</p>
+            </div>
+            <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
+                <p>gender:</p>
+                <p>{counselorData.gender_name}</p>
             </div>
             <div className="flex flex-row justify-end gap-3 text-slate-50 mt-3">
                 <button onClick={toggleModal} className="bg-teal-600 rounded-xl p-1 px-5">
@@ -116,7 +114,7 @@ const CounselorProfileCard = () => {
                     onSave={handleSave}
                 />
             )}
-        </>
+        </div>
     )
 }
 export default CounselorProfileCard;

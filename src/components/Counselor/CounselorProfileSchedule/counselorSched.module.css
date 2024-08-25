@@ -1,0 +1,26 @@
+.table {
+    margin: auto;
+    width: 100%;
+    padding: 10%;
+    border-radius: 15px;
+  }
+  
+  .table,
+  .table th,
+  .table td,
+  .table tr,
+  .table thead,
+  .table tbody {
+    color: black;
+    border: 1px solid lightslategrey;
+    text-align: center;
+  }
+  
+  @media only screen and (min-width: 648px) {
+    .table,
+    .table th,
+    .table td {
+      padding: 7px;
+    }
+  }
+  

@@ -1,0 +1,42 @@
+[
+    {
+        "schedule_id": 1,
+        "day": "Monday",
+        "slots": [
+            { "available_from": "09:00 AM", "available_to": "11:00 AM" },
+            { "available_from": "01:00 PM", "available_to": "05:00 PM" }
+        ]
+    },
+    {
+        "schedule_id": 2,
+        "day": "Tuesday",
+        "slots": [
+            { "available_from": "09:00 AM", "available_to": "11:00 AM" },
+            { "available_from": "01:00 PM", "available_to": "05:00 PM" }
+        ]
+    },
+    {
+        "schedule_id": 3,
+        "day": "Wednesday",
+        "slots": [
+            { "available_from": "09:00 AM", "available_to": "11:00 AM" },
+            { "available_from": "01:00 PM", "available_to": "05:00 PM" }
+        ]
+    },
+    {
+        "schedule_id": 4,
+        "day": "Thursday",
+        "slots": [
+            { "available_from": "09:00 AM", "available_to": "11:00 AM" },
+            { "available_from": "01:00 PM", "available_to": "05:00 PM" }
+        ]
+    },
+    {
+        "schedule_id": 5,
+        "day": "Friday",
+        "slots": [
+            { "available_from": "09:00 AM", "available_to": "11:00 AM" },
+            { "available_from": "01:00 PM", "available_to": "05:00 PM" }
+        ]
+    }
+]

@@ -92,7 +92,7 @@ const SignIn = () => {
     if (getToken) {
       router.push("/Articles");
     }
-  }, []);
+  }, [router]);
 
   return (
     <div className="lg:m-12 md:m-12 min-h-screen flex items-center justify-center">
@@ -183,7 +183,7 @@ const SignIn = () => {
                   )}
                 </div>
                 <p className="text-white">
-                  If you don't have an account, please go to{' '}
+                  If you don&apos;t have an account, please go to{' '}
                   <Link href="/Auth/SignUp" className="text-cream underline">
                     Sign Up
                   </Link>

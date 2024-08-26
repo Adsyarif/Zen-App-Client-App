@@ -5,6 +5,11 @@ import { AppContext } from "@/providers/AppContext";
 import { useRouter } from "next/router";
 import { API_BASE } from "@/lib/projectApi";
 import { useContext, useEffect, useState } from "react";
+import Link from "next/link";
+import { GoCommentDiscussion } from "react-icons/go";
+import { IoPeopleCircleSharp } from "react-icons/io5";
+import { FaBookOpen } from "react-icons/fa";
+import { BsNewspaper } from "react-icons/bs";
 
 const SignIn = () => {
   const router = useRouter();
@@ -54,13 +59,14 @@ const SignIn = () => {
           JSON.stringify({
             email: userData.email,
             account_id: userData.account_id,
-            role_id: roleId, 
+            role_id: userData.role_id.role_id, 
           })
         );
 
         setCurrentUser({
           email: userData.email,
           account_id: userData.account_id,
+          role_id: userData.role_id.role_id,
         });
 
         console.log("User data after login:", userData);
@@ -68,9 +74,9 @@ const SignIn = () => {
         if (roleId === 2 && (profileIncomplete === true || profileIncomplete === "true")) {
           router.push("/createProfile");
         } else if (roleId === 3 && (counselorIncomplete === true || counselorIncomplete === "true")) {
-          router.push("/counselor_page");
+          router.push("/Counselor/profile");
         } else {
-          router.push("/Forum");
+          router.push("/Articles");
         }
       } catch (error) {
         console.error("Login failed:", error);
@@ -84,7 +90,7 @@ const SignIn = () => {
   useEffect(() => {
     const getToken = localStorage.getItem("token");
     if (getToken) {
-      router.push("/Forum");
+      router.push("/Articles");
     }
   }, []);
 
@@ -104,6 +110,12 @@ const SignIn = () => {
             blandit massa montes. Cursus neque consequat erat fringilla,
             hendrerit suspendisse eros.
           </p>
+          <div className="flex flex-row gap-5 text-4xl">
+            <p className="text-[#22543D] "><GoCommentDiscussion/></p>
+            <p className="text-[#22543D]"><IoPeopleCircleSharp /></p>
+            <p className="text-[#22543D]"><FaBookOpen /></p>
+            <p className="text-[#22543D]"><BsNewspaper /></p>
+          </div>
           <div></div>
         </div>
         <div className="lg:m-10 md:m-10 p-4 md:w-1/3 w-full bg-[#22543D]  rounded-md  ">
@@ -170,6 +182,12 @@ const SignIn = () => {
                     <p className="text-red-500 mt-2 text-center">{error}</p>
                   )}
                 </div>
+                <p className="text-white">
+                  If you don't have an account, please go to{' '}
+                  <Link href="/Auth/SignUp" className="text-cream underline">
+                    Sign Up
+                  </Link>
+                </p>
               </form>
             </div>
           </div>

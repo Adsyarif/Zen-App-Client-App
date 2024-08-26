@@ -66,7 +66,7 @@ const ArticleDetail = ({ article }: { article: ArticleProps | null }) => {
         <HeaderDetailImage />
       </div>
       <div className="grid grid-cols-1 py-2 px-8 md:grid-cols-5">
-        <aside className="hidden lg:flex flex-col justify-center items-center col-span-1">
+        <aside className="hidden lg:flex flex-col items-center col-span-1">
           <SelectionSection article={article}/>
           <ShareArticle />
         </aside>

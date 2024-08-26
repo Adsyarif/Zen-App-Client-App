@@ -1,120 +1,122 @@
 import Image from "next/image";
-import { useContext, useState, useEffect } from "react";
-import { AppContext } from "@/providers/AppContext";
-import { API_BASE } from "@/lib/projectApi";
+import { useState } from "react";
 import axios from "axios";
-import EditModal from "@/components/profile/editModal";
+import EditModal from "@/components/profile/editModalControler";
+import { API_BASE } from "@/lib/projectApi";
 
-const CounselorProfileCard = () => {
-    const [counselorData, setCounselorData] = useState<any>(null);
-    const { currentUser } = useContext(AppContext);
-    const [isModalVisible, setModalVisible] = useState(false);
-
-    const toggleModal = () => {
-        setModalVisible(!isModalVisible);
-    };
-
-    useEffect(() => {
-        const fetchCounselorData = async () => {
-            try {
-                const response = await axios.get(`${API_BASE}/counselor_details/${currentUser?.account_id}`);
-                const data = response.data.data;
-                setCounselorData({
-                    email: data.account.email,
-                    ...data.counselor_details[0],
-                });
-            } catch (error) {
-                console.error("Error fetching user data:", error);
-            }
-        };
-
-        if (currentUser?.account_id) {
-            fetchCounselorData();
-        } else {
-            setCounselorData({
-                username: "doktostone",
-                first_name: "Senku",
-                last_name: "Ishigami",
-                title: "M.Psi",
-                certification: "Konsultan Psikologi bidang SDM",
-                phone_number: "628325553789",
-                gender_name: "male"
-            });
-        }
-    }, [currentUser]);
-
-    const handleSave = async (updatedData: any) => {
-        try {
-            const { email, ...dataToUpdate } = updatedData;
-            await axios.put(`${API_BASE}/counselor_details/${currentUser?.account_id}`, updatedData);
-            setCounselorData((prevData: any) => prevData ? {
-                ...prevData,
-                ...dataToUpdate,
-            } : {
-                email,
-                ...dataToUpdate,
-            });
-
-            setModalVisible(false);
-            setModalVisible(false);
-        } catch (error) {
-            console.error("Error saving counselor data:", error);
-        }
-    };
-
-    if (!counselorData) {
-        return <p>Loading...</p>;
-    }
-
-    return (
-        <div className="flex flex-col gap-3 bg-teal-900 w-1/3 m-10 p-10 rounded-md h-fit">
-            <div className="flex justify-center w-full">
-                <Image
-                    src="/counselorImg.png"
-                    width={320}
-                    height={120}
-                    className="object-cover object-center border-8 border-[#C1D8C3] rounded-full w-24 h-24"
-                    alt="Counselor Image"
-                />
-            </div>
-            <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
-                <p>username:</p>
-                <p>{counselorData.username}</p>
-            </div>
-            <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
-                <p>counselor name:</p>
-                <p>{`${counselorData.first_name} ${counselorData.last_name}`}</p>
-            </div>
-            <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
-                <p>title:</p>
-                <p>{counselorData.title}</p>
-            </div>
-            <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
-                <p>phone number:</p>
-                <p>{counselorData.phone_number}</p>
-            </div>
-            <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
-                <p>certification:</p>
-                <p>{counselorData.certification}</p>
-            </div>
-            <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
-                <p>gender:</p>
-                <p>{counselorData.gender_name}</p>
-            </div>
-            <div className="flex flex-row justify-end gap-3 text-slate-50 mt-3">
-                <button onClick={toggleModal} className="bg-teal-600 rounded-xl p-1 px-5">
-                    Edit
-                </button>
-            </div>
-            {isModalVisible && (
-                <EditModal
-                    isVisible={isModalVisible}
-                    onClose={toggleModal}
-                    userData={counselorData}
-                    onSave={handleSave}
-                />
-            )}
-        </div>
-    )
+export interface CounselorProfileCardProps {
+  counselorData: {
+    account_id: number;
+    email: string;
+    user_name: string;
+    first_name: string;
+    last_name: string;
+    title: string;
+    phone_number: string;
+    certification: string;
+    gender_name: string;
+    practice_license_status: string;
+    practice_location: string;
+    price: number;
+    year_of_experience: number;
+    alumnus: string[];
+  };
+  onLogout: (dataToUpdate: any) => void; 
 }
+
+const CounselorProfileCard = ({ counselorData, onLogout }: CounselorProfileCardProps) => {
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  const handleSave = async (updatedData: any) => {
+    try {
+      const { email, ...dataToUpdate } = updatedData;
+      dataToUpdate.price = parseFloat(dataToUpdate.price);
+      dataToUpdate.year_of_experience = parseInt(dataToUpdate.year_of_experience, 10);
+      await axios.put(`${API_BASE}/counselor/edit/${counselorData.account_id}`, dataToUpdate);
+
+      setModalVisible(false);
+    } catch (error) {
+      console.error("Error saving counselor data:", error);
+    }
+  };
+
+  return (
+    <div className="flex flex-col gap-3 bg-teal-900 w-1/3 m-10 p-10 rounded-md h-fit">
+      <div className="flex justify-center w-full">
+        <Image
+          src="/counselorImg.png"
+          width={320}
+          height={120}
+          className="object-cover object-center border-8 border-[#C1D8C3] rounded-full w-24 h-24"
+          alt="Counselor Image"
+        />
+      </div>
+      <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
+        <p>username:</p>
+        <p>{counselorData.user_name}</p>
+      </div>
+      <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
+        <p>counselor name:</p>
+        <p>{`${counselorData.first_name} ${counselorData.last_name}`}</p>
+      </div>
+      <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
+        <p>title:</p>
+        <p>{counselorData.title}</p>
+      </div>
+      <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
+        <p>phone number:</p>
+        <p>{counselorData.phone_number}</p>
+      </div>
+      <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
+        <p>gender:</p>
+        <p>{counselorData.gender_name}</p>
+      </div>
+      <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
+        <p>Alumnus:</p>
+        <ul className="list-disc pl-5">
+          {counselorData.alumnus.map((alumni, index) => (
+            <li key={index}>{alumni}</li>
+          ))}
+        </ul>
+      </div>
+      <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
+        <p>certification:</p>
+        <p>{counselorData.certification}</p>
+      </div>
+      <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
+        <p>Practice license:</p>
+        <p>{counselorData.practice_license_status}</p>
+      </div>
+      <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
+        <p>Year of experience:</p>
+        <p>{counselorData.year_of_experience}</p>
+      </div>
+      <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
+        <p>Price:</p>
+        <p>{counselorData.price}</p>
+      </div>
+      <div className="flex flex-row justify-end gap-3 text-slate-50 mt-3">
+        <button onClick={toggleModal} className="bg-teal-600 rounded-xl p-1 px-5">
+          Edit
+        </button>
+        <button onClick={onLogout} className="bg-red-400 rounded-xl p-1 px-5">
+            Logout
+        </button>
+      </div>
+      {isModalVisible && (
+        <EditModal
+          isVisible={isModalVisible}
+          onClose={toggleModal}
+          counselorData={counselorData}
+          onSave={handleSave}
+        />
+      )}
+    </div>
+  );
+};
+
 export default CounselorProfileCard;

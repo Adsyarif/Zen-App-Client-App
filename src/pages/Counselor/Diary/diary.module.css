@@ -1,0 +1,55 @@
+.diaryDetail {
+  background-image: linear-gradient(
+      rgba(239, 234, 241, 0.836),
+      rgba(235, 231, 233, 0.9)
+    ),
+    url(/hero-image.png);
+}
+
+.diaryDetail::-webkit-scrollbar {
+  width: 7px;
+}
+
+.diaryDetail::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  /* background: transparent; */
+  background-color: #22543d;
+
+  transition: 3s;
+}
+
+.diaryDetail::-webkit-scrollbar-thumb:hover {
+  background-color: #22543d;
+}
+
+.diaryDetail::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+.diaryDetail {
+  &::-webkit-scrollbar-thumb {
+    /* background-color: transparent; */
+    background-color: #22543d;
+
+    transition: all 1s ease;
+    transition-duration: 2s;
+  }
+}
+
+.diaryDetail:hover {
+  &::-webkit-scrollbar-thumb {
+    background-color: #22543d;
+    transition: all 1s ease;
+    -webkit-transition: 10s;
+  }
+}
+
+/* Hide scrollbar on mobile */
+@media only screen and (max-width: 648px) {
+  .diaryDetail::-webkit-scrollbar {
+    display: none;
+  }
+  .diaryDetail::-webkit-scrollbar-thumb {
+    display: none;
+  }
+}

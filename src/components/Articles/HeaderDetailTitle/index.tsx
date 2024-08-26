@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import Image from "next/image";
 import { RxDotFilled } from "react-icons/rx";
 
@@ -17,7 +18,7 @@ export default function HeaderDetailTitle(
           className="w-10 h-10 p-1 rounded-full object-cover object-center"
         />
         <h3 className="flex text-base font-semibold">
-          {article.author} <RxDotFilled /> {article.created_at}
+          {article.author} <RxDotFilled /> {dayjs(article.created_at).format("DD-MMMM-YYYY")}
         </h3>
       </div>
     </>

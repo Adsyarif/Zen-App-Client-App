@@ -3,12 +3,11 @@ import { useFormik } from "formik";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { API_BASE } from "@/lib/projectApi";
-import { useContext, useEffect, useState } from "react";
-import { AppContext } from "@/providers/AppContext";
 import { GoCommentDiscussion } from "react-icons/go";
 import { IoPeopleCircleSharp } from "react-icons/io5";
 import { FaBookOpen } from "react-icons/fa";
 import { BsNewspaper } from "react-icons/bs";
+import Link from "next/link";
 
 const SignUp = () => {
   const router = useRouter();
@@ -16,7 +15,7 @@ const SignUp = () => {
   const formik = useFormik({
     initialValues: {
       email: "",
-      role_id: 1,
+      role_id: null,
       password: "",
       confirmPassword: "",
     },
@@ -67,7 +66,7 @@ const SignUp = () => {
   return (
     <div className="lg:m-12 md:m-12 min-h-screen flex items-center justify-center">
       <div className="flex flex-col  lg:flex-row md:flex-row items-center">
-        <div className="flex flex-col w-1/2 md:m-10 hidden md:block">
+        <div className=" flex-col w-1/2 md:m-10 hidden md:block">
           <h1 className="text-7xl font-bold text-[#22543D] mb-8">
             Welcome To Zen Zone
           </h1>
@@ -129,7 +128,7 @@ const SignUp = () => {
                       id="role_id"
                       {...formik.getFieldProps("role_id")}
                     >
-                      <option value="1">Admin</option>
+                      <option value="" disabled selected>Select a role</option>
                       <option value="2">User</option>
                       <option value="3">Counselor</option>
                     </select>
@@ -191,6 +190,12 @@ const SignUp = () => {
                     Sign up
                   </button>
                 </div>
+                <p className="text-white">
+                  If you have an account, please go to{' '}
+                  <Link href="/Auth/SignIn" className="text-cream underline">
+                    Log in
+                  </Link>
+                </p>
               </form>
             </div>
           </div>

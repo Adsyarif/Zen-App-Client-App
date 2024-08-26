@@ -1,28 +1,43 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { DiaryMoodColor } from "../DiaryMoodColor";
+import { AppContext } from "@/providers/AppContext";
+
+
 
 interface MoodFilterProps {
   moods: string[];
 }
 export function MoodFilter(props: MoodFilterProps) {
   const [isActive, setIsActive] = useState(true);
+  const { currentUser } = useContext(AppContext);
 
   const { moods } = props;
   const route = useRouter();
 
   const { mood: selectedMood } = route.query;
 
+  if (!currentUser) {
+    return <div>Loading...</div>;
+  }
+
   const handleMoodClick = (mood: string) => {
-    // handle double click => clear url params
-    if (route.query.mood === mood) {
-      route.push(`/Counselor/Diary`);
-    } else {
-      // set url params based on mood clicked
-      route.push(`/Counselor/Diary?mood=${mood}`);
-    }
+    if (currentUser.role_id === 2) {
+      if (route.query.mood === mood) {
+        route.push(`/Diary`);
+      } else {
+        route.push(`/Diary?mood=${mood}`);
+      }
+    } else if (currentUser.role_id === 3) {
+      if (route.query.mood === mood) {
+        route.push(`/Counselor/Diary`);
+      } else {
+        route.push(`/Counselor/Diary?mood=${mood}`);
+      }
+    } 
   };
+  
 
   const handleAccordion = () => {
     setIsActive(!isActive);

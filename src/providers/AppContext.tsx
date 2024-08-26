@@ -5,7 +5,6 @@ import React, {
   ReactNode,
   FC,
 } from "react";
-import { string } from "yup";
 
 export interface ReportCategory {
   report_category_id: number;
@@ -48,6 +47,24 @@ export interface CounselorData {
   available_time: string;
 }
 
+export interface CounselorData {
+  counselor_id: number
+  account_id: number;
+  email: string;
+  user_name: string;
+  first_name: string;
+  last_name: string;
+  title: string;
+  phone_number: string;
+  certification: string;
+  gender_name: string;
+  practice_license_status: string;
+  practice_location: string;
+  price: number;
+  year_of_experience: number;
+  alumnus: string[];
+}
+
 export interface UserContextType {
   currentUser: User | null;
   setCurrentUser: (user: User | null) => void;
@@ -67,6 +84,7 @@ export interface User {
   email: string;
   account_id?: number;
   password?: string;
+  role_id: number;
 }
 
 export const AppContext = createContext<UserContextType>({

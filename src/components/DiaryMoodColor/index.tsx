@@ -4,18 +4,6 @@ interface DiaryMoodProps extends HTMLAttributes<HTMLSpanElement> {
   mood: string;
 }
 
-// const mood = [
-//   "excited",
-//   "happy",
-//   "sad",
-//   "angry",
-//   "stress",
-//   "hungry",
-//   "fun",
-//   "grateful",
-//   "anxious",
-//   "hopefull",
-// ];
 
 export function DiaryMoodColor(prop: DiaryMoodProps) {
   const { mood, ...rest } = prop;

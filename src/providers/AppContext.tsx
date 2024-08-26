@@ -65,6 +65,28 @@ export interface CounselorData {
   alumnus: string[];
 }
 
+export interface UserDetailsSchedules {
+  first_name: string;
+  last_name: string;
+}
+
+export interface Schedule {
+  available_from: string;
+  available_to: string;
+  booked_by_account_id: number | null;
+  booked_by_user: UserDetailsSchedules | null;
+  counselor_id: number;
+  created_at: string;
+  deleted_at: string | null;
+  schedule_id: number;
+  status: string | null;
+  updated_at: string;
+  user_details?: {
+      first_name: string;
+      last_name: string;
+  };
+}
+
 export interface UserContextType {
   currentUser: User | null;
   setCurrentUser: (user: User | null) => void;

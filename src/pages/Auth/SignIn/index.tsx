@@ -108,7 +108,7 @@ const SignIn = () => {
             urna consequat donec dui. Praesent dui consectetur faucibus
             penatibus penatibus vel pulvinar. Fames tellus natoque commodo
             blandit massa montes. Cursus neque consequat erat fringilla,
-            hendrerit suspendisse eros.
+            hendrerit suspendisse eros lore.
           </p>
           <div className="flex flex-row gap-5 text-4xl">
             <p className="text-[#22543D] "><GoCommentDiscussion/></p>

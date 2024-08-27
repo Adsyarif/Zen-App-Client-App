@@ -1,4 +1,6 @@
 import { API_BASE } from "@/lib/projectApi";
+import { Review } from "@/providers/AppContext";
+import axios, { AxiosResponse } from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -8,7 +10,7 @@ const renderStars = (score: number, maxStars = 5): string => {
   return starFull.repeat(score) + starEmpty.repeat(maxStars - score);
 };
 
-const avgRate = (reviews: []) => {
+const avgRate = (reviews: any[]) => {
   const rattingCollection: any[] = [];
   reviews.map((review) => {
     const score = review["rating"];
@@ -24,12 +26,50 @@ const avgRate = (reviews: []) => {
   return Math.floor(average);
 };
 
-const shortDescription = (text: string, maxLength = 100): string => {
-  return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
+const capitalFirstLetter = (text: string) => {
+  const firstChar = text[0].toLocaleUpperCase();
+  const remainingChars = text.slice(1);
+  return firstChar + remainingChars;
 };
 
 const CounselorCard = ({ counselor, handleClick }: any) => {
   const [currentCounselor, setCurrentCounselor] = useState<string[]>([]);
+  const [reviews, setReviews] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchReviewCounselor = async () => {
+      try {
+        const response: AxiosResponse<{
+          data: Review[];
+          status: {
+            code: number;
+            status: string;
+          };
+        }> = await axios.get(
+          `${API_BASE}/review_counselor/${counselor.account_id}`
+        );
+
+        const listReview = response.data.data;
+
+        if (Array.isArray(listReview)) {
+          const sortedReview = listReview.sort(
+            (a: any, b: any) =>
+              new Date(b.created_at).getTime() -
+              new Date(a.created_at).getTime()
+          );
+          const filteredReview = sortedReview.filter(
+            (review: any) => review.deleted_at === null
+          );
+
+          setReviews(filteredReview);
+        }
+      } catch (error) {
+        console.error("fetch diary list failed:", error);
+      }
+    };
+    fetchReviewCounselor();
+  }, []);
+
   useEffect(() => {
     const fetchCounselorData = async () => {
       try {
@@ -48,7 +88,11 @@ const CounselorCard = ({ counselor, handleClick }: any) => {
   }, []);
 
   const isAvailable = currentCounselor ? true : false;
-  const { reviews } = counselor;
+
+  const rupiahCurrency = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+  }).format(counselor.price);
 
   return (
     <div
@@ -59,19 +103,28 @@ const CounselorCard = ({ counselor, handleClick }: any) => {
         src={"/counselorImg.png"}
         width={320}
         height={120}
-        alt={`Profile picture of ${counselor.name}`}
+        alt={`Profile picture of ${counselor.first_name}`}
         className="w-full h-64 md:h-48 p-1 border rounded-2xl mb-4 border-leaf object-cover object-center"
       />
 
-      <div className="text-cream">
-        <h2 className="text-xl font-semibold">{counselor.name}</h2>
-        <p className="min-h-[80px] text-sm mt-2">
-          {shortDescription(counselor.detail)}
-        </p>
+      <div className="text-mocca">
+        <h2 className="text-xl font-semibold min-h-14">
+          {counselor.first_name} {counselor.last_name}
+        </h2>
+        <p className="text-lg my-2">{capitalFirstLetter(counselor.title)}</p>
       </div>
-      <div className="flex items-center">
-        <p className="text-2xl text-star">{renderStars(avgRate(reviews))}</p>
-        <p className="text-lg text-white ml-2">({counselor.reviews.length})</p>
+      <div className="flex justify-between">
+        <p className="bg-mocca text-leaf rounded-xl text-lg px-2">
+          {counselor.year_of_experience} years
+        </p>
+        <div className="flex items-center bg-mocca justify-center px-2 rounded rounded-xl">
+          <p className="text-2xl text-leaf">{renderStars(avgRate(reviews))}</p>
+          <p className="text-lg text-leaf ml-2">({reviews.length})</p>
+        </div>
+      </div>
+      <div className="mt-2">
+        <p className="text-mocca text-xl font-bold">Price</p>
+        <p className="text-mocca text-lg">{rupiahCurrency}</p>
       </div>
       <button
         disabled={!isAvailable}

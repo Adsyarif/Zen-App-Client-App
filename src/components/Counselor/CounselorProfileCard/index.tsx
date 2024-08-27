@@ -45,7 +45,7 @@ const CounselorProfileCard = ({ counselorData, onLogout }: CounselorProfileCardP
   };
 
   return (
-    <div className="flex flex-col gap-3 bg-teal-900 w-1/3 m-10 p-10 rounded-md h-fit">
+    <div className=" flex flex-col gap-3 bg-teal-900 md:w-1/3 w-full p-10 rounded-md h-fit">
       <div className="flex justify-center w-full">
         <Image
           src="/counselorImg.png"

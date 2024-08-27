@@ -48,9 +48,12 @@ const CounselorPage = () => {
   return (
     <>
       <Navigation />
-      <div className="flex justify-evenly">
-        <CounselorProfileCard onLogout={LogOut} counselorData={counselorData} />
-        <CounselorProfileSchedule />
+      <div className="my-10 flex flex-col md:flex-row w-full ">
+        <div className="gap-10 flex justify-center flex-col md:flex-row w-full">
+          <CounselorProfileCard onLogout={LogOut} counselorData={counselorData} />
+          <CounselorProfileSchedule />
+        </div>
+        
       </div>
     </>
   );

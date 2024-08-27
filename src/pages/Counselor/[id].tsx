@@ -116,7 +116,7 @@ export default function Review_Counseling() {
       <div className="bg-[#FAF6E3] md:px-32 py-12 min-h-screen">
         {selectedCounselor ? (
           <>
-            <CounselorDetail counselor={selectedCounselor} />
+            <CounselorDetail counselor={selectedCounselor} review={review} />
             <div className="flex justify-between">
               <h1 className="px-8 text-4xl text-black font-bold py-8">
                 Reviews

@@ -56,8 +56,8 @@ export default function Review_Counseling() {
       }> = await axios.get(
         `${API_BASE}/review_counselor/${selectedCounselor.counselor_id}`
       );
+
       const listReview = response.data.data;
-      console.log("list review", listReview);
 
       if (Array.isArray(listReview)) {
         const sortedReview = listReview.sort(

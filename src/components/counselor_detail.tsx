@@ -1,7 +1,7 @@
 import React from "react";
 import { useRouter } from "next/router";
 
-const CounselorDetail = ({ counselor }: any) => {
+const CounselorDetail = ({ counselor, review }: any) => {
   const renderStars = (score: number, maxStars = 5): string => {
     const starFull = "★";
     const starEmpty = "☆";
@@ -54,24 +54,50 @@ const CounselorDetail = ({ counselor }: any) => {
             src="https://randomuser.me/api/portraits/men/1.jpg"
           />
           <div className="flex flex-col self-center gap-1">
-            <div className="text-2xl font-bold">{counselor.name}</div>
-            <div className="text-xl font-semibold">Counseling doctor</div>
-            <div className="flex items-center">
-              <p className="text-2xl text-leaf ">
-                {renderStars(avgRate(counselor.reviews))}
+            <div className="text-2xl font-bold">
+              {counselor.first_name} {counselor.last_name}
+            </div>
+            <div className="text-xl font-semibold">{counselor.title}</div>
+            <div className="flex items-center gap-5">
+              <p className="bg-leaf rounded rounded-full text-mocca p-1">
+                {counselor.year_of_experience}
               </p>
-              <p className="text-lg text-leaf ml-2">
-                ({counselor.reviews.length})
+              <p className="bg-leaf rounded rounded-full text-2xl text-mocca p-1">
+                {renderStars(avgRate(review.rating))}
               </p>
             </div>
-            <div className="text-xl font-semibold">{counselor.specialist}</div>
+            <div className="text-xl font-semibold">Alumni</div>
+            {counselor.alumnus.map((alumn: string, index: number) => (
+              <div key={index} className="text-lg font-semibold">
+                {alumn}
+              </div>
+            ))}
+          </div>
+          <div className="text-xl font-semibold">Practice In</div>
+          <div className="text-lg font-semibold">
+            {counselor.practice_location}
+          </div>
+          <div className="text-xl font-semibold">STR Number</div>
+          <div className="text-lg font-semibold">
+            {counselor.practice_license_status}
           </div>
         </div>
         <button className="rounded-lg lg:px-5 md:px-5 bg-leaf text-mocca self-start h-12">
           Book Now
         </button>
       </div>
-      <div className="mx-7 my-5 text-lg">{counselor.detail}</div>
+      <div className="mx-7 my-5 text-lg rounded reounded-xl">
+        <div>
+          <div>List Schedule</div>
+          <div>Date</div>
+        </div>
+        <div>
+          <div>Time 1</div>
+          <div>Time 2</div>
+          <div>Time 3</div>
+          <div>Time 4</div>
+        </div>
+      </div>
     </div>
   );
 };

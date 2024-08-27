@@ -8,6 +8,7 @@ import { Navigation } from "@/components/common";
 import { useRouter } from "next/router";
 import { AppContext } from "@/providers/AppContext";
 import { CounselorData, UserContextType } from "@/providers/AppContext";
+import { API_BASE } from "@/lib/projectApi";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -16,8 +17,6 @@ const Counselor = () => {
   const context = useContext(AppContext);
   const getCounselor = context.currentCounselor;
   const setCounselor = context.setCurrentCounselor;
-
-  // console.log(getCounselor);
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchField, setSearchField] = useState<string>("");
@@ -29,10 +28,11 @@ const Counselor = () => {
   useEffect(() => {
     const fetchCounselorData = async () => {
       try {
-        const response = await fetch("/data/counselorData.json"); // Change this to API endpoint
+        const response = await fetch(`${API_BASE}/counselors`); // Change this to API endpoint
         const data = await response.json();
-        setCounselors(data.counselors);
-        setFilteredCounselors(data.counselors);
+
+        setCounselors(data.data);
+        setFilteredCounselors(data.data);
       } catch (error) {
         console.error("Failed to fetch counselor data", error);
       }
@@ -43,7 +43,7 @@ const Counselor = () => {
 
   useEffect(() => {
     const filtered = counselors.filter((counselor) =>
-      counselor.specialist.toLowerCase().includes(searchField.toLowerCase())
+      counselor.first_name.toLowerCase().includes(searchField.toLowerCase())
     );
     setFilteredCounselors(filtered);
     setCurrentPage(1);
@@ -71,31 +71,15 @@ const Counselor = () => {
     setSearchField(event.target.value);
   };
 
-  const avgRate = (reviews: any) => {
-    const ratingCollection: any[] = [];
-    reviews.map((review: any) => {
-      const score = review["rating"];
-      ratingCollection.push(score);
-    });
-
-    if (ratingCollection.length === 0) {
-      return 0;
-    }
-    const total = ratingCollection.reduce((acc, nilai) => acc + nilai, 0);
-
-    const average = total / ratingCollection.length;
-    return Math.floor(average);
-  };
-
   return (
     <>
       <Navigation />
       <div className="py-5 px-8 md:px-12 lg:px-32 md:py-5 min-h-screen">
         <HeaderCounselor handleOnChange={handleOnChange} />
         <div className="w-full py-5 grid md:grid-cols-2 lg:grid-cols-3 gap-y-5">
-          {displayedCounselors.map((counselor) => (
+          {displayedCounselors.map((counselor, index) => (
             <CounselorCard
-              key={counselor.counselor_id}
+              key={index}
               counselor={counselor}
               handleClick={() => handleClick(counselor.counselor_id, counselor)}
             />

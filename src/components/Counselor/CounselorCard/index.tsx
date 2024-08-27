@@ -1,4 +1,6 @@
+import { API_BASE } from "@/lib/projectApi";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 const renderStars = (score: number, maxStars = 5): string => {
   const starFull = "★";
@@ -27,7 +29,25 @@ const shortDescription = (text: string, maxLength = 100): string => {
 };
 
 const CounselorCard = ({ counselor, handleClick }: any) => {
-  const isAvailable = counselor.maxPatient > counselor.patientNames.length;
+  const [currentCounselor, setCurrentCounselor] = useState<string[]>([]);
+  useEffect(() => {
+    const fetchCounselorData = async () => {
+      try {
+        const response = await fetch(
+          `${API_BASE}/list_schedule/${counselor.counselor_id}`
+        ); // Change this to API endpoint
+        const data = await response.json();
+        console.log(data);
+        setCurrentCounselor(data.data);
+      } catch (error) {
+        console.error("Failed to fetch counselor data", error);
+      }
+    };
+
+    fetchCounselorData();
+  }, []);
+
+  const isAvailable = currentCounselor ? true : false;
   const { reviews } = counselor;
 
   return (

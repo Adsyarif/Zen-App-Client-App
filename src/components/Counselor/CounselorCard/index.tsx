@@ -75,7 +75,7 @@ const CounselorCard = ({ counselor, handleClick }: any) => {
       try {
         const response = await fetch(
           `${API_BASE}/list_schedule/${counselor.counselor_id}`
-        ); // Change this to API endpoint
+        );
         const data = await response.json();
         console.log(data);
         setCurrentCounselor(data.data);
@@ -109,7 +109,8 @@ const CounselorCard = ({ counselor, handleClick }: any) => {
 
       <div className="text-mocca">
         <h2 className="text-xl font-semibold min-h-14">
-          {counselor.first_name} {counselor.last_name}
+          {capitalFirstLetter(counselor.first_name)}{" "}
+          {capitalFirstLetter(counselor.last_name)}
         </h2>
         <p className="text-lg my-2">{capitalFirstLetter(counselor.title)}</p>
       </div>

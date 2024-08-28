@@ -1,5 +1,4 @@
 import DatePicker from "@/components/common/DatePicker";
-import { Dayjs } from "dayjs";
 import { useState } from "react";
 import { FaCalendarAlt, FaSearch } from "react-icons/fa";
 
@@ -9,15 +8,9 @@ interface Props {
 }
 
 const HeaderCounselor = ({ handleOnChange, onDateChange }: Props) => {
-  const [date, setDate] = useState<string | null>(null);
   const [calendar, setCalendar] = useState(false);
   const handleClick = () => {
     setCalendar(!calendar);
-  };
-
-  const handleDateChange = (newDate: any) => {
-    setDate(newDate);
-    onDateChange(newDate);
   };
 
   return (
@@ -45,7 +38,7 @@ const HeaderCounselor = ({ handleOnChange, onDateChange }: Props) => {
             <DatePicker
               label="Select Date"
               type="datetime"
-              onChange={handleDateChange}
+              onChange={onDateChange}
             />
           )}
         </div>

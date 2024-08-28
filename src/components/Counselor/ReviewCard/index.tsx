@@ -1,20 +1,16 @@
 import React, { useEffect, useState } from "react";
-import {  Review } from "@/providers/AppContext";
-
+import { Review } from "@/providers/AppContext";
+import { renderStars } from "@/utils/startsReview";
 
 interface CarouselReviewCardProps {
   reviews: Review[];
 }
 
-export default function CarouselReviewCard({ reviews }: CarouselReviewCardProps) {
+export default function CarouselReviewCard({
+  reviews,
+}: CarouselReviewCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(3);
-
-  const renderStars = (score: number, maxStars = 5): string => {
-    const starFull = "★";
-    const starEmpty = "☆";
-    return starFull.repeat(score) + starEmpty.repeat(maxStars - score);
-  };
 
   const updateVisibleCards = () => {
     if (window.innerWidth < 768) {
@@ -64,11 +60,13 @@ export default function CarouselReviewCard({ reviews }: CarouselReviewCardProps)
                 <div className="flex items-center mb-4 my-2">
                   <img
                     className="w-10 h-10 rounded-full mr-4"
-                    src="/profile people.png" 
+                    src="/profile people.png"
                     alt={review.user_first_name}
                   />
                   <div>
-                    <p className="font-semibold text-black">{review.user_first_name}</p>
+                    <p className="font-semibold text-black">
+                      {review.user_first_name}
+                    </p>
                     <p className="text-2xl text-leaf">
                       {renderStars(review.rating)}
                     </p>

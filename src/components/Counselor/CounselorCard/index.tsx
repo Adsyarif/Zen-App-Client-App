@@ -1,36 +1,10 @@
 import { API_BASE } from "@/lib/projectApi";
 import { Review } from "@/providers/AppContext";
+import { avgRate, renderStars } from "@/utils/startsReview";
+import { capitalFirstLetter } from "@/utils/stringFormated";
 import axios, { AxiosResponse } from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
-const renderStars = (score: number, maxStars = 5): string => {
-  const starFull = "★";
-  const starEmpty = "☆";
-  return starFull.repeat(score) + starEmpty.repeat(maxStars - score);
-};
-
-const avgRate = (reviews: any[]) => {
-  const rattingCollection: any[] = [];
-  reviews.map((review) => {
-    const score = review["rating"];
-    rattingCollection.push(score);
-  });
-
-  if (rattingCollection.length === 0) {
-    return 0;
-  }
-  const total = rattingCollection.reduce((acc, nilai) => acc + nilai, 0);
-
-  const average = total / rattingCollection.length;
-  return Math.floor(average);
-};
-
-const capitalFirstLetter = (text: string) => {
-  const firstChar = text[0].toLocaleUpperCase();
-  const remainingChars = text.slice(1);
-  return firstChar + remainingChars;
-};
 
 const CounselorCard = ({ counselor, handleClick }: any) => {
   const [currentCounselor, setCurrentCounselor] = useState<string[]>([]);
@@ -50,13 +24,13 @@ const CounselorCard = ({ counselor, handleClick }: any) => {
         );
 
         const listReview = response.data.data;
-
         if (Array.isArray(listReview)) {
           const sortedReview = listReview.sort(
             (a: any, b: any) =>
               new Date(b.created_at).getTime() -
               new Date(a.created_at).getTime()
           );
+
           const filteredReview = sortedReview.filter(
             (review: any) => review.deleted_at === null
           );
@@ -77,7 +51,6 @@ const CounselorCard = ({ counselor, handleClick }: any) => {
           `${API_BASE}/list_schedule/${counselor.counselor_id}`
         );
         const data = await response.json();
-        console.log(data);
         setCurrentCounselor(data.data);
       } catch (error) {
         console.error("Failed to fetch counselor data", error);
@@ -87,6 +60,7 @@ const CounselorCard = ({ counselor, handleClick }: any) => {
     fetchCounselorData();
   }, []);
 
+  console.log(reviews);
   const isAvailable = currentCounselor ? true : false;
 
   const rupiahCurrency = new Intl.NumberFormat("id-ID", {

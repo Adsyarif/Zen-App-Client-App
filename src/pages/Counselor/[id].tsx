@@ -13,6 +13,7 @@ import { AppContext, CounselorData, Review } from "@/providers/AppContext";
 import ReactStars from "react-stars";
 import axios, { AxiosResponse } from "axios";
 import { API_BASE } from "@/lib/projectApi";
+import { ListSchedule } from "@/components/Counselor";
 
 const style = {
   position: "absolute" as "absolute",

@@ -7,10 +7,10 @@ import {
 import { Navigation } from "@/components/common";
 import { useRouter } from "next/router";
 import { AppContext } from "@/providers/AppContext";
-import { CounselorData, UserContextType } from "@/providers/AppContext";
+import { CounselorData } from "@/providers/AppContext";
 import { API_BASE } from "@/lib/projectApi";
-import dayjs, { Dayjs } from "dayjs";
-import { changeDateGMTFormated, changeDateWIBFormated } from "@/utils/utils";
+import { changeTimeZone } from "@/utils/dateFormated";
+import { useAllSchedule } from "@/hooks/counselor/useAllSchedule";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -19,11 +19,11 @@ const Counselor = () => {
   const context = useContext(AppContext);
   const setCounselor = context.setCurrentCounselor;
 
+  const { listSchedules, loading, error } = useAllSchedule();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchField, setSearchField] = useState<string>("");
   const [counselors, setCounselors] = useState<CounselorData[]>([]);
   const [dateFilter, setDateFilter] = useState<any>(null);
-  const [schedules, setSchedules] = useState([]);
   const [filteredCounselors, setFilteredCounselors] = useState<CounselorData[]>(
     []
   );
@@ -45,30 +45,16 @@ const Counselor = () => {
   }, []);
 
   useEffect(() => {
-    const fetchCounselorData = async () => {
-      try {
-        const response = await fetch(`${API_BASE}/list_schedule`);
-        const data = await response.json();
-        console.log(data.data);
-        setSchedules(data.data);
-      } catch (error) {
-        console.error("Failed to fetch counselor data", error);
-      }
-    };
-
-    fetchCounselorData();
-  }, []);
-
-  useEffect(() => {
     const filtered = counselors.filter((counselor) =>
       counselor.first_name.toLowerCase().includes(searchField.toLowerCase())
     );
 
-    const scheduledCounselorIds = schedules.map(
-      (schedule: any) => schedule.counselor_detail
+    const scheduledCounselorIds = listSchedules.filter(
+      (schedule: any) => schedule.from === dateFilter
     );
+
     const availableCounselors = counselors.filter(
-      (counselor) => !scheduledCounselorIds.includes(counselor.account_id)
+      (counselor: any) => !scheduledCounselorIds.includes(counselor.account_id)
     );
 
     setFilteredCounselors(availableCounselors);
@@ -81,7 +67,8 @@ const Counselor = () => {
     setCounselor(counselor);
   };
 
-  // Pagination calculations
+  console.log(filteredCounselors);
+
   const totalCounselors = filteredCounselors.length;
   const totalPages = Math.ceil(totalCounselors / ITEMS_PER_PAGE);
 
@@ -99,9 +86,10 @@ const Counselor = () => {
   };
 
   const handleDateChange = (newDate: string) => {
-    const dateInWIB = changeDateWIBFormated(newDate);
+    const dateInWIB = changeTimeZone(newDate, "WIB");
     setDateFilter(dateInWIB);
   };
+
   return (
     <>
       <Navigation />

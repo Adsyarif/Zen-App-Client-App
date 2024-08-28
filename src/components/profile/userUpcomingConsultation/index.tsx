@@ -20,7 +20,7 @@ const timeFormat: Intl.DateTimeFormatOptions = {
 };
 
 const UserUpcomingConsultation: React.FC = () => {
-  const { currentUser, currentCounselor } = useContext(AppContext);
+  const { currentUser } = useContext(AppContext);
   const [schedules, setSchedules] = useState<Schedule[]>([]);
 
   useEffect(() => {
@@ -56,91 +56,96 @@ const UserUpcomingConsultation: React.FC = () => {
     const fromDate = new Date(availableFrom);
     const toDate = new Date(availableTo);
 
-    const dateInZone = `${fromDate.toLocaleDateString("en_US", {
+    const formattedDate = fromDate.toLocaleDateString("en-US", {
       ...dateFormat,
       timeZone: "UTC",
-    })}`;
-    const timeInZone = `${fromDate.toLocaleDateString("en_US", {
+    });
+
+    const fromTime = fromDate.toLocaleTimeString("en-US", {
       ...timeFormat,
       timeZone: "UTC",
-    })} - ${toDate.toLocaleDateString("en-US", {
+    });
+    const toTime = toDate.toLocaleTimeString("en-US", {
       ...timeFormat,
       timeZone: "UTC",
-    })}`;
-    return `${dateInZone} ${timeInZone}`;
+    });
+
+    return `${formattedDate} ${fromTime} - ${toTime}`;
   };
+
   return (
     <>
-      <div className="bg-[#C1D8C3] rounded-md m-5 p-5">
-        <h3 className="font-semibold text-xl mb-2 text-teal-900">
+      <div className="bg-[#C1D8C3] rounded-md mx-auto my-5 p-5 max-w-4xl shadow-lg">
+        <h3 className="font-semibold text-xl mb-4 text-teal-900">
           Upcoming Consultation Schedule
         </h3>
         {schedules.length > 0 ? (
           schedules.map((schedule_item) => (
             <div
               key={schedule_item.schedule_id}
-              className="flex justify-between bg-[#fafaf4] p-2 rounded-md mb-2"
+              className="flex justify-between items-center gap-5 bg-[#fafaf4] p-4 rounded-lg mb-4 shadow-md"
             >
-              <div className="flex flex-col p-2 rounded-md">
-                <div className="flex justify-start gap-4">
+              <div className="flex flex-col">
+                <div className="flex items-center">
                   <Image
                     src="/counselorImg.png"
-                    width={120}
-                    height={70}
-                    className="object-cover object-center border-2 border-[#C1D8C3] rounded-full w-14 h-14"
+                    width={80}
+                    height={80}
+                    className="object-cover object-center border-2 border-[#C1D8C3] rounded-full w-20 h-20"
                     alt="user Image"
                   />
-                  <div className="flex flex-col">
-                    <h6 className="font-semibold">
-                      Psychologist in Charge: {currentCounselor?.first_name}{" "}
-                      {currentCounselor?.last_name}
-                    </h6>
-                    <a
-                      href="#"
-                      className="text-center text-[#fafaf4] bg-teal-600 hover:bg-teal-700 rounded-full p-1"
-                    >
-                      Diary you shared
-                    </a>
-                  </div>
+                  <div className="ml-4"></div>
                 </div>
-                <div>
-                  <div className="flex flex-col">
-                    <h6 className="font-semibold">Booked Details</h6>
-                    <p>
-                      Schedule:{" "}
-                      {formatDateAndTime(
-                        schedule_item.available_from,
-                        schedule_item.available_to
-                      )}
-                    </p>
-                  </div>
+                <h6 className="font-semibold">
+                  Psychologist in Charge:{" "}
+                  {schedule_item.counselor_detail?.first_name}{" "}
+                  {schedule_item.counselor_detail?.last_name}
+                </h6>
+                <a
+                  href="#"
+                  className="text-center text-[#fafaf4] bg-teal-600 hover:bg-teal-700 rounded-full py-2 px-4 mt-2 inline-block"
+                >
+                  Diary you shared
+                </a>
+                <div className="my-5">
+                  <h2 className="font-semibold">Book Details:</h2>
+                  <p>
+                    Schedule:{" "}
+                    {formatDateAndTime(
+                      schedule_item.available_from,
+                      schedule_item.available_to
+                    )}
+                  </p>
                 </div>
               </div>
-              <div className="flex flex-col gap-1">
-                <a
-                  href="#"
-                  className="text-center text-[#fafaf4] rounded-md bg-teal-900 hover:bg-teal-950 p-1"
-                >
-                  Join
-                </a>
-                <a
-                  href="#"
-                  className="text-center text-[#fafaf4] rounded-md bg-teal-900 hover:bg-teal-950 p-1"
-                >
-                  Reschedule
-                </a>
-                <a
-                  href="#"
-                  className="text-center text-[#fafaf4] rounded-md bg-teal-900 hover:bg-teal-950 p-1"
-                >
-                  Done
-                </a>
-                <a
-                  href="#"
-                  className="text-center text-[#fafaf4] rounded-md bg-red-600 hover:bg-red-700 p-1"
-                >
-                  Cancel
-                </a>
+
+              <div>
+                <div className="flex flex-col gap-2 mt-4">
+                  <a
+                    href="#"
+                    className="text-center text-[#fafaf4] bg-teal-900 hover:bg-teal-950 rounded-md py-2 px-4"
+                  >
+                    Join
+                  </a>
+                  <a
+                    href="#"
+                    className="text-center text-[#fafaf4] bg-teal-900 hover:bg-teal-950 rounded-md py-2 px-4"
+                  >
+                    Reschedule
+                  </a>
+                  <a
+                    href="#"
+                    className="text-center text-[#fafaf4] bg-teal-900 hover:bg-teal-950 rounded-md py-2 px-4"
+                  >
+                    Done
+                  </a>
+                  <a
+                    href="#"
+                    className="text-center text-[#fafaf4] bg-red-600 hover:bg-red-700 rounded-md py-2 px-4"
+                  >
+                    Cancel
+                  </a>
+                </div>
               </div>
             </div>
           ))

@@ -76,6 +76,7 @@ export interface Schedule {
   booked_by_account_id: number | null;
   booked_by_user: UserDetailsSchedules | null;
   counselor_id: number;
+  counselor_detail?: CounselorDetails;
   created_at: string;
   deleted_at: string | null;
   schedule_id: number;
@@ -85,6 +86,11 @@ export interface Schedule {
     first_name: string;
     last_name: string;
   };
+}
+
+export interface CounselorDetails {
+  first_name: string;
+  last_name: string;
 }
 
 export interface UserContextType {

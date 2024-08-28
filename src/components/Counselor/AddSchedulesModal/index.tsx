@@ -9,6 +9,7 @@ interface AddScheduleModalProps {
   handleSave: () => void;
   newSchedule: { available_from: string; available_to: string };
   editingSchedule: Schedule | null;
+
 }
 
 const AddScheduleModal: React.FC<AddScheduleModalProps> = ({
@@ -18,9 +19,11 @@ const AddScheduleModal: React.FC<AddScheduleModalProps> = ({
   handleSave,
   newSchedule,
   editingSchedule,
+  
 }) => {
   return (
-    <Modal open={open} onClose={handleClose}>
+    
+    <Modal open={open}  onClose={handleClose}>
       <Box
         sx={{
           position: 'absolute',
@@ -66,14 +69,7 @@ const AddScheduleModal: React.FC<AddScheduleModalProps> = ({
           }}
         />
         <Box mt={2} display="flex" justifyContent="space-between">
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleSave}
-            sx={{ mt: 2 }}
-          >
-            {editingSchedule ? 'Save Changes' : 'Add Schedule'}
-          </Button>
+          
           <Button
             variant="outlined"
             color="secondary"
@@ -81,6 +77,19 @@ const AddScheduleModal: React.FC<AddScheduleModalProps> = ({
             sx={{ mt: 2 }}
           >
             Close
+          </Button>
+          <Button
+            variant="contained"
+            onClick={handleSave}
+            sx={{
+              mt: 2,
+              bgcolor: '#22543D',
+              '&:hover': {
+                bgcolor: '#1a3d31', 
+              },
+            }}
+          >
+            {editingSchedule ? 'Save Changes' : 'Add Schedule'}
           </Button>
         </Box>
       </Box>

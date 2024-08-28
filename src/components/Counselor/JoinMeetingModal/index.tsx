@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Box, Typography, Button, IconButton } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
+import { Schedule } from '@/providers/AppContext';
 
 interface JoinMeetingModalProps {
   isOpen: boolean;
@@ -8,6 +9,7 @@ interface JoinMeetingModalProps {
   meetingFrom: string;
   meetingTo: string;
   meetingLink: string;
+  schedule: Schedule;
 }
 
 const formatDateTime = (dateTimeString: string): string => {
@@ -23,7 +25,7 @@ const formatMeetingTimes = (from: string, to: string): string => {
   return `${formattedFrom.split(' ')[0]} ${formattedFrom.split(' ')[1]} - ${formattedTo.split(' ')[1]}`;
 };
 
-const JoinMeetingModal: React.FC<JoinMeetingModalProps> = ({ isOpen, onRequestClose, meetingFrom, meetingTo, meetingLink }) => {
+const JoinMeetingModal: React.FC<JoinMeetingModalProps> = ({ schedule, isOpen, onRequestClose, meetingFrom, meetingTo, meetingLink }) => {
   const formattedDateRange = formatMeetingTimes(meetingFrom, meetingTo);
 
   return (

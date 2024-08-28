@@ -7,8 +7,10 @@ import {
 import { Navigation } from "@/components/common";
 import { useRouter } from "next/router";
 import { AppContext } from "@/providers/AppContext";
-import { CounselorData, UserContextType } from "@/providers/AppContext";
+import { CounselorData } from "@/providers/AppContext";
 import { API_BASE } from "@/lib/projectApi";
+import { changeTimeZone } from "@/utils/dateFormated";
+import { useAllSchedule } from "@/hooks/counselor/useAllSchedule";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -18,9 +20,11 @@ const Counselor = () => {
   const getCounselor = context.currentCounselor;
   const setCounselor = context.setCurrentCounselor;
 
+  const { listSchedules, loading, error } = useAllSchedule();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchField, setSearchField] = useState<string>("");
   const [counselors, setCounselors] = useState<CounselorData[]>([]);
+  const [dateFilter, setDateFilter] = useState<any>(null);
   const [filteredCounselors, setFilteredCounselors] = useState<CounselorData[]>(
     []
   );
@@ -45,6 +49,16 @@ const Counselor = () => {
     const filtered = counselors.filter((counselor) =>
       counselor.first_name.toLowerCase().includes(searchField.toLowerCase())
     );
+
+    const scheduledCounselorIds = listSchedules.filter(
+      (schedule: any) => schedule.from === dateFilter
+    );
+
+    const availableCounselors = counselors.filter(
+      (counselor: any) => !scheduledCounselorIds.includes(counselor.account_id)
+    );
+
+    setFilteredCounselors(availableCounselors);
     setFilteredCounselors(filtered);
     setCurrentPage(1);
   }, [searchField, counselors]);
@@ -54,7 +68,8 @@ const Counselor = () => {
     setCounselor(counselor);
   };
 
-  // Pagination calculations
+  console.log(filteredCounselors);
+
   const totalCounselors = filteredCounselors.length;
   const totalPages = Math.ceil(totalCounselors / ITEMS_PER_PAGE);
 
@@ -69,6 +84,11 @@ const Counselor = () => {
 
   const handleOnChange = (event: { target: { value: string } }) => {
     setSearchField(event.target.value);
+  };
+
+  const handleDateChange = (newDate: string) => {
+    const dateInWIB = changeTimeZone(newDate, "WIB");
+    setDateFilter(dateInWIB);
   };
 
   return (

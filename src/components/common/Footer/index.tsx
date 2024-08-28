@@ -5,20 +5,20 @@ const Footer = () => {
   const { features, contacts } = footerMenu;
   return (
     <footer className="py-5 px-2 md:px-32 bg-leaf mx-auto">
-      <div className="flex justify-between items-center flex-col md:flex-row gap-5 md:p-4">
-        <h1 className="text-white font-bold text-lg md:text-2xl">Zen Zone</h1>
+      <div className="flex justify-between items-center md:flex-row gap-5 md:p-4">
+        <h1 className="text-white font-bold text-2xl md:text-2xl">Zen Zone</h1>
         <div className="flex gap-11">
-          <div className="text-white">
-            <h5 className="font-bold text-xl">Features</h5>
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-none text-white">
+            <h5 className="hidden lg:block font-bold text-xl">Features</h5>
             {features.map((feature, index) => {
               return (
-                <div className="text-xl" key={index}>
+                <div className="text-base" key={index}>
                   {feature.title}
                 </div>
               );
             })}
           </div>
-          <div className="text-white">
+          <div className="hidden lg:block text-white">
             <h5 className="font-bold text-xl">Contact Us</h5>
             {contacts.map((contact, index) => {
               return (
@@ -31,13 +31,13 @@ const Footer = () => {
         </div>
 
         <div className="flex space-x-4">
-          <FaGoogle className="text-white md:text-xl" aria-label="Google" />
+          <FaGoogle className="text-white md:text-3xl" aria-label="Google" />
           <FaFacebookF
-            className="text-white md:text-xl"
+            className="text-white md:text-3xl"
             aria-label="Facebook"
           />
-          <FaTwitter className="text-white md:text-xl" aria-label="Twitter" />
-          <FaTiktok className="text-white md:text-xl" aria-label="TikTok" />
+          <FaTwitter className="text-white md:text-3xl" aria-label="Twitter" />
+          <FaTiktok className="text-white md:text-3xl" aria-label="TikTok" />
         </div>
       </div>
       <div className="p-2">

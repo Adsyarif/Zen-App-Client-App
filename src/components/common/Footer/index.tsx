@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="py-5 px-2 md:px-32 bg-leaf mx-auto">
       <div className="flex justify-between items-center md:flex-row gap-5 md:p-4">
-        <h1 className="text-white font-bold text-2xl md:text-2xl">Zen Zone</h1>
+        <h1 className="text-white font-bold text-xl md:text-4xl">Zen Zone</h1>
         <div className="flex gap-11">
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-none text-white">
             <h5 className="hidden lg:block font-bold text-xl">Features</h5>

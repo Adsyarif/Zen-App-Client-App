@@ -71,13 +71,17 @@ const SignIn = () => {
 
         console.log("User data after login:", userData);
 
-        if (roleId === 2 && (profileIncomplete === true || profileIncomplete === "true")) {
+        if (roleId.role_id === 2 && (profileIncomplete === true || profileIncomplete === "true")) {
+          console.log("Navigating to /createProfile");
           router.push("/createProfile");
-        } else if (roleId === 3 && (counselorIncomplete === true || counselorIncomplete === "true")) {
-          router.push("/Counselor/profile");
+        } else if (roleId.role_id === 3 && (counselorIncomplete === true || counselorIncomplete === "true")) {
+          console.log("Navigating to /createProfile/counselor");
+          router.push("/createProfile/counselor");
         } else {
+          console.log("Navigating to /Articles");
           router.push("/Articles");
         }
+        
       } catch (error) {
         console.error("Login failed:", error);
         setErrors({ password: "Invalid email or password" });

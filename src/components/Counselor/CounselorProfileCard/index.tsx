@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { useState } from "react";
-import axios from "axios";
 import EditModal from "@/components/profile/editModalControler";
-import { API_BASE } from "@/lib/projectApi";
 
 export interface CounselorProfileCardProps {
   counselorData: {
@@ -21,27 +19,21 @@ export interface CounselorProfileCardProps {
     year_of_experience: number;
     alumnus: string[];
   };
-  onLogout: (dataToUpdate: any) => void; 
+  onLogout: () => void;
+  onSave: (updatedData: any) => void; 
 }
 
-const CounselorProfileCard = ({ counselorData, onLogout }: CounselorProfileCardProps) => {
+const CounselorProfileCard = ({ counselorData, onLogout, onSave }: CounselorProfileCardProps) => {
   const [isModalVisible, setModalVisible] = useState(false);
+  
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
-  const handleSave = async (updatedData: any) => {
-    try {
-      const { email, ...dataToUpdate } = updatedData;
-      dataToUpdate.price = parseFloat(dataToUpdate.price);
-      dataToUpdate.year_of_experience = parseInt(dataToUpdate.year_of_experience, 10);
-      await axios.put(`${API_BASE}/counselor/edit/${counselorData.account_id}`, dataToUpdate);
-
-      setModalVisible(false);
-    } catch (error) {
-      console.error("Error saving counselor data:", error);
-    }
+  const handleSaveClick = (updatedData: any) => {
+    onSave(updatedData);
+    setModalVisible(false);
   };
 
   return (
@@ -112,7 +104,7 @@ const CounselorProfileCard = ({ counselorData, onLogout }: CounselorProfileCardP
           isVisible={isModalVisible}
           onClose={toggleModal}
           counselorData={counselorData}
-          onSave={handleSave}
+          onSave={handleSaveClick}
         />
       )}
     </div>

@@ -47,7 +47,7 @@ const SignUp = () => {
     onSubmit: async (values, { setSubmitting, setErrors }) => {
       console.log("Form Values:", values);
       try {
-        const response = await axios.post(`${API_BASE}/account/sigunp`, {
+        const response = await axios.post(`${API_BASE}/account/signup`, {
           email: values.email,
           role_id: values.role_id,
           password: values.password,

@@ -6,7 +6,9 @@ interface CarouselReviewCardProps {
   reviews: Review[];
 }
 
-export default function CarouselReviewCard({ reviews }: CarouselReviewCardProps) {
+export default function CarouselReviewCard({
+  reviews,
+}: CarouselReviewCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(3);
 
@@ -58,16 +60,18 @@ export default function CarouselReviewCard({ reviews }: CarouselReviewCardProps)
                 <div className="flex items-center mb-4 my-2">
                   <img
                     className="w-10 h-10 rounded-full mr-4"
-                    src="/profile people.png" 
+                    src="/profile people.png"
                     alt={review.user_first_name}
                   />
                   <div>
-                    <p className="font-semibold text-black">{review.user_first_name}</p>
+                    <p className="font-semibold text-black">
+                      {review.user_first_name}
+                    </p>
                     <ReactStars
                       count={5}
                       value={review.rating}
                       size={24}
-                      edit={false} 
+                      edit={false}
                       half={true}
                       color2={"#22543D"}
                     />

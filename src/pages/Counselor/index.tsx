@@ -10,7 +10,7 @@ import { AppContext } from "@/providers/AppContext";
 import { CounselorData } from "@/providers/AppContext";
 import { API_BASE } from "@/lib/projectApi";
 import { changeTimeZone } from "@/utils/dateFormated";
-import { useAllSchedule } from "@/hooks/counselor/useAllSchedule";
+import { useAllSchedule } from "@/hooks/counselor/scheduleHooks";
 
 const ITEMS_PER_PAGE = 12;
 
@@ -61,14 +61,12 @@ const Counselor = () => {
     setFilteredCounselors(availableCounselors);
     setFilteredCounselors(filtered);
     setCurrentPage(1);
-  }, [searchField, counselors]);
+  }, [searchField, counselors, dateFilter]);
 
   const handleClick = (id: number, counselor: CounselorData) => {
     router.push(`/Counselor/${id}`);
     setCounselor(counselor);
   };
-
-  console.log(filteredCounselors);
 
   const totalCounselors = filteredCounselors.length;
   const totalPages = Math.ceil(totalCounselors / ITEMS_PER_PAGE);

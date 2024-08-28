@@ -16,7 +16,7 @@ const ConsultationHistories: React.FC<ConsultationHistoriesProps> = ({ historySc
             <tr>
               <th>Date of Consultation</th>
               <th>Consultation Time</th>
-              <th>User's Name</th>
+              <th>Users Name</th>
             </tr>
           </thead>
           <tbody>

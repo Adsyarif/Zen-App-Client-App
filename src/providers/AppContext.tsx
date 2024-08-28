@@ -48,7 +48,7 @@ export interface CounselorData {
 }
 
 export interface CounselorData {
-  counselor_id: number
+  counselor_id: number;
   account_id: number;
   email: string;
   user_name: string;
@@ -82,8 +82,8 @@ export interface Schedule {
   status: string | null;
   updated_at: string;
   user_details?: {
-      first_name: string;
-      last_name: string;
+    first_name: string;
+    last_name: string;
   };
 }
 

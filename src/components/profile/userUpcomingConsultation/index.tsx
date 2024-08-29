@@ -97,18 +97,17 @@ const UserUpcomingConsultation: React.FC = () => {
                   <div className="ml-4"></div>
                 </div>
                 <h6 className="font-semibold">
-                  Psychologist in Charge:{" "}
-                  {schedule_item.counselor_detail?.first_name}{" "}
+                  Psychologist: {schedule_item.counselor_detail?.first_name}{" "}
                   {schedule_item.counselor_detail?.last_name}
                 </h6>
                 <a
                   href="#"
-                  className="text-center text-[#fafaf4] bg-teal-600 hover:bg-teal-700 rounded-full py-2 px-4 mt-2 inline-block"
+                  className="text-center text-[#fafaf4] bg-teal-600 hover:bg-teal-700 rounded-full py-2 px-4 mt-2 inline-block w-48"
                 >
                   Diary you shared
                 </a>
                 <div className="my-5">
-                  <h2 className="font-semibold">Book Details:</h2>
+                  <h2 className="font-semibold">Consultation Details:</h2>
                   <p>
                     Schedule:{" "}
                     {formatDateAndTime(

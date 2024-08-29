@@ -9,7 +9,6 @@ import axios from "axios";
 import { MoodStatus } from "@/providers/AppContext";
 import { AppContext } from "@/providers/AppContext";
 import { useRouter } from "next/router";
-import DropdownTripleDotsMenu from "@/components/dropdown_triple_dots";
 
 const DiaryEntryPage = () => {
   const { currentUser } = useContext(AppContext);
@@ -127,8 +126,8 @@ const DiaryEntryPage = () => {
             onDelete={() => deleteDiaryEntry(diaryId)}
           />
         </div>
-        <div className="flex flex-col gap-10">
-          <div className="hidden md:block">
+        <div className="hidden md:flex flex-col gap-10">
+          <div className="">
             <DatePicker
               type="date"
               label="Select Date"

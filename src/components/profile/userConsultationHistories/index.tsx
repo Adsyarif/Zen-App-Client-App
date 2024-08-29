@@ -73,7 +73,7 @@ const UserConsultationHistories: React.FC = () => {
 
   return (
     <>
-      <div className="bg-[#C1D8C3] rounded-md mx-auto my-5 p-5 max-w-4xl shadow-lg">
+      <div className="bg-[#C1D8C3] rounded-md mx-auto my-5 p-5 max-w-4xl shadow-lg ">
         <h3 className="font-semibold text-xl mb-4 text-teal-900">
           Consultation Histories
         </h3>

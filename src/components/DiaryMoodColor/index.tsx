@@ -83,7 +83,7 @@ export function DiaryMoodColor(prop: DiaryMoodProps) {
 
   return (
     <>
-      <span {...rest} className={`px-3 py-1 rounded-xl shadow-lg ${styles}`}>
+      <span {...rest} className={`text-center align-middle px-3 py-1 rounded-xl shadow-lg ${styles}`}>
         {emoji} {mood}
       </span>
     </>

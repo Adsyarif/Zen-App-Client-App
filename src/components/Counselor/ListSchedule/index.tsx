@@ -7,6 +7,7 @@ import {
   formatDate,
   formatDateRender,
 } from "@/utils/dateFormated";
+import { validateYupSchema } from "formik";
 
 const ListSchedule = ({ counselorId }: any) => {
   const today = new Date();
@@ -66,15 +67,23 @@ const ListSchedule = ({ counselorId }: any) => {
           {checkData.length > 0
             ? checkData.map((data, index) => {
                 const date = changeTimeZone(currentDate, "WIB").split(" ")[0];
+                const bookedHr: any = [];
                 for (let key in data) {
                   if (key === date) {
                     console.log(true);
                     const getValue = data[key];
-                    console.log(getValue);
+
+                    const bookedTime: any = [];
+                    getValue.map((value: any) => {
+                      const time = value.to.split(" ")[1];
+                      const hr = time.split(":")[0];
+                      bookedTime.push(hr);
+                    });
                   } else {
                     console.log(false);
                   }
                 }
+                console.log(bookedHr);
 
                 return (
                   <div
@@ -83,23 +92,71 @@ const ListSchedule = ({ counselorId }: any) => {
                     style={{ flexBasis: `${100 / visibleCards}%` }}
                   >
                     <div className="grid grid-rows-2 grid-flow-col gap-5 justify-around py-4 w-full">
-                      <div className="bg-mocca px-8 py-2 rounded-xl text-xl min-w-40 text-center">
+                      <div
+                        className={`${
+                          bookedHr.includes(7) ||
+                          bookedHr.includes(8) ||
+                          bookedHr.includes(9)
+                            ? "bg-grey"
+                            : "bg-mocca"
+                        } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}
+                      >
                         07:00 - 09:00
                       </div>
-                      <div className="bg-mocca px-8 py-2 rounded-xl text-xl min-w-40 text-center">
+                      <div
+                        className={`${
+                          bookedHr.includes(10) ||
+                          bookedHr.includes(11) ||
+                          bookedHr.includes(12)
+                            ? "bg-grey"
+                            : "bg-mocca"
+                        } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}
+                      >
                         10:00 - 12:00
                       </div>
-                      <div className="bg-mocca px-8 py-2 rounded-xl text-xl min-w-40 text-center">
+                      <div
+                        className={`${
+                          bookedHr.includes(13) ||
+                          bookedHr.includes(14) ||
+                          bookedHr.includes(15)
+                            ? "bg-grey"
+                            : "bg-mocca"
+                        } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}
+                      >
                         13:00 - 15:00
                       </div>
-                      <div className="bg-mocca px-8 py-2 rounded-xl text-xl min-w-40 text-center">
+                      <div
+                        className={`${
+                          bookedHr.includes(16) ||
+                          bookedHr.includes(17) ||
+                          bookedHr.includes(18)
+                            ? "bg-grey"
+                            : "bg-mocca"
+                        } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}
+                      >
                         16:00 - 18:00
                       </div>
-                      <div className="bg-mocca px-8 py-2 rounded-xl text-xl min-w-40 text-center">
-                        18:00 - 20:00
+                      <div
+                        className={`${
+                          bookedHr.includes(19) ||
+                          bookedHr.includes(20) ||
+                          bookedHr.includes(21)
+                            ? "bg-grey"
+                            : "bg-mocca"
+                        } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}
+                      >
+                        19:00 - 21:00
                       </div>
-                      <div className="bg-mocca px-8 py-2 rounded-xl text-xl min-w-40 text-center">
-                        21:00 - 24:00
+                      <div
+                        className={`${
+                          bookedHr.includes(22) ||
+                          bookedHr.includes(23) ||
+                          bookedHr.includes(24)
+                            ? "bg-grey"
+                            : "bg-mocca"
+                        } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}
+                      >
+                        22:00 - 24:00
                       </div>
                     </div>
                   </div>

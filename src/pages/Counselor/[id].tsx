@@ -35,8 +35,6 @@ export default function Review_Counseling() {
   const { currentUser } = useContext(AppContext);
   const [review, setReview] = useState<Review[]>([]);
 
-  console.log(selectedCounselor);
-
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 

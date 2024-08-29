@@ -60,7 +60,6 @@ const CounselorCard = ({ counselor, handleClick }: any) => {
     fetchCounselorData();
   }, []);
 
-  console.log(reviews);
   const isAvailable = currentCounselor ? true : false;
 
   const rupiahCurrency = new Intl.NumberFormat("id-ID", {

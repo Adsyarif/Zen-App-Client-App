@@ -17,7 +17,10 @@ const timeFormat: Intl.DateTimeFormatOptions = {
   hour12: false,
 };
 
+const ITEMS_PER_PAGE = 3;
+
 const UserConsultationHistories: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState(1);
   const { currentUser } = useContext(AppContext);
   const [schedules, setSchedules] = useState<Schedule[]>([]);
 
@@ -49,6 +52,15 @@ const UserConsultationHistories: React.FC = () => {
       fetchSchedules();
     }
   }, [currentUser]);
+
+  const handleSeeMore = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const displayedHistorys = schedules.slice(
+    0,
+    currentPage * ITEMS_PER_PAGE
+  ) || [];
 
   const formatDateAndTime = (availableFrom: string, availableTo: string) => {
     const fromDate = new Date(availableFrom);
@@ -86,7 +98,7 @@ const UserConsultationHistories: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {schedules.map((schedule_item) => (
+              {displayedHistorys.map((schedule_item) => (
                 <tr
                   key={schedule_item.schedule_id}
                   className="border-b border-gray-200"
@@ -97,7 +109,7 @@ const UserConsultationHistories: React.FC = () => {
                       schedule_item.available_to
                     )}
                   </td>
-                  <td className="py-2">
+                  <td className="py-2 max-w-0 lg:max-w-none truncate whitespace-nowrap">
                     {schedule_item.counselor_detail?.first_name}{" "}
                     {schedule_item.counselor_detail?.last_name}
                   </td>
@@ -106,11 +118,13 @@ const UserConsultationHistories: React.FC = () => {
             </tbody>
           </table>
         </div>
+        {displayedHistorys.length < schedules.length && (
         <div className="flex justify-end mt-4">
-          <button className="text-center text-[#fafaf4] bg-teal-600 hover:bg-teal-700 rounded-full py-2 px-4">
+          <button className="text-center text-[#fafaf4] bg-teal-600 hover:bg-teal-700 rounded-full py-2 px-4" onClick={handleSeeMore}>
             See more
           </button>
         </div>
+        )}
       </div>
     </>
   );

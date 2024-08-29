@@ -31,7 +31,7 @@ const ListSchedule = ({ counselorId }: any) => {
   }, {});
 
   const checkData = dataCompile(groupedData);
-  console.log(checkData);
+
   const nextSlide = () => {
     if (currentIndex < maxIndex - visibleCards) {
       const newDate = dateManipulation(currentDate, "+");
@@ -66,7 +66,16 @@ const ListSchedule = ({ counselorId }: any) => {
           {checkData.length > 0
             ? checkData.map((data, index) => {
                 const date = changeTimeZone(currentDate, "WIB").split(" ")[0];
-                console.log(data.date);
+                for (let key in data) {
+                  if (key === date) {
+                    console.log(true);
+                    const getValue = data[key];
+                    console.log(getValue);
+                  } else {
+                    console.log(false);
+                  }
+                }
+
                 return (
                   <div
                     key={index}

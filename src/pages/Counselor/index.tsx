@@ -19,7 +19,7 @@ const Counselor = () => {
   const context = useContext(AppContext);
   const setCounselor = context.setCurrentCounselor;
 
-  const { listSchedules, loading, error } = useAllSchedule();
+  const { listSchedules } = useAllSchedule();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchField, setSearchField] = useState<string>("");
   const [counselors, setCounselors] = useState<CounselorData[]>([]);
@@ -101,7 +101,7 @@ const Counselor = () => {
             <CounselorCard
               key={index}
               counselor={counselor}
-              handleClick={() => handleClick(counselor.counselor_id, counselor)}
+              handleClick={() => handleClick(counselor.account_id, counselor)}
             />
           ))}
         </div>

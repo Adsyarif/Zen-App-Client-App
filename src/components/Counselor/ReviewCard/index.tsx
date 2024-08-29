@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {  Review } from "@/providers/AppContext";
-
+import ReactStars from "react-stars";
+import { Review } from "@/providers/AppContext";
 
 interface CarouselReviewCardProps {
   reviews: Review[];
@@ -9,12 +9,6 @@ interface CarouselReviewCardProps {
 export default function CarouselReviewCard({ reviews }: CarouselReviewCardProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(3);
-
-  const renderStars = (score: number, maxStars = 5): string => {
-    const starFull = "★";
-    const starEmpty = "☆";
-    return starFull.repeat(score) + starEmpty.repeat(maxStars - score);
-  };
 
   const updateVisibleCards = () => {
     if (window.innerWidth < 768) {
@@ -59,7 +53,7 @@ export default function CarouselReviewCard({ reviews }: CarouselReviewCardProps)
               className="flex-none px-4"
               style={{ flexBasis: `${100 / visibleCards}%` }}
             >
-              <div className=" h-full border border-black p-6 shadow-lg rounded-lg text-left bg-[#DBE4D8]">
+              <div className="h-full border border-black p-6 shadow-lg rounded-lg text-left bg-[#DBE4D8]">
                 <p className="text-gray-700">&quot;{review.content}&quot;</p>
                 <div className="flex items-center mb-4 my-2">
                   <img
@@ -69,9 +63,14 @@ export default function CarouselReviewCard({ reviews }: CarouselReviewCardProps)
                   />
                   <div>
                     <p className="font-semibold text-black">{review.user_first_name}</p>
-                    <p className="text-2xl text-leaf">
-                      {renderStars(review.rating)}
-                    </p>
+                    <ReactStars
+                      count={5}
+                      value={review.rating}
+                      size={24}
+                      edit={false} 
+                      half={true}
+                      color2={"#22543D"}
+                    />
                     <p className="text-sm text-gray-500">{review.created_at}</p>
                   </div>
                 </div>

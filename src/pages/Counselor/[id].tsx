@@ -191,11 +191,15 @@ export default function Review_Counseling() {
                   />
                   <div className="flex justify-center">
                     <ReactStars
+                      half={true}
                       count={5}
                       size={64}
                       color2={"#ffd700"}
                       value={rating}
-                      onChange={(newRating: number) => setRating(newRating)}
+                      onChange={(newRating: number) => {
+                        console.log("Selected Rating:", newRating); // Log the rating to console
+                        setRating(newRating);
+                      }}
                     />
                   </div>
                   <Box

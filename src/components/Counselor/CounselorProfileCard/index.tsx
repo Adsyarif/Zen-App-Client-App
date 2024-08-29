@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import EditModal from "@/components/profile/editModalControler";
+import ReactStars from "react-stars";
 
 export interface CounselorProfileCardProps {
   counselorData: {
@@ -21,10 +22,12 @@ export interface CounselorProfileCardProps {
   };
   onLogout: () => void;
   onSave: (updatedData: any) => void; 
+  rating: number;
 }
 
-const CounselorProfileCard = ({ counselorData, onLogout, onSave }: CounselorProfileCardProps) => {
+const CounselorProfileCard = ({ counselorData, onLogout, onSave, rating }: CounselorProfileCardProps) => {
   const [isModalVisible, setModalVisible] = useState(false);
+  const [currentRating, setCurrentRating] = useState(rating);
   
 
   const toggleModal = () => {
@@ -38,14 +41,25 @@ const CounselorProfileCard = ({ counselorData, onLogout, onSave }: CounselorProf
 
   return (
     <div className=" flex flex-col gap-3 bg-teal-900 md:w-1/3 w-full p-10 rounded-md h-fit">
-      <div className="flex justify-center w-full">
-        <Image
-          src="/counselorImg.png"
-          width={320}
-          height={120}
-          className="object-cover object-center border-8 border-[#C1D8C3] rounded-full w-24 h-24"
-          alt="Counselor Image"
-        />
+      <div className="flex flex-col justify-center w-full">
+        <image className="flex justify-center">
+          <Image
+            src="/counselorImg.png"
+            width={320}
+            height={120}
+            className="flex justify-center object-cover object-center border-8 border-[#C1D8C3] rounded-full w-24 h-24"
+            alt="Counselor Image"
+          />
+        </image>
+         <div className="flex justify-center">
+            <ReactStars
+              count={5}
+              size={24}
+              color2={"#ffd700"}
+              value={currentRating}
+              onChange={(newRating: number) => setCurrentRating(newRating)}
+            />
+          </div>
       </div>
       <div className="flex justify-between w-full bg-[#C1D8C3] p-2 rounded-md">
         <p>username:</p>

@@ -6,6 +6,8 @@ import CounselorProfileCard, { CounselorProfileCardProps } from "@/components/Co
 import CounselorProfileSchedule from "@/components/Counselor/CounselorProfileSchedule";
 import { Navigation } from "@/components/common";
 import { useRouter } from "next/router";
+import ReactStars from "react-stars";
+import React from "react";
 
 const CounselorPage = () => {
   const [counselorData, setCounselorData] = useState<CounselorProfileCardProps["counselorData"] | null>(null);
@@ -22,6 +24,7 @@ const CounselorPage = () => {
 
   const { currentUser, setCurrentUser } = useContext(AppContext);
   const router = useRouter();
+  const [rating, setRating] = React.useState(0);
 
   const handleClose = () => {
     setOpen(false);
@@ -32,13 +35,16 @@ const CounselorPage = () => {
   const fetchData = async () => {
     try {
       if (currentUser?.account_id) {
-        const [counselorRes, schedulesRes] = await Promise.all([
+        const [counselorRes, schedulesRes, ratingCounselorRes] = await Promise.all([
           axios.get(`${API_BASE}/counselor/${currentUser.account_id}`),
           axios.get(`${API_BASE}/list_schedule/${currentUser.account_id}`),
+          axios.get(`${API_BASE}/review_counselor/${currentUser.account_id}/average_ratings`)
         ]);
 
         const counselorData = counselorRes.data.data;
         const schedulesData = schedulesRes.data.data || [];
+        const ratingCounselor = ratingCounselorRes.data.data.average_ratings;
+        
 
         setCounselorData({
           account_id: currentUser.account_id,
@@ -50,6 +56,7 @@ const CounselorPage = () => {
         setFilteredSchedules(orderedSchedules.filter((schedule: Schedule) => schedule.booked_by_account_id && schedule.status === null));
         setListSchedules(orderedSchedules.filter((schedule: Schedule) => !schedule.booked_by_account_id && schedule.status === null));
         setHistorySchedules(orderedSchedules.filter((schedule: Schedule) => schedule.booked_by_account_id && schedule.status !== null));
+        setRating(ratingCounselor)
       }
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -179,12 +186,13 @@ const CounselorPage = () => {
   return (
     <>
       <Navigation />
-      <div className="my-10 flex flex-col md:flex-row w-full ">
+      <div className="min-h-screen my-10 flex flex-col md:flex-row w-full ">
         <div className="gap-10 flex justify-center flex-col md:flex-row w-full">
           <CounselorProfileCard
             onLogout={LogOut}
             counselorData={counselorData}
-            onSave={handleSave} // Pass the handleSave function
+            onSave={handleSave} 
+            rating={rating}
           />
           <CounselorProfileSchedule
             filteredSchedules={filteredSchedules}

@@ -13,7 +13,6 @@ import { API_BASE } from "@/lib/projectApi";
 
 import consultationOngoing from "@/data/consultationOngoing.json";
 import consulationHistory from "@/data/consultationHistory.json";
-import FeedbackModal from '@/components/profile/editModal';
 import EditModal from "@/components/profile/editModal";
 import Link from "next/link";
 import { useRouter } from "next/router";

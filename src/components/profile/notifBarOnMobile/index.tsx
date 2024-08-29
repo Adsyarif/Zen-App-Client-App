@@ -7,7 +7,7 @@ import { IoNotificationsOutline } from "react-icons/io5";
 const NotifBarOnMobile = () => {
   return (
     <>
-      <div className="lg:hidden flex gap-3 text-white font10-semibold justify-around text-2xl py-3 bg-darkGreen rounded-md mx-3">
+      <div className="lg:hidden flex gap-3 text-white font10-semibold justify-around text-2xl py-3 bg-darkGreen rounded-md ">
         <Link href={"/Profile/post"}>
           <FaRegComment />
         </Link>

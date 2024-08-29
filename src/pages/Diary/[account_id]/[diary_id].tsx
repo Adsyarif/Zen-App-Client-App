@@ -145,6 +145,7 @@ const DiaryIDPage = () => {
             diaryText={diaryText}
             setMoodText={setMoodText}
             setDiaryText={setDiaryText}
+            setSelectedDate={setSelectedDate}
             onSave={createDiaryEntry}
             onEdit={editDiaryEntry}
             onDelete={deleteDiaryEntry} 

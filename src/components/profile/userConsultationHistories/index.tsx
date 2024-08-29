@@ -71,18 +71,6 @@ const UserConsultationHistories: React.FC = () => {
     return `${formattedDate} ${fromTime} - ${toTime}`;
   };
 
-  // const handleDeleteConsultationHistory = async (scheduleHistory: Schedule) => {
-  //   try {
-  //     const isConfirmed = window.confirm("Are you sure want to delete this schedule history?")
-  //     if(!isConfirmed) {
-  //       return
-  //     }
-  //     const response = await axios.delete(
-  //       `${API_BASE}/list_schedule/`
-  //     )
-  //   }
-  // }
-
   return (
     <>
       <div className="bg-[#C1D8C3] rounded-md mx-auto my-5 p-5 max-w-4xl shadow-lg">
@@ -95,7 +83,6 @@ const UserConsultationHistories: React.FC = () => {
               <tr className="border-b border-gray-300">
                 <th className="pb-2">Date of Consultation</th>
                 <th className="pb-2">Psychologist</th>
-                <th className="pb-2">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -113,14 +100,6 @@ const UserConsultationHistories: React.FC = () => {
                   <td className="py-2">
                     {schedule_item.counselor_detail?.first_name}{" "}
                     {schedule_item.counselor_detail?.last_name}
-                  </td>
-                  <td className="py-2">
-                    <a
-                      href="#"
-                      className="text-center text-[#fafaf4] rounded-md bg-red-600 hover:bg-red-700 py-1 px-3"
-                    >
-                      Delete
-                    </a>
                   </td>
                 </tr>
               ))}

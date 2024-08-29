@@ -3,7 +3,7 @@ import { AppContext } from "@/providers/AppContext";
 import { Schedule } from "@/providers/AppContext";
 import axios from "axios";
 import { API_BASE } from "@/lib/projectApi";
-
+import Button from "@/common/button/button";
 import Image from "next/image";
 
 const dateFormat: Intl.DateTimeFormatOptions = {
@@ -73,6 +73,31 @@ const UserUpcomingConsultation: React.FC = () => {
     return `${formattedDate} ${fromTime} - ${toTime}`;
   };
 
+  const handleDoneConsultation = async (schedule: Schedule) => {
+    try {
+      const isConfirmedDone = window.confirm(
+        "Are you sure want to finish this consultation?"
+      );
+
+      if (!isConfirmedDone) {
+        return;
+      }
+      const response = await axios.put(
+        `${API_BASE}/list_schedule/status/${currentUser?.account_id}/${schedule.schedule_id}/${schedule.counselor_id}`
+      );
+      if (response.status === 200) {
+        setSchedules((prevSchedules) =>
+          prevSchedules.filter((s) => s.schedule_id !== schedule.schedule_id)
+        );
+        alert("Consultation Finished! Thank you for your response.");
+      } else {
+        alert("Failed to finish this consultation");
+      }
+    } catch (error) {
+      console.error("Error finishing consultation schedule:", error);
+    }
+  };
+
   return (
     <>
       <div className="bg-[#C1D8C3] rounded-md mx-auto my-5 p-5 max-w-4xl shadow-lg">
@@ -132,12 +157,13 @@ const UserUpcomingConsultation: React.FC = () => {
                   >
                     Reschedule
                   </a>
-                  <a
-                    href="#"
+                  <Button
+                    type="button"
+                    onClick={() => handleDoneConsultation(schedule_item)}
                     className="text-center text-[#fafaf4] bg-teal-900 hover:bg-teal-950 rounded-md py-2 px-4"
                   >
                     Done
-                  </a>
+                  </Button>
                   <a
                     href="#"
                     className="text-center text-[#fafaf4] bg-red-600 hover:bg-red-700 rounded-md py-2 px-4"

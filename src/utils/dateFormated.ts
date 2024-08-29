@@ -80,12 +80,14 @@ export const formatDateRender = (
 
 export const dataCompile = (groupedData: any) => {
   const dateCollection = [];
+
   for (let key in groupedData) {
     const format = {
       [key]: groupedData[key],
     };
     dateCollection.push(format);
   }
+
   return dateCollection;
 };
 

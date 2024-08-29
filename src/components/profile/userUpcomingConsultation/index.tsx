@@ -37,7 +37,7 @@ const UserUpcomingConsultation: React.FC = () => {
             const filteredSchedules = data.filter(
               (schedule: Schedule) =>
                 schedule.booked_by_account_id !== null &&
-                schedule.status === null
+                schedule.status === "UPCOMING"
             );
             console.log("filter", filteredSchedules);
             setSchedules(filteredSchedules);

@@ -52,10 +52,11 @@ const CounselorPage = () => {
           ...counselorData.counselor_details[0],
         });
 
+        
         const orderedSchedules = schedulesData.sort((a: any, b: any)  => new Date(b.available_from).getTime() - new Date(a.available_from).getTime());
-        setFilteredSchedules(orderedSchedules.filter((schedule: Schedule) => schedule.booked_by_account_id && schedule.status === null));
+        setFilteredSchedules(orderedSchedules.filter((schedule: Schedule) => schedule.booked_by_account_id && schedule.status === "UPCOMING"));
         setListSchedules(orderedSchedules.filter((schedule: Schedule) => !schedule.booked_by_account_id && schedule.status === null));
-        setHistorySchedules(orderedSchedules.filter((schedule: Schedule) => schedule.booked_by_account_id && schedule.status !== null));
+        setHistorySchedules(orderedSchedules.filter((schedule: Schedule) => schedule.booked_by_account_id && schedule.status === "DONE"));
         setRating(ratingCounselor)
       }
     } catch (error) {

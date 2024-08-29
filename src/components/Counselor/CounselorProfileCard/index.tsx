@@ -53,6 +53,7 @@ const CounselorProfileCard = ({ counselorData, onLogout, onSave, rating }: Couns
         </image>
          <div className="flex justify-center">
             <ReactStars
+              edit={false}
               count={5}
               size={24}
               color2={"#ffd700"}

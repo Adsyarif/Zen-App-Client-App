@@ -44,7 +44,8 @@ const DiaryEntryContainer: React.FC<DiaryEntryContainerProps> = ({
       <p className="text-white text-2xl mb-6">{selectMoodStatus ? "Edit Diary Entry" : "New Diary Entry"}</p>
       <div className="bg-gray-100 rounded-lg shadow-md p-4 w-full h-full max-h-[80vh] overflow-y-auto">
         <div className="flex ">
-          <DropdownMoodPicker />
+          {/* <DropdownMoodPicker /> */}
+          
         </div>
         <div className=" flex flex-col ">
           <div className=" flex flex-row justify-between">

@@ -2,7 +2,6 @@ import React from "react";
 import { BackButton, CounselorInformation, ListSchedule } from "./Counselor";
 
 const CounselorDetail = ({ counselor, review }: any) => {
-  console.log(review);
   return (
     <div className="text-black">
       <BackButton />

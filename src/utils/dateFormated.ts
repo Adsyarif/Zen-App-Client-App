@@ -1,3 +1,5 @@
+import { addDays, subDays, format } from "date-fns";
+
 export const changeTimeZone = (newDate: string, type: string) => {
   let gmt0Time = new Date(newDate);
 
@@ -17,7 +19,26 @@ export const changeTimeZone = (newDate: string, type: string) => {
   return gmt7Time;
 };
 
-export const formatDateRender = (newDate: string, type: string) => {
+export const dateManipulation = (date: string, operation: string): string => {
+  const initialDate = new Date(date);
+  let newDate;
+
+  if (operation === "+") {
+    newDate = addDays(initialDate, 1);
+  } else if (operation === "-") {
+    newDate = subDays(initialDate, 1);
+  } else {
+    return "Error: Invalid operation";
+  }
+
+  return format(newDate, "yyyy-MM-dd HH:mm:ss");
+};
+
+export const formatDateRender = (
+  newDate: string,
+  type: string,
+  format = "full"
+) => {
   const date: Date = new Date(newDate);
 
   let timeZone: string = "";
@@ -39,14 +60,33 @@ export const formatDateRender = (newDate: string, type: string) => {
     year: "numeric",
     month: "short",
     day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
+    hour: format === "full" ? "2-digit" : undefined,
+    minute: format === "full" ? "2-digit" : undefined,
+    second: format === "full" ? "2-digit" : undefined,
     hour12: false,
   };
 
   const formattedDate: string = date.toLocaleString("en-GB", options);
-  const formattedDateWithGMT: string = `${formattedDate} GMT${delta}`;
+  let formattedDateWithGMT: string = "";
 
-  return newDate;
+  if (format === "full") {
+    formattedDateWithGMT = `${formattedDate} GMT${delta}`;
+  } else if (format === "short") {
+    formattedDateWithGMT = `${formattedDate}`;
+  }
+
+  return formattedDateWithGMT;
 };
+
+export const dataCompile = (groupedData: any) => {
+  const dateCollection = [];
+  for (let key in groupedData) {
+    const format = {
+      [key]: groupedData[key],
+    };
+    dateCollection.push(format);
+  }
+  return dateCollection;
+};
+
+export const formatDate = (dateTime: string) => dateTime.split(" ")[0];

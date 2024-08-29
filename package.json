@@ -17,6 +17,7 @@
     "axios": "^1.7.3",
     "chart.js": "^4.4.4",
     "chartjs-plugin-datalabels": "^2.2.0",
+    "date-fns": "^3.6.0",
     "dayjs": "^1.11.12",
     "formik": "^2.4.6",
     "hoist-non-react-statics": "^3.3.2",

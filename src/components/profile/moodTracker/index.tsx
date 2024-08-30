@@ -81,8 +81,8 @@ const MoodTracker = () => {
 
   return (
     <div className="bg-teal-900 p-3 rounded-md  flex flex-col w-full justify-center items-center">
-      <h2 className="text-center text-white font-bold text-4xl ">Mood Tracker</h2>
-      <div className="flex justify-center items-center md:w-[400px] md:h-[400px] " >
+      <h2 className="text-center text-white font-bold text-2xl lg:text-4xl">Mood Tracker</h2>
+      <div className="flex justify-center items-center md:w-[400px] md:h-[400px] py-4" >
         <Pie data={data} options={options} />
       </div>
     </div>

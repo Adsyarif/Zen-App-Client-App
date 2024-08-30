@@ -108,7 +108,7 @@ const UserUpcomingConsultation: React.FC = () => {
           schedules.map((schedule_item) => (
             <div
               key={schedule_item.schedule_id}
-              className="flex justify-between items-center gap-5 bg-[#fafaf4] p-4 rounded-lg mb-4 shadow-md"
+              className="md:flex justify-between items-center gap-5 bg-[#fafaf4] p-4 rounded-lg mb-4 shadow-md"
             >
               <div className="flex flex-col">
                 <div className="flex items-center">

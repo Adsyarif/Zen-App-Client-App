@@ -11,7 +11,7 @@ export default function UserProfilePage() {
     <>
       <Navigation />
       <div className="flex h-min-screen mb-10 flex-col lg:flex-row gap-5 lg:mx-24 mx-5">
-        <div className="flex flex-col w-[70%]">
+        <div className="flex flex-col lg:w-[70%]">
           <NotifBarOnMobile />
           <UserProfileBiodataCard />
           <MoodTracker/>

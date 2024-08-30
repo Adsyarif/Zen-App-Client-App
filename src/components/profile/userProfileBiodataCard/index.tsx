@@ -93,37 +93,37 @@ const UserProfileBiodataCard = () => {
         </div>
         {/* Biodata */}
         <div>
-          <div className="bg-lightGreen text-white rounded-md p-1 px-3 my-2 w-full gap-3">
+          <div className="bg-[#C1D8C3] text-teal-900 rounded-md p-1 px-3 my-2 w-full gap-3">
             <div className="flex justify-between">
               <p className="w-2/5">First Name:</p>
               <p className="w-3/5 text-right">{userData.first_name}</p>
             </div>
           </div>
-          <div className="bg-lightGreen text-white rounded-md p-1 px-3 my-2 w-full gap-3">
+          <div className="bg-[#C1D8C3] text-teal-900 rounded-md p-1 px-3 my-2 w-full gap-3">
             <div className="flex items-start justify-start">
               <p className="w-2/5">Last Name:</p>
               <p className="w-3/5 text-right">{userData.last_name}</p>
             </div>
           </div>
-          <div className="bg-lightGreen text-white rounded-md p-1 px-3 my-2 w-full gap-3">
+          <div className="bg-[#C1D8C3] text-teal-900 rounded-md p-1 px-3 my-2 w-full gap-3">
             <div className="flex items-start justify-start">
               <p className="w-2/5">Username:</p>
               <p className="w-3/5 text-right">{userData.user_name}</p>
             </div>
           </div>
-          <div className="bg-lightGreen text-white rounded-md p-1 px-3 my-2 w-full gap-3">
+          <div className="bg-[#C1D8C3] text-teal-900 rounded-md p-1 px-3 my-2 w-full gap-3">
             <div className="flex items-start justify-start">
               <p className="w-2/5">Phone number:</p>
               <p className="w-3/5 text-right">{userData.phone_number}</p>
             </div>
           </div>
-          <div className="bg-lightGreen text-white rounded-md p-1 px-3 my-2 w-full">
+          <div className="bg-[#C1D8C3] text-teal-900 rounded-md p-1 px-3 my-2 w-full">
             <div className="flex justify-between">
               <p className="w-2/5">Email:</p>
               <p className="w-3/5 text-sm text-right">{userData.email}</p>
             </div>
           </div>
-          <div className="bg-lightGreen text-white rounded-md p-1 px-3 my-2 w-full">
+          <div className="bg-[#C1D8C3] text-teal-900 rounded-md p-1 px-3 my-2 w-full">
             <div className="flex items-start justify-start">
               <p className="w-2/5">Gender:</p>
               <p className="w-3/5 text-right">{userData.gender_name}</p>

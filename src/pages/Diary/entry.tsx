@@ -50,12 +50,15 @@ const DiaryEntryPage = () => {
     }
 
     try {
-      const response = await axios.post(`${API_BASE}/diary/${accountId}/create`, {
-        mood_status_id: selectMoodStatus,
-        content: diaryText,
-        created_at: selectedDate.toISOString(),
-      });
-      setDiaryId(response.data.diary_id); 
+      const response = await axios.post(
+        `${API_BASE}/diary/${accountId}/create`,
+        {
+          mood_status_id: selectMoodStatus,
+          content: diaryText,
+          created_at: selectedDate.toISOString(),
+        }
+      );
+      setDiaryId(response.data.diary_id);
       alert("Create New Diary Success!");
       console.log("result", response);
       router.push("/Diary");
@@ -66,7 +69,13 @@ const DiaryEntryPage = () => {
   };
 
   const editDiaryEntry = async () => {
-    if (!diaryId || !selectMoodStatus || !diaryText || !accountId || !selectedDate) {
+    if (
+      !diaryId ||
+      !selectMoodStatus ||
+      !diaryText ||
+      !accountId ||
+      !selectedDate
+    ) {
       alert("Please select a mood and enter some text before saving.");
       return;
     }
@@ -83,7 +92,6 @@ const DiaryEntryPage = () => {
       alert("Terjadi kesalahan saat mengedit diary.");
     }
   };
-  
 
   const deleteDiaryEntry = async (diary_id: number | null) => {
     try {
@@ -107,12 +115,17 @@ const DiaryEntryPage = () => {
     }
   };
 
-
   return (
     <>
       <Navigation />
       <div className="md:flex md:flex-row justify-between gap-5 p-8 lg:mx-32 lg:mb-24 items-start">
         <div className="w-full">
+          <div className="md:hidden py-4">
+            <MoodPickerComponent
+              moodCategories={moodCategories}
+              onMoodChange={handleMoodChange}
+            />
+          </div>
           <DiaryEntryContainer
             selectedDate={selectedDate}
             selectMoodStatus={selectMoodStatus}
@@ -120,6 +133,7 @@ const DiaryEntryPage = () => {
             diaryText={diaryText}
             setDiaryText={setDiaryText}
             setMoodText={setMoodText}
+            setSelectedDate={setSelectedDate}
             onSave={createDiaryEntry}
             onEdit={editDiaryEntry}
             diaryId={diaryId}
@@ -127,25 +141,23 @@ const DiaryEntryPage = () => {
           />
         </div>
         <div className="hidden md:flex flex-col gap-10">
-          <div className="">
+          <div>
             <DatePicker
               type="date"
               label="Select Date"
               onChange={handleDateChange}
             />
           </div>
-          
+
           <MoodPickerComponent
             moodCategories={moodCategories}
             onMoodChange={handleMoodChange}
           />
-          
-            {/* <DropdownTripleDotsMenu
+
+          {/* <DropdownTripleDotsMenu
               onSave={createDiaryEntry}
               onDelete={() => deleteDiaryEntry(diaryId)} 
             /> */}
-          
-         
         </div>
       </div>
     </>

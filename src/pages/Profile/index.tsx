@@ -14,9 +14,9 @@ export default function UserProfilePage() {
         <div className="flex flex-col lg:w-[70%]">
           <NotifBarOnMobile />
           <UserProfileBiodataCard />
-          <MoodTracker/>
+          <MoodTracker />
         </div>
-        
+
         <div className="bg-teal-900 w-full rounded-md p-3 pb-10 my-3 ">
           <NotifBarOnDesktop />
           <div>

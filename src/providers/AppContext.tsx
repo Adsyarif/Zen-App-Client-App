@@ -111,6 +111,7 @@ export interface UserContextType {
 export interface User {
   email: string;
   account_id?: number;
+  username?: string;
   password?: string;
   role_id: number;
 }

@@ -16,6 +16,18 @@ const ListSchedule = ({ counselorId }: any) => {
   const maxIndex = 7;
 
   const { listSchedules } = useIdSchedule(counselorId);
+  const [dateBooked, setDateBooked] = useState<any>({
+    startFrom: "",
+    endTo: "",
+  });
+  const [isBooked, setIsBooked] = useState({
+    7: false,
+    10: false,
+    13: false,
+    16: false,
+    19: false,
+    22: false,
+  });
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const [currentDate, setCurrentDate] = useState(renderDateOnCard);
@@ -51,15 +63,6 @@ const ListSchedule = ({ counselorId }: any) => {
     }
   };
 
-  const [isBooked, setIsBooked] = useState({
-    7: false,
-    10: false,
-    13: false,
-    16: false,
-    19: false,
-    22: false,
-  });
-
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     const timeRange = (event.target as HTMLDivElement).textContent?.trim();
     const startTime = timeRange?.split(" - ")[0];
@@ -75,11 +78,13 @@ const ListSchedule = ({ counselorId }: any) => {
         }
         return newState;
       });
-      return { from: startTime, to: endTime };
+
+      setDateBooked({
+        startFrom: dateManipulation(`${currentDate} ${startTime}`),
+        endTo: dateManipulation(`${currentDate} ${endTime}`),
+      });
     }
   };
-
-  console.log(isBooked);
 
   return (
     <div className="mx-7 my-5 text-lg rounded rounded-2xl bg-leaf p-5 relative mx-auto text-center">
@@ -126,7 +131,10 @@ const ListSchedule = ({ counselorId }: any) => {
                         className={`${
                           bookedHr.includes(7) ||
                           bookedHr.includes(8) ||
-                          bookedHr.includes(9)
+                          bookedHr.includes(9) ||
+                          (isBooked[7] === true &&
+                            dateManipulation(currentDate) ===
+                              dateBooked.startFrom.split(" ")[0])
                             ? "bg-grey"
                             : "bg-mocca"
                         } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}
@@ -138,7 +146,10 @@ const ListSchedule = ({ counselorId }: any) => {
                         className={`${
                           bookedHr.includes(10) ||
                           bookedHr.includes(11) ||
-                          bookedHr.includes(12)
+                          bookedHr.includes(12) ||
+                          (isBooked[10] === true &&
+                            dateManipulation(currentDate) ===
+                              dateBooked.startFrom.split(" ")[0])
                             ? "bg-grey"
                             : "bg-mocca"
                         } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}
@@ -150,7 +161,10 @@ const ListSchedule = ({ counselorId }: any) => {
                         className={`${
                           bookedHr.includes(13) ||
                           bookedHr.includes(14) ||
-                          bookedHr.includes(15)
+                          bookedHr.includes(15) ||
+                          (isBooked[13] === true &&
+                            dateManipulation(currentDate) ===
+                              dateBooked.startFrom.split(" ")[0])
                             ? "bg-grey"
                             : "bg-mocca"
                         } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}
@@ -162,7 +176,10 @@ const ListSchedule = ({ counselorId }: any) => {
                         className={`${
                           bookedHr.includes(16) ||
                           bookedHr.includes(17) ||
-                          bookedHr.includes(18)
+                          bookedHr.includes(18) ||
+                          (isBooked[16] === true &&
+                            dateManipulation(currentDate) ===
+                              dateBooked.startFrom.split(" ")[0])
                             ? "bg-grey"
                             : "bg-mocca"
                         } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}
@@ -174,7 +191,10 @@ const ListSchedule = ({ counselorId }: any) => {
                         className={`${
                           bookedHr.includes(19) ||
                           bookedHr.includes(20) ||
-                          bookedHr.includes(21)
+                          bookedHr.includes(21) ||
+                          (isBooked[19] === true &&
+                            dateManipulation(currentDate) ===
+                              dateBooked.startFrom.split(" ")[0])
                             ? "bg-grey"
                             : "bg-mocca"
                         } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}
@@ -186,7 +206,10 @@ const ListSchedule = ({ counselorId }: any) => {
                         className={`${
                           bookedHr.includes(22) ||
                           bookedHr.includes(23) ||
-                          bookedHr.includes(24)
+                          bookedHr.includes(24) ||
+                          (isBooked[22] === true &&
+                            dateManipulation(currentDate) ===
+                              dateBooked.startFrom.split(" ")[0])
                             ? "bg-grey"
                             : "bg-mocca"
                         } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}

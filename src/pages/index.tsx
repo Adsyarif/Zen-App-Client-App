@@ -37,11 +37,6 @@ export default function HomePage () {
 
   const handleSubmitReview = async () => {
 
-    // if (!currentUser) {
-    //   alert("User is not logged in");
-    //   return;
-    // }
-
     try {
       await axios.post(
         `${API_BASE}/feedback/${accountId}/create`,
@@ -89,21 +84,10 @@ export default function HomePage () {
     }
   };
 
-  // const handleAddFeedback = async (newFeedback: Omit<Feedback, 'feedback_id' | 'created_at' | 'updated_at' | 'deleted_at'>) => {
-  //   try {
-  //     console.log("Sending feedback:", { ...newFeedback, username }); 
-  //     await axios.post(`${API_BASE}/feedback/${accountId}/create`, { ...newFeedback, username });
-  //     fetchFeedback();
-  //   } catch (error) {
-  //     console.error("Error adding feedback:", error);
-  //   }
-  //   setModalVisible(false); 
-  // };
-
   const handleAddFeedback = async (feedback: { username: string; description: string; rating: number }) => {
     try {
-      console.log("Sending feedback:", { ...feedback, username }); 
-      await axios.post(`${API_BASE}/feedback/${accountId}/create`, { ...feedback, username });
+      console.log("Sending feedback:", { ...feedback }); 
+      await axios.post(`${API_BASE}/feedback/${accountId}/create`, { ...feedback});
       fetchFeedback();
     } catch (error) {
       console.error("Error adding feedback:", error);

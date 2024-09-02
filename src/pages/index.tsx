@@ -23,12 +23,12 @@ export interface Feedback {
 export default function HomePage () {
   const { currentUser } = useContext(AppContext);
   const accountId = currentUser?.account_id;
-  const username = currentUser?.username;
   const [feedback, setFeedback] = useState<Feedback[]>([]);
   const [isModalVisible, setModalVisible] = useState<boolean>(false);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [rating, setRating] = React.useState(0);
   const [description, setDescription] = React.useState("");
+  const [username, setUsername] = React.useState("");
   const visibleCards = 4; 
 
   useEffect(() => {

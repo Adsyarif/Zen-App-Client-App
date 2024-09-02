@@ -7,7 +7,6 @@ import {
   formatDate,
   formatDateRender,
 } from "@/utils/dateFormated";
-import { validateYupSchema } from "formik";
 
 const ListSchedule = ({ counselorId }: any) => {
   const today = new Date();
@@ -18,6 +17,7 @@ const ListSchedule = ({ counselorId }: any) => {
 
   const { listSchedules } = useIdSchedule(counselorId);
   const [currentIndex, setCurrentIndex] = useState(0);
+
   const [currentDate, setCurrentDate] = useState(renderDateOnCard);
 
   const groupedData = listSchedules.reduce((acc: any, item) => {
@@ -50,6 +50,36 @@ const ListSchedule = ({ counselorId }: any) => {
       setCurrentIndex(currentIndex - 1);
     }
   };
+
+  const [isBooked, setIsBooked] = useState({
+    7: false,
+    10: false,
+    13: false,
+    16: false,
+    19: false,
+    22: false,
+  });
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    const timeRange = (event.target as HTMLDivElement).textContent?.trim();
+    const startTime = timeRange?.split(" - ")[0];
+    const endTime = timeRange?.split(" - ")[1];
+    if (startTime) {
+      console.log(startTime, endTime);
+      setIsBooked((prev: any) => {
+        const newState = { ...prev };
+        for (const key in newState) {
+          if (parseInt(key) === parseInt(startTime)) {
+            newState[key] = true;
+          }
+        }
+        return newState;
+      });
+      return { from: startTime, to: endTime };
+    }
+  };
+
+  console.log(isBooked);
 
   return (
     <div className="mx-7 my-5 text-lg rounded rounded-2xl bg-leaf p-5 relative mx-auto text-center">
@@ -100,6 +130,7 @@ const ListSchedule = ({ counselorId }: any) => {
                             ? "bg-grey"
                             : "bg-mocca"
                         } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}
+                        onClick={handleClick}
                       >
                         07:00 - 09:00
                       </div>
@@ -111,6 +142,7 @@ const ListSchedule = ({ counselorId }: any) => {
                             ? "bg-grey"
                             : "bg-mocca"
                         } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}
+                        onClick={handleClick}
                       >
                         10:00 - 12:00
                       </div>
@@ -122,6 +154,7 @@ const ListSchedule = ({ counselorId }: any) => {
                             ? "bg-grey"
                             : "bg-mocca"
                         } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}
+                        onClick={handleClick}
                       >
                         13:00 - 15:00
                       </div>
@@ -133,6 +166,7 @@ const ListSchedule = ({ counselorId }: any) => {
                             ? "bg-grey"
                             : "bg-mocca"
                         } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}
+                        onClick={handleClick}
                       >
                         16:00 - 18:00
                       </div>
@@ -144,6 +178,7 @@ const ListSchedule = ({ counselorId }: any) => {
                             ? "bg-grey"
                             : "bg-mocca"
                         } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}
+                        onClick={handleClick}
                       >
                         19:00 - 21:00
                       </div>
@@ -155,6 +190,7 @@ const ListSchedule = ({ counselorId }: any) => {
                             ? "bg-grey"
                             : "bg-mocca"
                         } px-8 py-2 rounded-xl text-xl min-w-40 text-center`}
+                        onClick={handleClick}
                       >
                         22:00 - 24:00
                       </div>

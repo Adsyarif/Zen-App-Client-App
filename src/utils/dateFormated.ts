@@ -19,7 +19,10 @@ export const changeTimeZone = (newDate: string, type: string) => {
   return gmt7Time;
 };
 
-export const dateManipulation = (date: string, operation: string): string => {
+export const dateManipulation = (
+  date: string,
+  operation: string = "none"
+): string => {
   const initialDate = new Date(date);
   let newDate;
 
@@ -28,7 +31,7 @@ export const dateManipulation = (date: string, operation: string): string => {
   } else if (operation === "-") {
     newDate = subDays(initialDate, 1);
   } else {
-    return "Error: Invalid operation";
+    return format(initialDate, "yyyy-MM-dd HH:mm:ss");
   }
 
   return format(newDate, "yyyy-MM-dd HH:mm:ss");

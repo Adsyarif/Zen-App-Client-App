@@ -41,8 +41,8 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isVisible, onClose, onSub
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-white p-6 rounded-lg w-96 z-50">
-        <h2 className="text-2xl mb-4">Leave Feedback</h2>
+      <div className="bg-leaf p-6 rounded-lg w-96 z-50">
+        <h2 className="text-2xl text-white mb-4">Leave Feedback</h2>
         <input
           type="text"
           placeholder="Your Name"
@@ -66,13 +66,13 @@ const FeedbackModal: React.FC<FeedbackModalProps> = ({ isVisible, onClose, onSub
           />
         </div>
         <button
-          className="bg-leaf text-white p-2 rounded w-full"
+          className="bg-white text-leaf p-2 rounded w-full"
           onClick={handleSubmit}
         >
           Submit
         </button>
         <button
-          className="mt-2 text-gray-500 underline w-full"
+          className="mt-2 text-white w-full"
           onClick={onClose}
         >
           Cancel

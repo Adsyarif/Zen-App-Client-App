@@ -404,24 +404,25 @@ export default function HomePage () {
                     className="flex-none px-4"
                     style={{ flexBasis: `${100 / visibleCards}%` }}
                   >
-                    <div className="bg-white p-6 shadow-lg rounded-lg text-left">
-                      <p className="text-gray-700">{item.description}</p>
-                      <div className="flex items-center mb-4 my-2">
+                   <div className="bg-white p-6 shadow-lg rounded-lg text-left max-w-sm mx-auto md:max-w-md lg:max-w-lg">
+                      <p className="text-gray-700 text-base md:text-lg lg:text-xl mb-4">{item.description}</p>
+                      <ReactStars
+                        count={5}
+                        size={20}
+                        value={item.rating}
+                        edit={false}
+                        color2={"#ffd700"}
+                        className="mb-4"
+                      />
+                      <div className="flex flex-col items-center space-y-2 md:space-y-0 md:flex-row md:items-start">
                         <img
-                          className="w-10 h-10 rounded-full mr-4"
-                          src="https://randomuser.me/api/portraits/lego/1.jpg" 
+                          className="w-10 h-10 rounded-full mb-2 md:mb-0"
+                          src="https://randomuser.me/api/portraits/lego/1.jpg"
                           alt={item.username}
                         />
-                        <div>
-                          <p className="font-semibold text-black">{item.username}</p>
-                          <p className="text-sm text-gray-500">{item.created_at}</p>
-                          <ReactStars
-                            count={5}
-                            size={20}
-                            value={item.rating}
-                            edit={false}
-                            color2={"#ffd700"}
-                          />
+                        <div className="text-center md:text-left md:ml-4">
+                          <p className="font-semibold text-black text-sm md:text-base lg:text-lg">{item.username}</p>
+                          <p className="text-xs text-gray-500 md:text-sm lg:text-base">{item.created_at}</p>
                         </div>
                       </div>
                     </div>
@@ -437,7 +438,6 @@ export default function HomePage () {
         </div>
 
         <div className="flex flex-col-reverse md:flex-row py-6">
-          {/* Text section */}
           <div className="flex flex-col justify-center w-full md:w-1/2 order-1 md:order-2 mt-4 md:mt-0">
             <div className="text-lg text-justify">
               Your feedback is very important to us for analyzing our strengths and weaknesses, so we can continue to improve based on your comments.
@@ -455,12 +455,6 @@ export default function HomePage () {
               onClose={toggleModal} 
               onSubmit={handleAddFeedback} 
             />
-
-            {/* <FeedbackForm 
-              isVisible={isModalVisible} 
-              onClose={toggleModal} 
-              onSubmit={handleAddFeedback} 
-            /> */}
           </div>
 
           {/* Image section */}

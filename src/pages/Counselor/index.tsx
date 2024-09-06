@@ -17,7 +17,6 @@ const ITEMS_PER_PAGE = 12;
 const Counselor = () => {
   const router = useRouter();
   const context = useContext(AppContext);
-  const getCounselor = context.currentCounselor;
   const setCounselor = context.setCurrentCounselor;
 
   const { listSchedules } = useAllSchedule();
@@ -34,7 +33,7 @@ const Counselor = () => {
       try {
         const response = await fetch(`${API_BASE}/counselors`); // Change this to API endpoint
         const data = await response.json();
-
+        console.log("counselor data", data);
         setCounselors(data.data);
         setFilteredCounselors(data.data);
       } catch (error) {
@@ -50,16 +49,16 @@ const Counselor = () => {
       counselor.first_name.toLowerCase().includes(searchField.toLowerCase())
     );
 
-    const scheduledCounselorIds = listSchedules.filter(
-      (schedule: any) => schedule.from === dateFilter
-    );
+    const scheduledCounselorIds = listSchedules
+      .filter((schedule: any) => schedule.from === dateFilter)
+      .map((schedule: any) => schedule.account_id);
 
     const availableCounselors = counselors.filter(
       (counselor: any) => !scheduledCounselorIds.includes(counselor.account_id)
     );
 
     setFilteredCounselors(availableCounselors);
-    setFilteredCounselors(filtered);
+    // setFilteredCounselors(filtered);
     setCurrentPage(1);
   }, [searchField, counselors, dateFilter]);
 
@@ -75,10 +74,12 @@ const Counselor = () => {
     setCurrentPage(page);
   };
 
-  const displayedCounselors = filteredCounselors.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
-  );
+  const displayedCounselors = Array.isArray(filteredCounselors)
+    ? filteredCounselors.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE
+      )
+    : [];
 
   const handleOnChange = (event: { target: { value: string } }) => {
     setSearchField(event.target.value);
@@ -93,7 +94,10 @@ const Counselor = () => {
     <>
       <Navigation />
       <div className="py-5 px-8 md:px-12 lg:px-32 md:py-5 min-h-screen">
-        <HeaderCounselor handleOnChange={handleOnChange} />
+        <HeaderCounselor
+          handleOnChange={handleOnChange}
+          onDateChange={handleDateChange}
+        />
         <div className="w-full py-5 grid md:grid-cols-2 lg:grid-cols-3 gap-y-5">
           {displayedCounselors.map((counselor, index) => (
             <CounselorCard

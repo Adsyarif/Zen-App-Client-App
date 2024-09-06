@@ -4,6 +4,7 @@ import { FaCalendarAlt, FaSearch } from "react-icons/fa";
 
 interface Props {
   handleOnChange: any;
+  onDateChange: (date: any) => void;
 }
 
 const HeaderCounselor = ({ handleOnChange, onDateChange }: Props) => {

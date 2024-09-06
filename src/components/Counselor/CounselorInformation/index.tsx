@@ -15,10 +15,10 @@ const CounselorInformation = ({ counselor, review }: any) => {
           </div>
           <div className="text-xl font-semibold">{counselor.title}</div>
           <div className="flex items-center gap-5">
-            <p className="bg-leaf rounded rounded-xl text-mocca px-2 py-1 text-xl">
+            <p className="bg-leaf rounded-xl text-mocca px-2 py-1 text-xl">
               {counselor.year_of_experience} years
             </p>
-            <p className="bg-leaf rounded rounded-xl text-xl text-mocca px-2 py-1">
+            <p className="bg-leaf rounded-xl text-xl text-mocca px-2 py-1">
               {renderStars(avgRate(review))}
             </p>
           </div>

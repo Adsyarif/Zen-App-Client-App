@@ -3,6 +3,7 @@ import { Review } from "@/providers/AppContext";
 import { avgRate, renderStars } from "@/utils/startsReview";
 import { capitalFirstLetter } from "@/utils/stringFormated";
 import axios, { AxiosResponse } from "axios";
+
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -90,7 +91,7 @@ const CounselorCard = ({ counselor, handleClick }: any) => {
         <p className="bg-mocca text-leaf rounded-xl text-lg px-2">
           {counselor.year_of_experience} years
         </p>
-        <div className="flex items-center bg-mocca justify-center px-2 rounded rounded-xl">
+        <div className="flex items-center bg-mocca justify-center px-2 rounded-xl">
           <p className="text-2xl text-leaf">{renderStars(avgRate(reviews))}</p>
           <p className="text-lg text-leaf ml-2">({reviews.length})</p>
         </div>
@@ -98,17 +99,21 @@ const CounselorCard = ({ counselor, handleClick }: any) => {
       <div className="mt-2">
         <p className="text-mocca text-xl font-bold">Price</p>
         <p className="text-mocca text-lg">{rupiahCurrency}</p>
+        <div className="mt-2">
+          <p className="text-mocca text-xl font-bold">Price</p>
+          <p className="text-mocca text-lg">{rupiahCurrency}</p>
+        </div>
+        <button
+          disabled={!isAvailable}
+          className={`mt-2 h-14 text-xl px-4 py-2 font-semibold rounded-lg ${
+            isAvailable
+              ? "bg-mocca text-leaf hover:bg-gray-200"
+              : "bg-gray-400 text-gray-600 cursor-not-allowed"
+          }`}
+        >
+          {isAvailable ? "Book Now" : "Fully Booked"}
+        </button>
       </div>
-      <button
-        disabled={!isAvailable}
-        className={`mt-2 h-14 text-xl px-4 py-2 font-semibold rounded-lg ${
-          isAvailable
-            ? "bg-mocca text-leaf hover:bg-gray-200"
-            : "bg-gray-400 text-gray-600 cursor-not-allowed"
-        }`}
-      >
-        {isAvailable ? "Book Now" : "Fully Booked"}
-      </button>
     </div>
   );
 };

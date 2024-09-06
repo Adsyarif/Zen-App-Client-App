@@ -126,7 +126,7 @@ const ListSchedule = ({ counselorId }: any) => {
   // }, [dateBooked]);
 
   return (
-    <div className="mx-7 my-5 text-lg rounded rounded-2xl bg-leaf p-5 relative mx-auto text-center">
+    <div className="mx-7 my-5 text-lg rounded-2xl bg-leaf p-5 relative text-center">
       <div className="relative w-full overflow-hidden px-12">
         <div className="text-mocca font-bold text-2xl flex justify-between p-2">
           <p>List Schedule</p>

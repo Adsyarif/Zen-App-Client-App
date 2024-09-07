@@ -82,7 +82,7 @@ const CounselorCard = ({ counselor, handleClick }: any) => {
       />
 
       <div className="text-mocca">
-        <h2 className="text-xl font-semibold min-h-14">
+        <h2 className="text-xl font-semibold">
           {counselor.first_name} {counselor.last_name}
         </h2>
         <p className="text-lg my-2">{capitalFirstLetter(counselor.title)}</p>
@@ -99,10 +99,6 @@ const CounselorCard = ({ counselor, handleClick }: any) => {
       <div className="mt-2">
         <p className="text-mocca text-xl font-bold">Price</p>
         <p className="text-mocca text-lg">{rupiahCurrency}</p>
-        <div className="mt-2">
-          <p className="text-mocca text-xl font-bold">Price</p>
-          <p className="text-mocca text-lg">{rupiahCurrency}</p>
-        </div>
         <button
           disabled={!isAvailable}
           className={`mt-2 h-14 text-xl px-4 py-2 font-semibold rounded-lg ${

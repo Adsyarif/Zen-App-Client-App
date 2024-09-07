@@ -7,7 +7,8 @@ import {
   formatDate,
   formatDateRender,
 } from "@/utils/dateFormated";
-import TimeSlotGrid, { Props } from "../TimeSlotGrid";
+// import TimeSlotGrid, { Props } from "../TimeSlotGrid";
+import TimeSlotGrid from "../TimeSlotGrid";
 import { API_BASE } from "@/lib/projectApi";
 
 const ListSchedule = ({ counselorId }: any) => {
@@ -94,17 +95,17 @@ const ListSchedule = ({ counselorId }: any) => {
     }
   };
 
-  const props: Props = {
-    currentIndex: currentIndex,
-    visibleCards: visibleCards,
-    checkData: checkData,
-    currentDate: currentDate,
-    isBooked: isBooked,
-    dateBooked: dateBooked,
-    handleClick: handleClick,
-    changeTimeZone: changeTimeZone,
-    dateManipulation: dateManipulation,
-  };
+  // const props: Props = {
+  //   currentIndex: currentIndex,
+  //   visibleCards: visibleCards,
+  //   checkData: checkData,
+  //   currentDate: currentDate,
+  //   isBooked: isBooked,
+  //   dateBooked: dateBooked,
+  //   handleClick: handleClick,
+  //   changeTimeZone: changeTimeZone,
+  //   dateManipulation: dateManipulation,
+  // };
 
   // useEffect(() => {
   //   const bookedSchedule = async () => {
@@ -133,7 +134,8 @@ const ListSchedule = ({ counselorId }: any) => {
           <p>{currentDate}</p>
         </div>
 
-        <TimeSlotGrid {...props} />
+        {/* <TimeSlotGrid {...props} /> */}
+        <TimeSlotGrid />
 
         <div>
           <button

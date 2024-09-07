@@ -45,7 +45,7 @@ const Counselor = () => {
   }, []);
 
   useEffect(() => {
-    const filtered = counselors.filter((counselor) =>
+    const filteredByName = counselors.filter((counselor) =>
       counselor.first_name.toLowerCase().includes(searchField.toLowerCase())
     );
 
@@ -53,7 +53,7 @@ const Counselor = () => {
       .filter((schedule: any) => schedule.from === dateFilter)
       .map((schedule: any) => schedule.account_id);
 
-    const availableCounselors = counselors.filter(
+    const availableCounselors = filteredByName.filter(
       (counselor: any) => !scheduledCounselorIds.includes(counselor.account_id)
     );
 

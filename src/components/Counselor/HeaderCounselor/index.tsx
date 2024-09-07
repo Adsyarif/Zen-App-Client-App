@@ -1,10 +1,18 @@
+import DatePicker from "@/components/common/DatePicker";
+import { useState } from "react";
 import { FaCalendarAlt, FaSearch } from "react-icons/fa";
 
 interface Props {
   handleOnChange: any;
+  onDateChange: (date: any) => void;
 }
 
-const HeaderCounselor = ({ handleOnChange }: Props) => {
+const HeaderCounselor = ({ handleOnChange, onDateChange }: Props) => {
+  const [calendar, setCalendar] = useState(false);
+  const handleClick = () => {
+    setCalendar(!calendar);
+  };
+
   return (
     <div className="flex justify-between items-center ">
       <div className="flex items-center w-64 h-12 px-4 bg-leaf border rounded-lg">
@@ -18,7 +26,22 @@ const HeaderCounselor = ({ handleOnChange }: Props) => {
         />
       </div>
       <div>
-        <FaCalendarAlt size={24} className="text-leaf md:text-2xl" />
+        <div className="relative">
+          {!calendar && (
+            <FaCalendarAlt
+              size={24}
+              onClick={handleClick}
+              className="text-leaf md:text-2xl cursor-pointer"
+            />
+          )}
+          {calendar && (
+            <DatePicker
+              label="Select Date"
+              type="datetime"
+              onChange={onDateChange}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

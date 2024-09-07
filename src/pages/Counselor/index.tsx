@@ -7,21 +7,23 @@ import {
 import { Navigation } from "@/components/common";
 import { useRouter } from "next/router";
 import { AppContext } from "@/providers/AppContext";
-import { CounselorData, UserContextType } from "@/providers/AppContext";
+import { CounselorData } from "@/providers/AppContext";
+import { API_BASE } from "@/lib/projectApi";
+import { changeTimeZone } from "@/utils/dateFormated";
+import { useAllSchedule } from "@/hooks/counselor/scheduleHooks";
 
 const ITEMS_PER_PAGE = 12;
 
 const Counselor = () => {
   const router = useRouter();
   const context = useContext(AppContext);
-  const getCounselor = context.currentCounselor;
   const setCounselor = context.setCurrentCounselor;
 
-  // console.log(getCounselor);
-
+  const { listSchedules } = useAllSchedule();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchField, setSearchField] = useState<string>("");
   const [counselors, setCounselors] = useState<CounselorData[]>([]);
+  const [dateFilter, setDateFilter] = useState<any>(null);
   const [filteredCounselors, setFilteredCounselors] = useState<CounselorData[]>(
     []
   );
@@ -29,10 +31,11 @@ const Counselor = () => {
   useEffect(() => {
     const fetchCounselorData = async () => {
       try {
-        const response = await fetch("/data/counselorData.json"); // Change this to API endpoint
+        const response = await fetch(`${API_BASE}/counselors`); // Change this to API endpoint
         const data = await response.json();
-        setCounselors(data.counselors);
-        setFilteredCounselors(data.counselors);
+        console.log("counselor data", data);
+        setCounselors(data.data);
+        setFilteredCounselors(data.data);
       } catch (error) {
         console.error("Failed to fetch counselor data", error);
       }
@@ -43,18 +46,27 @@ const Counselor = () => {
 
   useEffect(() => {
     const filtered = counselors.filter((counselor) =>
-      counselor.specialist.toLowerCase().includes(searchField.toLowerCase())
+      counselor.first_name.toLowerCase().includes(searchField.toLowerCase())
     );
-    setFilteredCounselors(filtered);
+
+    const scheduledCounselorIds = listSchedules
+      .filter((schedule: any) => schedule.from === dateFilter)
+      .map((schedule: any) => schedule.account_id);
+
+    const availableCounselors = counselors.filter(
+      (counselor: any) => !scheduledCounselorIds.includes(counselor.account_id)
+    );
+
+    setFilteredCounselors(availableCounselors);
+    // setFilteredCounselors(filtered);
     setCurrentPage(1);
-  }, [searchField, counselors]);
+  }, [searchField, counselors, dateFilter]);
 
   const handleClick = (id: number, counselor: CounselorData) => {
     router.push(`/Counselor/${id}`);
     setCounselor(counselor);
   };
 
-  // Pagination calculations
   const totalCounselors = filteredCounselors.length;
   const totalPages = Math.ceil(totalCounselors / ITEMS_PER_PAGE);
 
@@ -62,42 +74,36 @@ const Counselor = () => {
     setCurrentPage(page);
   };
 
-  const displayedCounselors = filteredCounselors.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
-  );
+  const displayedCounselors = Array.isArray(filteredCounselors)
+    ? filteredCounselors.slice(
+        (currentPage - 1) * ITEMS_PER_PAGE,
+        currentPage * ITEMS_PER_PAGE
+      )
+    : [];
 
   const handleOnChange = (event: { target: { value: string } }) => {
     setSearchField(event.target.value);
   };
 
-  const avgRate = (reviews: any) => {
-    const ratingCollection: any[] = [];
-    reviews.map((review: any) => {
-      const score = review["rating"];
-      ratingCollection.push(score);
-    });
-
-    if (ratingCollection.length === 0) {
-      return 0;
-    }
-    const total = ratingCollection.reduce((acc, nilai) => acc + nilai, 0);
-
-    const average = total / ratingCollection.length;
-    return Math.floor(average);
+  const handleDateChange = (newDate: string) => {
+    const dateInWIB = changeTimeZone(newDate, "WIB");
+    setDateFilter(dateInWIB);
   };
 
   return (
     <>
       <Navigation />
       <div className="py-5 px-8 md:px-12 lg:px-32 md:py-5 min-h-screen">
-        <HeaderCounselor handleOnChange={handleOnChange} />
+        <HeaderCounselor
+          handleOnChange={handleOnChange}
+          onDateChange={handleDateChange}
+        />
         <div className="w-full py-5 grid md:grid-cols-2 lg:grid-cols-3 gap-y-5">
-          {displayedCounselors.map((counselor) => (
+          {displayedCounselors.map((counselor, index) => (
             <CounselorCard
-              key={counselor.counselor_id}
+              key={index}
               counselor={counselor}
-              handleClick={() => handleClick(counselor.counselor_id, counselor)}
+              handleClick={() => handleClick(counselor.account_id, counselor)}
             />
           ))}
         </div>

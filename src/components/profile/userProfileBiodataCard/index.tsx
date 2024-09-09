@@ -3,17 +3,14 @@ import axios from "axios";
 import { API_BASE } from "@/lib/projectApi";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import profileImage from "@/assets/img/user-profile.png";
 import EditModal from "../editModal";
 import { AppContext } from "@/providers/AppContext";
-
 
 const UserProfileBiodataCard = () => {
   const [userData, setUserData] = useState<any>(null);
   const { currentUser, setCurrentUser } = useContext(AppContext);
   const [isModalVisible, setModalVisible] = useState(false);
   const router = useRouter();
-  
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -33,7 +30,6 @@ const UserProfileBiodataCard = () => {
         const moodResponse = await axios.get(
           `${API_BASE}/diary/${currentUser?.account_id}/moodtracker`
         );
-        
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -80,15 +76,22 @@ const UserProfileBiodataCard = () => {
     router.push("/");
   };
 
-  
-
+  const userImg =
+    userData.genderName == "female" ? "/user-female.png" : "/user-male.png";
+  // Gender == "rather not say" uses male image by default
 
   return (
     <>
       <div className="bg-teal-900 lg:w-full h-fit pb-20 rounded-md p-3 my-3 flex flex-col">
-        <div className="flex flex-col items-center">
-          <div className="rounded-full size-20 lg:size-40 bg-lightGreen flex items-center border-4 border-lightGreen">
-            <Image src={profileImage} alt="profile image" />
+        <div className="flex flex-col items-center justify-center">
+          <div className="rounded-full size-20 lg:size-40 bg-lightGreen flex flex-col items-center justify-center border-4 border-lightGreen">
+            <Image
+              src={userImg}
+              alt="profile image"
+              width={100}
+              height={100}
+              className="rounded-full"
+            />
           </div>
         </div>
         {/* Biodata */}
@@ -152,8 +155,6 @@ const UserProfileBiodataCard = () => {
           />
         )}
       </div>
-      
-      
     </>
   );
 };

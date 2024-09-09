@@ -33,7 +33,6 @@ const Counselor = () => {
       try {
         const response = await fetch(`${API_BASE}/counselors`); // Change this to API endpoint
         const data = await response.json();
-        console.log("counselor data", data);
         setCounselors(data.data);
         setFilteredCounselors(data.data);
       } catch (error) {

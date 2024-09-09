@@ -76,7 +76,6 @@ const ListSchedule = ({ counselorId }: any) => {
     const startTime = timeRange?.split(" - ")[0];
     const endTime = timeRange?.split(" - ")[1];
     if (startTime) {
-      console.log(startTime, endTime);
       setIsBooked((prev: any) => {
         const newState = { ...prev };
         for (const key in newState) {
@@ -91,7 +90,6 @@ const ListSchedule = ({ counselorId }: any) => {
         startFrom: dateManipulation(`${currentDate} ${startTime}`),
         endTo: dateManipulation(`${currentDate} ${endTime}`),
       });
-      console.log(dateBooked);
     }
   };
 

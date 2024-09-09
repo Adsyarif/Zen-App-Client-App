@@ -34,9 +34,9 @@ const CounselorInformation = ({ counselor, review }: any) => {
           <div className="text-lg ">{counselor.practice_license_status}</div>
         </div>
       </div>
-      <button className="rounded-lg lg:px-5 md:px-5 bg-leaf text-mocca self-start h-12">
+      {/* <button className="rounded-lg lg:px-5 md:px-5 bg-leaf text-mocca self-start h-12">
         Book Now
-      </button>
+      </button> */}
     </div>
   );
 };

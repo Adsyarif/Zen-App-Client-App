@@ -29,10 +29,10 @@ export function useGetUserDetailPublic() {
 
         const detailUser = response.data.data;
 
-        // if (!detailUser.user_details[0].user_name) {
-        //   console.error("User has no user_name, mismatch user role");
-        //   return null;
-        // }
+        if (!detailUser.user_details[0].user_name) {
+          console.error("User has no user_name, mismatch user role");
+          return null;
+        }
 
         setUsers(detailUser);
 
@@ -55,9 +55,6 @@ export function useGetUserDetailPublic() {
     phone_number: users?.user_details[0].phone_number,
     gender_name: users?.user_details[0].gender_name,
   };
-
-  // console.log(users);
-  // console.log(user);
 
   return {
     users,

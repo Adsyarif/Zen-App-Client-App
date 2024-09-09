@@ -23,7 +23,7 @@ export function useGetUserDetailDiaryShare() {
             code: number;
             status: string;
           };
-        }> = await axios.get(`${API_BASE}/diary/${id}`);
+        }> = await axios.get(`${API_BASE}/diary`);
 
         const listDiary = response.data.data;
         if (Array.isArray(listDiary)) {
@@ -41,7 +41,11 @@ export function useGetUserDetailDiaryShare() {
   }, [id]);
 
   // Filter public diary/ share diary
-  const diaryByUserId = diary.filter((diary) => diary.share === true);
+  const diaryShared = diary.filter((diary) => diary.share === true);
+  console.log(diaryShared);
+
+  const diaryByUserId = diaryShared.filter((diary) => diary.account_id === id);
+  console.log(diaryByUserId);
 
   return {
     isLoading,

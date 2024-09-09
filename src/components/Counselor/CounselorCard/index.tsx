@@ -50,7 +50,7 @@ const CounselorCard = ({ counselor, handleClick }: any) => {
       try {
         const response = await fetch(
           `${API_BASE}/list_schedule/${counselor.counselor_id}`
-        ); // Change this to API endpoint
+        );
         const data = await response.json();
         setCurrentCounselor(data.data);
       } catch (error) {

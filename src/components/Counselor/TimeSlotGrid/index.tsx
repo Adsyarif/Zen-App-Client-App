@@ -19,7 +19,7 @@ const TimeSlotGrid: React.FC = () => {
           const response = await axios.get(
             `${API_BASE}/list_schedule/${currentCounselor.account_id}`
           );
-          console.log(response);
+
           const data = response.data.data;
           if (Array.isArray(data)) {
             const filteredSchedules = data.filter(
@@ -27,7 +27,7 @@ const TimeSlotGrid: React.FC = () => {
                 schedule.booked_by_account_id === null &&
                 schedule.status === null
             );
-            console.log("filter", filteredSchedules);
+
             setSchedulesAvailable(filteredSchedules);
           }
         } catch (error) {

@@ -115,7 +115,7 @@ const CounselorProfileSchedule: React.FC<CounselorProfileScheduleProps> = ({
                       {item.booked_by_user?.last_name}
                     </h6>
                     <Link
-                      href="/Counselor/Diary"
+                      href={`/Counselor/Diary?userId=${item.booked_by_account_id}`}
                       className="text-center text-[#fafaf4] bg-teal-600 hover:bg-teal-700 rounded-full p-1"
                     >
                       Diary

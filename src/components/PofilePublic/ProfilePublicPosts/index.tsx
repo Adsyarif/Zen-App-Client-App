@@ -18,9 +18,7 @@ export function ProfilePublicPosts() {
   const { sortedPosts, postsIsLoading } = useGetUserDetailPosts();
 
   const userImgSrc =
-    user.gender_name == "female"
-      ? "/user-image-public-female.png"
-      : "/user-image-public-male.png";
+    user.gender_name == "female" ? "/user-female.png" : "/user-male.png";
 
   if (postsIsLoading) {
     return <div>Loading ...</div>;

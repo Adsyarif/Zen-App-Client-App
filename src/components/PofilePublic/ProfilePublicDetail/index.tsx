@@ -25,7 +25,7 @@ export const DataPair = (props: DataPairProps) => {
 export function ProfilePublicDetail() {
   const { user, isLoading, isError } = useGetUserDetailPublic();
 
-  if (!user) {
+  if (!user.user_name) {
     return (
       <>
         <Custom404Component message="User Not Found" />
@@ -42,9 +42,7 @@ export function ProfilePublicDetail() {
   }
 
   const userImgSrc =
-    user.gender_name == "female"
-      ? "/user-image-public-female.png"
-      : "/user-image-public-male.png";
+    user.gender_name == "female" ? "/user-female.png" : "/user-male.png";
 
   return (
     <>

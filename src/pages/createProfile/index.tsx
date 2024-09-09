@@ -28,9 +28,11 @@ export default function CompleteProfilePage() {
     fetchGenders();
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setUserData(prevData => ({
+    setUserData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -40,8 +42,11 @@ export default function CompleteProfilePage() {
     e.preventDefault();
     console.log("Data to be submitted:", userData);
     try {
-      await axios.post(`${API_BASE}/user_details/${currentUser?.account_id}`, userData);
-      router.push('/profilePage');  
+      await axios.post(
+        `${API_BASE}/user_details/${currentUser?.account_id}`,
+        userData
+      );
+      router.push("/Profile");
     } catch (error) {
       console.error("Error saving profile data:", error);
     }
@@ -50,9 +55,10 @@ export default function CompleteProfilePage() {
   return (
     <div className="mb-10  w-full flex justify-center items-center ">
       <div className="flex flex-col items-center rounded-2xl p-4 bg-teal-900 align-middle mt-10 lg:mx-24 w-full lg:w-1/2 md:w-1/2 mx-12">
-        <h1 className="text-2xl font-semibold mb-4 text-white">Complete Your Profile</h1>
+        <h1 className="text-2xl font-semibold mb-4 text-white">
+          Complete Your Profile
+        </h1>
         <form onSubmit={handleSubmit} className="flex flex-col w-full ">
-
           <div className="">
             <p className="text-white lg:text-xl font-semibold">First Name</p>
             <input
@@ -98,7 +104,9 @@ export default function CompleteProfilePage() {
               onChange={handleChange}
               className="capitalize w-full p-2 border border-gray-300 rounded mb-4"
             >
-              <option value="" disabled>Select Gender</option>
+              <option value="" disabled>
+                Select Gender
+              </option>
               {genderCategories.map((gender: any) => (
                 <option key={gender.gender_id} value={gender.gender_id}>
                   {gender.name}
@@ -119,7 +127,12 @@ export default function CompleteProfilePage() {
             />
           </div>
 
-          <button type="submit" className="bg-teal-600 rounded-lg p-2 text-white">Save</button>
+          <button
+            type="submit"
+            className="bg-teal-600 rounded-lg p-2 text-white"
+          >
+            Save
+          </button>
         </form>
       </div>
     </div>

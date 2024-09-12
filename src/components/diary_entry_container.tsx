@@ -8,6 +8,8 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 import { date } from "yup";
+import { DiaryMoodColor } from "./DiaryMoodColor";
+import Link from "next/link";
 
 interface DiaryEntryContainerProps {
   selectedDate: Dayjs | null;
@@ -54,7 +56,10 @@ const DiaryEntryContainer: React.FC<DiaryEntryContainerProps> = ({
     : "No date selected";
 
   return (
-    <div className="bg-green-900 text-lg font-semibold text-center items-center rounded-lg p-6 h-screen">
+    <div
+      id="diary-textarea"
+      className="bg-green-900 text-lg font-semibold text-center items-center rounded-lg p-6 h-screen"
+    >
       <p className="text-white text-2xl mb-6">
         {selectMoodStatus ? "Edit Diary Entry" : "New Diary Entry"}
       </p>
@@ -68,7 +73,10 @@ const DiaryEntryContainer: React.FC<DiaryEntryContainerProps> = ({
           />
           {showDatePicker && (
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <MobileDatePicker value={selectedDate} onChange={handelDateChange} />
+              <MobileDatePicker
+                value={selectedDate}
+                onChange={handelDateChange}
+              />
             </LocalizationProvider>
           )}
         </div>
@@ -79,7 +87,10 @@ const DiaryEntryContainer: React.FC<DiaryEntryContainerProps> = ({
                 Date: {formattedDate}
               </p>
               <p className="text-green-900 text-left font-bold py-2">
-                My current mood: {moodText || "Select your mood"}
+                My current mood:{" "}
+                <Link href={"#mood-picker"}>
+                  <DiaryMoodColor mood={moodText || "Select your mood"} />
+                </Link>
               </p>
             </div>
             <div className=" flex items-center">
@@ -105,6 +116,7 @@ const DiaryEntryContainer: React.FC<DiaryEntryContainerProps> = ({
             }}
           />
           <textarea
+            // id="diary-textarea"
             className="w-full h-96 p-2 border-none outline-none bg-transparent resize-none text-black relative z-10 placeholder:text-center placeholder:text-slate-700"
             placeholder="It is still empty here"
             value={diaryText}

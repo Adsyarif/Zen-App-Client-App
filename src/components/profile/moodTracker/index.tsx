@@ -106,7 +106,7 @@ const MoodTracker = () => {
         <Pie data={data} options={options} />
       </div>
       {getMoodMessage() && (
-        <p className="text-center text-white font-medium text-lg mt-4">
+        <p className="text-center text-white font-medium text-lg mt-4 mb-4">
           {getMoodMessage()}
         </p>
       )}

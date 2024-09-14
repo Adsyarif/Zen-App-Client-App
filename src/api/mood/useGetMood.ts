@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { API_BASE } from "@/lib/projectApi";
-import { MoodStatusID } from "../diary/diaryProps";
+import { MoodStatusID } from "./diaryProp";
 
 export function useGetMood() {
   const [moodList, setMoodList] = useState<MoodStatusID[]>([]);

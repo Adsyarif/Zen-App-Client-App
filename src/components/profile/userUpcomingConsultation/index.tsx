@@ -5,6 +5,7 @@ import axios from "axios";
 import { API_BASE } from "@/lib/projectApi";
 import Button from "@/common/button/button";
 import Image from "next/image";
+import Link from "next/link";
 
 const dateFormat: Intl.DateTimeFormatOptions = {
   weekday: "short",
@@ -108,7 +109,7 @@ const UserUpcomingConsultation: React.FC = () => {
           schedules.map((schedule_item) => (
             <div
               key={schedule_item.schedule_id}
-              className="flex justify-between items-center gap-5 bg-[#fafaf4] p-4 rounded-lg mb-4 shadow-md"
+              className="md:flex justify-between items-center gap-5 bg-[#fafaf4] p-4 rounded-lg mb-4 shadow-md"
             >
               <div className="flex flex-col">
                 <div className="flex items-center">
@@ -125,12 +126,12 @@ const UserUpcomingConsultation: React.FC = () => {
                   Psychologist: {schedule_item.counselor_detail?.first_name}{" "}
                   {schedule_item.counselor_detail?.last_name}
                 </h6>
-                <a
-                  href="#"
+                <Link
+                  href={`/Counselor/Diary?userId=${currentUser?.account_id}`}
                   className="text-center text-[#fafaf4] bg-teal-600 hover:bg-teal-700 rounded-full py-2 px-4 mt-2 inline-block w-48"
                 >
                   Diary you shared
-                </a>
+                </Link>
                 <div className="my-5">
                   <h2 className="font-semibold">Consultation Details:</h2>
                   <p>

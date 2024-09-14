@@ -2,9 +2,9 @@ import { DiaryMoodColor } from "@/components/DiaryMoodColor";
 import { Navigation } from "@/components/common";
 
 import { useRouter } from "next/router";
-import { useGetDiary } from "@/api/diary/useGetDiary";
 import { useGetMood } from "@/api/mood/useGetMood";
 import { MoodFilter } from "@/components/DiaryMoodFilter";
+import { useGetUserDetailDiaryShare } from "@/api/users/userDetailDiaryShare/useGetUserDetailDiaryShare";
 
 export default function DiaryPage() {
   const route = useRouter();
@@ -16,14 +16,11 @@ export default function DiaryPage() {
     day: "numeric",
   };
 
-  const { sharedDiary, isLoading, isError } = useGetDiary();
+  const { diary, diaryByUserId, isLoading, isError } =
+    useGetUserDetailDiaryShare();
   const { moodList } = useGetMood();
 
   const { mood } = route.query;
-
-  const filteredDiaryMood = mood
-    ? sharedDiary.filter((diary) => diary.value === mood)
-    : sharedDiary;
 
   if (isLoading) {
     return <div className="text-white">Loading ...</div>;
@@ -32,6 +29,18 @@ export default function DiaryPage() {
   if (isError) {
     return <div>Error fetching data</div>;
   }
+
+  if (!diary) {
+    return (
+      <>
+        <div>Diary not found</div>
+      </>
+    );
+  }
+
+  const filteredDiaryMood = mood
+    ? diaryByUserId.filter((diary) => diary.value === mood)
+    : diaryByUserId;
 
   const moods = moodList.map((item) => item.value);
   console.log(moods);
@@ -82,7 +91,7 @@ export default function DiaryPage() {
                 >
                   <p className="text-right text-sm">Written by:</p>
                   <p className="text-right text-sm text-blue-800">
-                    - {item.email}
+                    - user{item.account_id}
                   </p>
                 </div>
               </div>

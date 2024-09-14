@@ -1,106 +1,119 @@
+import { useState, useEffect, useContext } from 'react';
+import { API_BASE } from "@/lib/projectApi";
+import { AppContext } from "@/providers/AppContext";
+import { Navigation } from "@/components/common";
 import Image from "next/image";
 import React from 'react';
 import FeedbackModal from '@/components/FeedbackModal';
-import { useEffect, useState } from "react";
-import { Navigation } from "@/components/common";
+import axios from 'axios';
+import ReactStars from "react-stars";
+
+
+export interface Feedback {
+  feedback_id: number;
+  account_id: number;
+  username: string;
+  description: string;
+  rating: number;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string;
+}
 
 export default function HomePage () {
-  const [isModalVisible, setModalVisible] = useState(false);
-
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [visibleCards, setVisibleCards] = useState(3);
-
-  const items = [
-    {
-      id: 1,
-      name: "John Doe",
-      time: "8 Agustus 2024",
-      src: "https://randomuser.me/api/portraits/men/1.jpg",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.",
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      time: "8 Agustus 2024",
-      src: "https://randomuser.me/api/portraits/women/2.jpg",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.",
-    },
-    {
-      id: 3,
-      name: "Michael Johnson",
-      time: "8 Agustus 2024",
-      src: "https://randomuser.me/api/portraits/men/3.jpg",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.",
-    },
-    {
-      id: 4,
-      name: "Emily Davis",
-      time: "8 Agustus 2024",
-      src: "https://randomuser.me/api/portraits/women/4.jpg",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.",
-    },
-    {
-      id: 5,
-      name: "William Brown",
-      time: "8 Agustus 2024",
-      src: "https://randomuser.me/api/portraits/men/5.jpg",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.",
-    },
-    {
-      id: 6,
-      name: "Sophia Wilson",
-      time: "8 Agustus 2024",
-      src: "https://randomuser.me/api/portraits/women/6.jpg",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.",
-    },
-    {
-      id: 7,
-      name: "Sophia Wilson",
-      time: "8 Agustus 2024",
-      src: "https://randomuser.me/api/portraits/women/6.jpg",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.",
-    },
-    {
-      id: 8,
-      name: "Sophia Wilson",
-      time: "8 Agustus 2024",
-      src: "https://randomuser.me/api/portraits/women/6.jpg",
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure.",
-    },
-  ];
-
-  const updateVisibleCards = () => {
-    if (window.innerWidth < 768) {
-      setVisibleCards(1);
-    } else if (window.innerWidth < 1024) {
-      setVisibleCards(2);
-    } else if (window.innerWidth < 1280) {
-      setVisibleCards(3);
-    } else {
-      setVisibleCards(4);
-    }
-  };
-  
+  const { currentUser } = useContext(AppContext);
+  const accountId = currentUser?.account_id;
+  const username = currentUser?.username;
+  const [feedback, setFeedback] = useState<Feedback[]>([]);
+  const [isModalVisible, setModalVisible] = useState<boolean>(false);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [rating, setRating] = React.useState(0);
+  const [description, setDescription] = React.useState("");
+  const visibleCards = 4; 
 
   useEffect(() => {
-    updateVisibleCards();
-    window.addEventListener("resize", updateVisibleCards);
-    return () => window.removeEventListener("resize", updateVisibleCards);
+    fetchFeedback();
+  }, []);
+
+  const handleSubmitReview = async () => {
+
+    // if (!currentUser) {
+    //   alert("User is not logged in");
+    //   return;
+    // }
+
+    try {
+      await axios.post(
+        `${API_BASE}/feedback/${accountId}/create`,
+        {
+          username,
+          description,
+          rating,
+        }
+      );
+      alert("Review submitted successfully");
+      handleClose();
+      setInputValue("");
+      setRating(0);
+
+      await fetchFeedback();
+    } catch (error) {
+      console.error("Error posting review:", error);
+      alert("There was an error posting your review. Please try again.");
+    }
+  };
+
+  useEffect(() => {
+    fetchFeedback();
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex < items.length - visibleCards ? prevIndex + 1 : 0
-      );
-    }, 3000);
+    if (feedback.length > visibleCards) {
+      const interval = setInterval(() => {
+        setCurrentIndex((prevIndex) =>
+          prevIndex < feedback.length - visibleCards ? prevIndex + 1 : 0
+        );
+      }, 3000);
 
-    return () => clearInterval(interval);
-  }, [currentIndex, visibleCards, items.length]);
+      return () => clearInterval(interval);
+    }
+  }, [feedback.length]);
+
+  const fetchFeedback = async () => {
+    try {
+      const response = await axios.get(`${API_BASE}/feedback`);
+      console.log("Feedback data fetched:", response.data.data);
+      setFeedback(response.data.data as Feedback[]);
+    } catch (error) {
+      console.error("Error fetching feedback:", error);
+    }
+  };
+
+  // const handleAddFeedback = async (newFeedback: Omit<Feedback, 'feedback_id' | 'created_at' | 'updated_at' | 'deleted_at'>) => {
+  //   try {
+  //     console.log("Sending feedback:", { ...newFeedback, username }); 
+  //     await axios.post(`${API_BASE}/feedback/${accountId}/create`, { ...newFeedback, username });
+  //     fetchFeedback();
+  //   } catch (error) {
+  //     console.error("Error adding feedback:", error);
+  //   }
+  //   setModalVisible(false); 
+  // };
+
+  const handleAddFeedback = async (feedback: { username: string; description: string; rating: number }) => {
+    try {
+      console.log("Sending feedback:", { ...feedback, username }); 
+      await axios.post(`${API_BASE}/feedback/${accountId}/create`, { ...feedback, username });
+      fetchFeedback();
+    } catch (error) {
+      console.error("Error adding feedback:", error);
+    }
+    setModalVisible(false); 
+  };
+  
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   return (
     <>
@@ -391,96 +404,121 @@ export default function HomePage () {
       </div>
 
 
-      <div className="flex justify-start w-full">
-        <div className="text-2xl font-bold md:text-3xl">Feedback</div>
-      </div>
-      <div className="relative mx-auto text-center p-4">
-        <div className="relative w-full overflow-hidden">
-          <div
-            className="flex transition-transform duration-500 ease-in-out"
-            style={{
-              transform: `translateX(-${(currentIndex * 100) / visibleCards}%)`,
-            }}
-          >
-            {items.map((item) => (
+      <div>
+          <div className="text-2xl font-bold md:text-3xl">Feedback</div>
+          <div className="relative mx-auto text-center p-4">
+            <div className="relative w-full overflow-hidden">
               <div
-                key={item.id}
-                className="flex-none px-4"
-                style={{ flexBasis: `${100 / visibleCards}%` }}
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{
+                  transform: `translateX(-${(currentIndex * 100) / visibleCards}%)`,
+                }}
               >
-                <div className="bg-white p-6 shadow-lg rounded-lg text-left">
-                  <p className="text-gray-700">{item.text}</p>
-                  <div className="flex items-center mb-4 my-2">
-                    <img
-                      className="w-10 h-10 rounded-full mr-4"
-                      src={item.src}
-                      alt={item.name}
-                    />
-                    <div>
-                      <p className="font-semibold text-black">{item.name}</p>
-                      <p className="text-sm text-gray-500">{item.time}</p>
+                {feedback.map((item) => (
+                  <div
+                    key={item.feedback_id}
+                    className="flex-none px-4"
+                    style={{ flexBasis: `${100 / visibleCards}%` }}
+                  >
+                    <div className="bg-white p-6 shadow-lg rounded-lg text-left">
+                      <p className="text-gray-700">{item.description}</p>
+                      <div className="flex items-center mb-4 my-2">
+                        <img
+                          className="w-10 h-10 rounded-full mr-4"
+                          src="https://randomuser.me/api/portraits/lego/1.jpg" 
+                          alt={item.username}
+                        />
+                        <div>
+                          <p className="font-semibold text-black">{item.username}</p>
+                          <p className="text-sm text-gray-500">{item.created_at}</p>
+                          <ReactStars
+                            count={5}
+                            size={20}
+                            value={item.rating}
+                            edit={false}
+                            color2={"#ffd700"}
+                          />
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-      </div>
 
       <div className="gap-6 pb-4">
         <div className="text-2xl md:text-3xl font-bold flex justify-center">
-          You can also leave a feedback for us by filling the form
+          You can also leave feedback for us by filling out the form
         </div>
-        
+
         <div className="flex flex-col-reverse md:flex-row py-6">
           {/* Text section */}
           <div className="flex flex-col justify-center w-full md:w-1/2 order-1 md:order-2 mt-4 md:mt-0">
             <div className="text-lg text-justify">
-              feedback yang kamu berikan sangat berarti bagi kami untuk menganalisa
-              kekurangan maupun kelebihan sehingga kami bisa semakin berkembang dari
-              feedback yang telah anda kirimkan
+              Your feedback is very important to us for analyzing our strengths and weaknesses, so we can continue to improve based on your comments.
             </div>
             <div className="flex justify-center">
               <button
                 className="rounded-md bg-leaf p-1 px-6 my-3 text-white font-medium"
                 onClick={toggleModal}
               >
-                leave a feedback
+                Leave Feedback
               </button>
             </div>
-            <FeedbackModal isVisible={isModalVisible} onClose={toggleModal} />
+            <FeedbackModal 
+              isVisible={isModalVisible} 
+              onClose={toggleModal} 
+              onSubmit={handleAddFeedback} 
+            />
+
+            {/* <FeedbackForm 
+              isVisible={isModalVisible} 
+              onClose={toggleModal} 
+              onSubmit={handleAddFeedback} 
+            /> */}
           </div>
-          
+
           {/* Image section */}
           <div className="flex w-full md:w-1/2 gap-2 order-2 md:order-1">
-            {/* This image is shown on mobile */}
-            <div className="relative block md:hidden">
+            {/* Image for mobile */}
+            <div className="relative block md:hidden z-10">
               <Image
                 src="/feedback.png"
                 width={800}
                 height={800}
-                alt="Profile picture"
-                className=""
+                alt="Feedback"
               />
             </div>
-            {/* This image is shown on desktop */}
+
+            {/* Image for desktop */}
             <div className="relative hidden md:block">
               <Image
                 src="/feedback.png"
                 width={800}
                 height={800}
-                alt="Profile picture"
-                className=""
+                alt="Feedback"
               />
             </div>
           </div>
         </div>
       </div>
-      </div>
+    </div>
+    </div>
     </>
   );
   
 }
 
+function handleClose() {
+  throw new Error('Function not implemented.');
+}
+
+function setInputValue(arg0: string) {
+  throw new Error('Function not implemented.');
+}
+
+function fetchReviewCounselor() {
+  throw new Error('Function not implemented.');
+}
 

@@ -145,11 +145,12 @@ const DiaryIDPage = () => {
             diaryText={diaryText}
             setMoodText={setMoodText}
             setDiaryText={setDiaryText}
+            setSelectedDate={setSelectedDate}
             onSave={createDiaryEntry}
             onEdit={editDiaryEntry}
-            onDelete={deleteDiaryEntry} 
+            onDelete={deleteDiaryEntry}
             diaryId={null} 
-          />
+            />
         </div>
         <div className="flex flex-col gap-10">
           <div className="hidden md:block">

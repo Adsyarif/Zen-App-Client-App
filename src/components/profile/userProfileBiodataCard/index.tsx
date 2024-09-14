@@ -3,17 +3,14 @@ import axios from "axios";
 import { API_BASE } from "@/lib/projectApi";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import profileImage from "@/assets/img/user-profile.png";
 import EditModal from "../editModal";
 import { AppContext } from "@/providers/AppContext";
-
 
 const UserProfileBiodataCard = () => {
   const [userData, setUserData] = useState<any>(null);
   const { currentUser, setCurrentUser } = useContext(AppContext);
   const [isModalVisible, setModalVisible] = useState(false);
   const router = useRouter();
-  
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -33,7 +30,6 @@ const UserProfileBiodataCard = () => {
         const moodResponse = await axios.get(
           `${API_BASE}/diary/${currentUser?.account_id}/moodtracker`
         );
-        
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -80,65 +76,60 @@ const UserProfileBiodataCard = () => {
     router.push("/");
   };
 
-  
-
+  const userImg =
+    userData.genderName == "female" ? "/user-female.png" : "/user-male.png";
+  // Gender == "rather not say" uses male image by default
 
   return (
     <>
       <div className="bg-teal-900 lg:w-full h-fit pb-20 rounded-md p-3 my-3 flex flex-col">
-        <div className="flex flex-col items-center">
-          <div className="rounded-full size-20 bg-lightGreen flex items-center border-4 border-lightGreen">
-            <Image src={profileImage} alt="profile image" />
+        <div className="flex flex-col items-center justify-center">
+          <div className="rounded-full size-20 lg:size-40 bg-lightGreen flex flex-col items-center justify-center border-4 border-lightGreen">
+            <Image
+              src={userImg}
+              alt="profile image"
+              width={100}
+              height={100}
+              className="rounded-full"
+            />
           </div>
         </div>
         {/* Biodata */}
         <div>
-          <div className="bg-lightGreen text-white rounded-md p-1 px-3 my-2 flex w-full justify-between gap-3">
-            <div className="flex items-start justify-start w-2/5">
-              <p>First Name</p>
-            </div>
-            <div className="flex justify-start items-start w-3/5">
-              <p>{userData.first_name}</p>
+          <div className="bg-[#C1D8C3] text-teal-900 rounded-md p-1 px-3 my-2 w-full gap-3">
+            <div className="flex justify-between">
+              <p className="w-2/5">First Name:</p>
+              <p className="w-3/5 text-right">{userData.first_name}</p>
             </div>
           </div>
-          <div className="bg-lightGreen text-white rounded-md p-1 px-3 my-2 flex w-full justify-between gap-3">
-            <div className="flex items-start justify-start w-2/5">
-              <p>Last Name</p>
-            </div>
-            <div className="flex justify-start items-start w-3/5">
-              <p>{userData.last_name}</p>
+          <div className="bg-[#C1D8C3] text-teal-900 rounded-md p-1 px-3 my-2 w-full gap-3">
+            <div className="flex items-start justify-start">
+              <p className="w-2/5">Last Name:</p>
+              <p className="w-3/5 text-right">{userData.last_name}</p>
             </div>
           </div>
-          <div className="bg-lightGreen text-white rounded-md p-1 px-3 my-2 flex w-full justify-between gap-3">
-            <div className="flex items-start justify-start w-2/5">
-              <p>Username</p>
-            </div>
-            <div className="flex justify-start items-start w-3/5">
-              <p>{userData.user_name}</p>
+          <div className="bg-[#C1D8C3] text-teal-900 rounded-md p-1 px-3 my-2 w-full gap-3">
+            <div className="flex items-start justify-start">
+              <p className="w-2/5">Username:</p>
+              <p className="w-3/5 text-right">{userData.user_name}</p>
             </div>
           </div>
-          <div className="bg-lightGreen text-white rounded-md p-1 px-3 my-2 flex w-full justify-between gap-3">
-            <div className="flex items-start justify-start w-2/5">
-              <p>Phone number</p>
-            </div>
-            <div className="flex justify-start items-start w-3/5">
-              <p>{userData.phone_number}</p>
+          <div className="bg-[#C1D8C3] text-teal-900 rounded-md p-1 px-3 my-2 w-full gap-3">
+            <div className="flex items-start justify-start">
+              <p className="w-2/5">Phone number:</p>
+              <p className="w-3/5 text-right">{userData.phone_number}</p>
             </div>
           </div>
-          <div className="bg-lightGreen text-white rounded-md p-1 px-3 my-2 flex w-full justify-between gap-3">
-            <div className="flex items-start justify-start w-2/5">
-              <p>Email</p>
-            </div>
-            <div className="flex justify-start items-start w-3/5">
-              <p>{userData.email}</p>
+          <div className="bg-[#C1D8C3] text-teal-900 rounded-md p-1 px-3 my-2 w-full">
+            <div className="flex justify-between">
+              <p className="w-2/5">Email:</p>
+              <p className="w-3/5 text-sm text-right">{userData.email}</p>
             </div>
           </div>
-          <div className="bg-lightGreen text-white rounded-md p-1 px-3 my-2 flex w-full justify-between gap-3">
-            <div className="flex items-start justify-start w-2/5">
-              <p>Gender</p>
-            </div>
-            <div className="flex justify-start items-start w-3/5">
-              <p>{userData.gender_name}</p>
+          <div className="bg-[#C1D8C3] text-teal-900 rounded-md p-1 px-3 my-2 w-full">
+            <div className="flex items-start justify-start">
+              <p className="w-2/5">Gender:</p>
+              <p className="w-3/5 text-right">{userData.gender_name}</p>
             </div>
           </div>
         </div>
@@ -164,8 +155,6 @@ const UserProfileBiodataCard = () => {
           />
         )}
       </div>
-      
-      
     </>
   );
 };

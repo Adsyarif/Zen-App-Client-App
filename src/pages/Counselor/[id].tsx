@@ -13,6 +13,7 @@ import { AppContext, CounselorData, Review } from "@/providers/AppContext";
 import ReactStars from "react-stars";
 import axios, { AxiosResponse } from "axios";
 import { API_BASE } from "@/lib/projectApi";
+import { ListSchedule } from "@/components/Counselor";
 
 const style = {
   position: "absolute" as "absolute",
@@ -56,8 +57,8 @@ export default function Review_Counseling() {
       }> = await axios.get(
         `${API_BASE}/review_counselor/${selectedCounselor.counselor_id}`
       );
+
       const listReview = response.data.data;
-      console.log("list review", listReview);
 
       if (Array.isArray(listReview)) {
         const sortedReview = listReview.sort(
@@ -116,7 +117,7 @@ export default function Review_Counseling() {
       <div className="bg-[#FAF6E3] md:px-32 py-12 min-h-screen">
         {selectedCounselor ? (
           <>
-            <CounselorDetail counselor={selectedCounselor} />
+            <CounselorDetail counselor={selectedCounselor} review={review} />
             <div className="flex justify-between">
               <h1 className="px-8 text-4xl text-black font-bold py-8">
                 Reviews

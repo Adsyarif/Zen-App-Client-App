@@ -109,8 +109,8 @@ The Zenzone App is developed to address mental health issues by increasing aware
   **Usage**: To provide an overview of what the platform offers and guide users to the main sections like Forums, Counseling, or Articles.
 
   <div style="display: flex; justify-content: center; margin-bottom: 40px;">
-    <img src="public/docs/homepage.png" alt="Homepage" style="width: 50%; height: auto;">
-    <img src="public/docs/homepage-mobile.png" alt="Homepage Mobile" style="width: 15%; height: auto;">
+    <img src="public/docs/homepage.png" alt="Homepage" style="width: 60%; height: auto;">
+    <img src="public/docs/homepage-mobile.png" alt="Homepage Mobile" style="width: 20%; height: auto;">
   </div>
 
 - Register = "/register"

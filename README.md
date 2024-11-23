@@ -15,8 +15,9 @@ The Zenzone App aims to bridge this gap by offering essential support and resour
    - [Libraries and Dependencies](#libraries-and-dependencies)
    - [Database](#database)
    - [Design Tools](#design-tools)
-6. [User Flow](#user-flow)
-7. [Pages](#pages)
+6. [ERD](#ERD)
+8. [User Flow](#user-flow)
+9. [Pages](#pages)
    - [Homepage](#homepage)
    - [Register](#register)
    - [Login](#login)
@@ -25,22 +26,22 @@ The Zenzone App aims to bridge this gap by offering essential support and resour
    - [Article Page](#article-page)
    - [Diary Page](#diary-page)
    - [Profile](#profile)
-8. [Feature](#feature)
+10. [Feature](#feature)
    - [Login / Register Functionality](#login--register-functionality)
    - [Forum Page](#forum-page)
    - [Counseling Page](#counseling-page)
    - [Article Page](#article-page-1)
    - [Diary Page](#diary-page-1)
    - [Profile Page](#profile-page)
-9. [Prerequisites](#prerequisites)
-10. [Run in Local](#run-in-local)
+11. [Prerequisites](#prerequisites)
+12. [Run in Local](#run-in-local)
     - [Clone or Pulling from Repo](#clone-or-pulling-from-repo)
     - [Optional](#optional)
     - [Install Dependency](#install-dependency)
     - [Run](#run)
     - [Test Build/Deployment](#test-builddeployment)
-11. [Future Development Features](#future-development-features)
-12. [Team Developer](#team-developer)
+13. [Future Development Features](#future-development-features)
+14. [Team Developer](#team-developer)
 
 ## Problem Statement
 
@@ -87,9 +88,19 @@ The Zenzone App is developed to address mental health issues by increasing aware
 
 - Figma
 
-## User Flow
+## ERD
 
-![User Flow]()
+![User Flow](public/zen-zone-ERD.png)
+
+## User FLow
+  <div style="display: flex; flex-direction: column; justify-content: center; margin-bottom: 40px;">
+    <img src="public/docs/zen-zone-login.drawio.png" alt="Homepage" style="width: 100%; height: auto;">
+    <img src="public/docs/zen-zone-forumPage.drawio.png" alt="Homepage Mobile" style="width: 100%; height: auto;">
+    <img src="public/docs/zen-zone-articlePage.drawio.png" alt="Homepage" style="width: 100%; height: auto;">
+    <img src="public/docs/zen-zone-counselingPage.drawio.png" alt="Homepage Mobile" style="width: 100%; height: auto;">
+    <img src="public/docs/zen-zone-diaryPage.drawio.png" alt="Homepage Mobile" style="width: 100%; height: auto;">
+    <img src="public/docs/zen-zone-profilePage.drawio.png" alt="Homepage Mobile" style="width: 100%; height: auto;">
+  </div>
 
 ## Pages
 
@@ -97,58 +108,77 @@ The Zenzone App is developed to address mental health issues by increasing aware
 
   **Usage**: To provide an overview of what the platform offers and guide users to the main sections like Forums, Counseling, or Articles.
 
-  ![homepage](public/docs/homepage.png)
-
-  ![homepage Mobile](public/docs/homepage-mobile.png)
+  <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+    <img src="public/docs/homepage.png" alt="Homepage" style="width: 80%; height: auto;">
+    <img src="public/docs/homepage-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+  </div>
 
 - Register = "/register"
 
   **Usage**: To onboard new users by capturing essential information and creating an account.
 
-  ![register](public/docs/register.png)
-  ![register mobile](public/docs/register-mobile.png)
+  <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+    <img src="public/docs/register.png" alt="Homepage" style="width: 80%; height: auto;">
+    <img src="public/docs/register-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+    <br>
+    <br>
+  </div>
 
 - Login = "/login"
 
   **Usage**: To authenticate users and grant them access to the platform’s features.
 
-  ![Login](public/docs/login.png)
-  ![Login mobile](public/docs/login-mobile.png)
+  <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+    <img src="public/docs/login.png" alt="Homepage" style="width: 80%; height: auto;">
+    <img src="public/docs/login-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+  </div>
 
 - Forum = "/forum"
 
   **Usage**: To foster community interaction by providing a platform for discussions on various topics related to the application’s focus.
 
-  ![Forum](public/docs/forum.png)
-  ![Forum mobile](public/docs/forum-mobile.png)
+  <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+    <img src="public/docs/forum.png" alt="Homepage" style="width: 80%; height: auto;">
+    <img src="public/docs/forum-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+  </div>
 
 - Consulting = "/consulting"
 
   **Usage**: To provide users with an easy way to find and book sessions with professional consultants or counselors.
 
-  ![Counseling](public/docs/counseling.png)
-  ![Counseling mobile](public/docs/counseling-mobile.png)
+  <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+    <img src="public/docs/counseling.png" alt="Homepage" style="width: 80%; height: auto;">
+    <img src="public/docs/counseling-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+  </div>
 
 - Article = "/article"
 
   **Usage**: To inform and engage users with high-quality content related to the platform’s niche.
 
-  ![Article](public/docs/article.png)
-  ![Article mobile](public/docs/article-mobile.png)
+  <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+    <img src="public/docs/article.png" alt="Homepage" style="width: 80%; height: auto;">
+    <img src="public/docs/article-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+  </div>
+
 
 - Diary page = "/diary"
 
   **Usage**: To allow users to manage their personal diaries within the application, providing easy access to past entries and the ability to add new ones.
 
-  ![Diary](public/docs/diary.png)
-  ![Diary mobile](public/docs/diary-mobile.png)
+  <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+    <img src="public/docs/diary.png" alt="Homepage" style="width: 80%; height: auto;">
+    <img src="public/docs/diary-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+  </div>
+
 
 - Profile = "/profile"
 
   **Usage**: To show user profile account.
 
-  ![Profile](public/docs/profile.png)
-  ![Profile mobile](public/docs/profile-mobile.png)
+  <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+    <img src="public/docs/profile.png" alt="Homepage" style="width: 80%; height: auto;">
+    <img src="public/docs/profile-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+  </div>
 
 ## Feature
 
@@ -173,8 +203,10 @@ The Zenzone App is developed to address mental health issues by increasing aware
   - **Like**:  
     Users can like posts or comments to show their support or agreement.
 
-    ![Forum report](public/docs/forum-report.png)
-    ![Forum report moobile](public/docs/forum-report-mobile.png)
+    <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+      <img src="public/docs/forum-report.png" alt="Homepage" style="width: 80%; height: auto;">
+      <img src="public/docs/forum-report-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+    </div>
 
 ### Counseling Page
 
@@ -202,16 +234,20 @@ The Zenzone App is developed to address mental health issues by increasing aware
 - **Edit and Delete**:  
   Users can edit or delete their diary entries as needed.
 
-  ![Diary add](public/docs/diary-add.png)
-  ![Diary add mobile](public/docs/diary-add-mobile.png)
+  <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+    <img src="public/docs/diary-add.png" alt="Homepage" style="width: 80%; height: auto;">
+    <img src="public/docs/diary-add-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+  </div>
 
 ### Profile Page
 
 - **Profile Status**
   Users can check his/her recent status posted, liked, bookmark
 
-  ![Profile bookmark](public/docs/profile-bookmark.png)
-  ![Profile bookmark mobile](public/docs/profile-bookmark-mobile.png)
+  <div style="display: flex; justify-content: center; margin-bottom: 40px;">
+    <img src="public/docs/profile-bookmark.png" alt="Homepage" style="width: 80%; height: auto;">
+    <img src="public/docs/profile-bookmark-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+  </div>
 
 ## Prerequisities
 

@@ -110,7 +110,7 @@ The Zenzone App is developed to address mental health issues by increasing aware
 
   <div style="display: flex; justify-content: center; margin-bottom: 40px;">
     <img src="public/docs/homepage.png" alt="Homepage" style="width: 70%; height: auto;">
-    <img src="public/docs/homepage-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+    <img src="public/docs/homepage-mobile.png" alt="Homepage Mobile" style="width: 20%; height: auto;">
   </div>
 
 - Register = "/register"
@@ -118,8 +118,8 @@ The Zenzone App is developed to address mental health issues by increasing aware
   **Usage**: To onboard new users by capturing essential information and creating an account.
 
   <div style="display: flex; justify-content: center; margin-bottom: 40px;">
-    <img src="public/docs/register.png" alt="Homepage" style="width: 80%; height: auto;">
-    <img src="public/docs/register-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+    <img src="public/docs/register.png" alt="Homepage" style="width: 70%; height: auto;">
+    <img src="public/docs/register-mobile.png" alt="Homepage Mobile" style="width: 20%; height: auto;">
     <br>
     <br>
   </div>
@@ -129,8 +129,8 @@ The Zenzone App is developed to address mental health issues by increasing aware
   **Usage**: To authenticate users and grant them access to the platform’s features.
 
   <div style="display: flex; justify-content: center; margin-bottom: 40px;">
-    <img src="public/docs/login.png" alt="Homepage" style="width: 80%; height: auto;">
-    <img src="public/docs/login-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+    <img src="public/docs/login.png" alt="Homepage" style="width: 70%; height: auto;">
+    <img src="public/docs/login-mobile.png" alt="Homepage Mobile" style="width: 20%; height: auto;">
   </div>
 
 - Forum = "/forum"
@@ -138,8 +138,8 @@ The Zenzone App is developed to address mental health issues by increasing aware
   **Usage**: To foster community interaction by providing a platform for discussions on various topics related to the application’s focus.
 
   <div style="display: flex; justify-content: center; margin-bottom: 40px;">
-    <img src="public/docs/forum.png" alt="Homepage" style="width: 80%; height: auto;">
-    <img src="public/docs/forum-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+    <img src="public/docs/forum.png" alt="Homepage" style="width: 70%; height: auto;">
+    <img src="public/docs/forum-mobile.png" alt="Homepage Mobile" style="width: 20%; height: auto;">
   </div>
 
 - Consulting = "/consulting"
@@ -147,8 +147,8 @@ The Zenzone App is developed to address mental health issues by increasing aware
   **Usage**: To provide users with an easy way to find and book sessions with professional consultants or counselors.
 
   <div style="display: flex; justify-content: center; margin-bottom: 40px;">
-    <img src="public/docs/counseling.png" alt="Homepage" style="width: 80%; height: auto;">
-    <img src="public/docs/counseling-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+    <img src="public/docs/counseling.png" alt="Homepage" style="width: 70%; height: auto;">
+    <img src="public/docs/counseling-mobile.png" alt="Homepage Mobile" style="width: 20%; height: auto;">
   </div>
 
 - Article = "/article"
@@ -156,8 +156,8 @@ The Zenzone App is developed to address mental health issues by increasing aware
   **Usage**: To inform and engage users with high-quality content related to the platform’s niche.
 
   <div style="display: flex; justify-content: center; margin-bottom: 40px;">
-    <img src="public/docs/article.png" alt="Homepage" style="width: 80%; height: auto;">
-    <img src="public/docs/article-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+    <img src="public/docs/article.png" alt="Homepage" style="width: 70%; height: auto;">
+    <img src="public/docs/article-mobile.png" alt="Homepage Mobile" style="width: 20%; height: auto;">
   </div>
 
 
@@ -166,8 +166,8 @@ The Zenzone App is developed to address mental health issues by increasing aware
   **Usage**: To allow users to manage their personal diaries within the application, providing easy access to past entries and the ability to add new ones.
 
   <div style="display: flex; justify-content: center; margin-bottom: 40px;">
-    <img src="public/docs/diary.png" alt="Homepage" style="width: 80%; height: auto;">
-    <img src="public/docs/diary-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+    <img src="public/docs/diary.png" alt="Homepage" style="width: 70%; height: auto;">
+    <img src="public/docs/diary-mobile.png" alt="Homepage Mobile" style="width: 20%; height: auto;">
   </div>
 
 
@@ -176,8 +176,8 @@ The Zenzone App is developed to address mental health issues by increasing aware
   **Usage**: To show user profile account.
 
   <div style="display: flex; justify-content: center; margin-bottom: 40px;">
-    <img src="public/docs/profile.png" alt="Homepage" style="width: 80%; height: auto;">
-    <img src="public/docs/profile-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+    <img src="public/docs/profile.png" alt="Homepage" style="width: 70%; height: auto;">
+    <img src="public/docs/profile-mobile.png" alt="Homepage Mobile" style="width: 20%; height: auto;">
   </div>
 
 ## Feature
@@ -204,8 +204,8 @@ The Zenzone App is developed to address mental health issues by increasing aware
     Users can like posts or comments to show their support or agreement.
 
     <div style="display: flex; justify-content: center; margin-bottom: 40px;">
-      <img src="public/docs/forum-report.png" alt="Homepage" style="width: 80%; height: auto;">
-      <img src="public/docs/forum-report-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+      <img src="public/docs/forum-report.png" alt="Homepage" style="width:70%; height: auto;">
+      <img src="public/docs/forum-report-mobile.png" alt="Homepage Mobile" style="width: 20%; height: auto;">
     </div>
 
 ### Counseling Page
@@ -235,8 +235,8 @@ The Zenzone App is developed to address mental health issues by increasing aware
   Users can edit or delete their diary entries as needed.
 
   <div style="display: flex; justify-content: center; margin-bottom: 40px;">
-    <img src="public/docs/diary-add.png" alt="Homepage" style="width: 80%; height: auto;">
-    <img src="public/docs/diary-add-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+    <img src="public/docs/diary-add.png" alt="Homepage" style="width:70%; height: auto;">
+    <img src="public/docs/diary-add-mobile.png" alt="Homepage Mobile" style="width: 20%; height: auto;">
   </div>
 
 ### Profile Page
@@ -245,8 +245,8 @@ The Zenzone App is developed to address mental health issues by increasing aware
   Users can check his/her recent status posted, liked, bookmark
 
   <div style="display: flex; justify-content: center; margin-bottom: 40px;">
-    <img src="public/docs/profile-bookmark.png" alt="Homepage" style="width: 80%; height: auto;">
-    <img src="public/docs/profile-bookmark-mobile.png" alt="Homepage Mobile" style="width: 25%; height: auto;">
+    <img src="public/docs/profile-bookmark.png" alt="Homepage" style="width:70%; height: auto;">
+    <img src="public/docs/profile-bookmark-mobile.png" alt="Homepage Mobile" style="width: 20%; height: auto;">
   </div>
 
 ## Prerequisities

@@ -1,9 +1,8 @@
 ## Zen-App
 
-“Zen-App: 
-Mental health is gaining attention worldwide, including in Indonesia. Despite growing awareness of its importance, stigma and a lack of understanding still prevent many from seeking help. 
+“Zen-App:
+Mental health is gaining attention worldwide, including in Indonesia. Despite growing awareness of its importance, stigma and a lack of understanding still prevent many from seeking help.
 The Zenzone App aims to bridge this gap by offering essential support and resources." This is where the role of the Zenzone App is highly needed to provide the right support and resources.
-
 
 ## Table of Contents
 
@@ -43,8 +42,6 @@ The Zenzone App aims to bridge this gap by offering essential support and resour
 11. [Future Development Features](#future-development-features)
 12. [Team Developer](#team-developer)
 
-
-
 ## Problem Statement
 
 - **Increasing Cases of Mental Disorders**:  
@@ -56,7 +53,6 @@ The Zenzone App aims to bridge this gap by offering essential support and resour
 - **Negative Stigma**:  
   There is still a lot of negative stigma related to mental disorders in society, making people reluctant to acknowledge their problems or seek help. The fear of negative judgment or discrimination often prevents individuals from openly discussing their mental health and getting the necessary treatment.
 
-
 ## Solution
 
 The Zenzone App is developed to address mental health issues by increasing awareness, providing support, facilitating access to resources, encouraging help-seeking behavior, and reducing stigma. It offers a safe online community, accurate information, and tools to manage mental health, thus bridging the gap between individuals and quality mental health care.
@@ -64,7 +60,7 @@ The Zenzone App is developed to address mental health issues by increasing aware
 ## Deployment
 
 - Backend Repository : https://github.com/Adsyarif/Zen-Zone-Server-App
-- Platform : 
+- Platform :
 
 ## Tech stack
 
@@ -85,9 +81,9 @@ The Zenzone App is developed to address mental health issues by increasing aware
 
 ### Database
 
-- Supabase 
+- Supabase
 
-### Design Tools 
+### Design Tools
 
 - Figma
 
@@ -99,41 +95,66 @@ The Zenzone App is developed to address mental health issues by increasing aware
 
 - Homepage = "/homepage"
 
-  **Usage**:  To provide an overview of what the platform offers and guide users to the main sections like Forums, Counseling, or Articles.
-  
+  **Usage**: To provide an overview of what the platform offers and guide users to the main sections like Forums, Counseling, or Articles.
+
+  ![homepage](public/docs/homepage.png)
+
+  ![homepage Mobile](public/docs/homepage-mobile.png)
+
 - Register = "/register"
 
   **Usage**: To onboard new users by capturing essential information and creating an account.
-  
+
+  ![register](public/docs/register.png)
+  ![register mobile](public/docs/register-mobile.png)
+
 - Login = "/login"
 
   **Usage**: To authenticate users and grant them access to the platform’s features.
 
+  ![Login](public/docs/login.png)
+  ![Login mobile](public/docs/login-mobile.png)
+
 - Forum = "/forum"
 
   **Usage**: To foster community interaction by providing a platform for discussions on various topics related to the application’s focus.
-  
+
+  ![Forum](public/docs/forum.png)
+  ![Forum mobile](public/docs/forum-mobile.png)
+
 - Consulting = "/consulting"
 
   **Usage**: To provide users with an easy way to find and book sessions with professional consultants or counselors.
-  
+
+  ![Counseling](public/docs/counseling.png)
+  ![Counseling mobile](public/docs/counseling-mobile.png)
+
 - Article = "/article"
 
   **Usage**: To inform and engage users with high-quality content related to the platform’s niche.
+
+  ![Article](public/docs/article.png)
+  ![Article mobile](public/docs/article-mobile.png)
 
 - Diary page = "/diary"
 
   **Usage**: To allow users to manage their personal diaries within the application, providing easy access to past entries and the ability to add new ones.
 
+  ![Diary](public/docs/diary.png)
+  ![Diary mobile](public/docs/diary-mobile.png)
+
 - Profile = "/profile"
 
   **Usage**: To show user profile account.
-  
+
+  ![Profile](public/docs/profile.png)
+  ![Profile mobile](public/docs/profile-mobile.png)
 
 ## Feature
-  
+
 ### Login / Register functionality
-   -. Onboard new user to be listed on the database
+
+-. Onboard new user to be listed on the database
 
 ### Forum Page
 
@@ -152,6 +173,9 @@ The Zenzone App is developed to address mental health issues by increasing aware
   - **Like**:  
     Users can like posts or comments to show their support or agreement.
 
+    ![Forum report](public/docs/forum-report.png)
+    ![Forum report moobile](public/docs/forum-report-mobile.png)
+
 ### Counseling Page
 
 - **Counselor List**:  
@@ -167,24 +191,34 @@ The Zenzone App is developed to address mental health issues by increasing aware
     Users can give reviews and ratings to counselors based on their experience.
 
 ### Artile Page
+
 - **Article List**
   Counselor can post a article related regarding mental health
 
 ### Diary Page
+
 - **User Diary**:  
   Users can write their thoughts and track their mood for each diary entry.
-  
 - **Edit and Delete**:  
   Users can edit or delete their diary entries as needed.
 
+  ![Diary add](public/docs/diary-add.png)
+  ![Diary add mobile](public/docs/diary-add-mobile.png)
+
 ### Profile Page
+
 - **Profile Status**
-  Users can check his/her recent status posted
-  
+  Users can check his/her recent status posted, liked, bookmark
+
+  ![Profile bookmark](public/docs/profile-bookmark.png)
+  ![Profile bookmark mobile](public/docs/profile-bookmark-mobile.png)
+
 ## Prerequisities
 
 ### **Node.js and npm/yarn installed on your machine **
+
 ## Note: It is crucial to have Node.js and npm/yarn installed on your machine to run the project locally. If you don't have them installed, please follow the instructions below:
+
     -.Install Node.js
     -.Install Yarn (recommended) or use npm
 
@@ -199,7 +233,6 @@ The Zenzone App is developed to address mental health issues by increasing aware
 Checkout to determine branch (`git checkout -b feature`)
 
 ### Instal Dependency
-
 
 yarn install
 
@@ -217,30 +250,30 @@ yarn preview
 ## Future Development Features
 
 ### Booked List Page
+
 List page of counselor that user booked could be shown in the profile
 
-### 
+###
 
-### 
-
-
-
-
+###
 
 ## Team Developer
 
 Here is the list of our development team members:
 
 **Project Leader**:
+
 - Meirth Maulida Hartanti
 
 **Full Stack Engineers**:
+
 - Alfath Bagus Kurnia
 - Desya Saskia Sarbini
 - Muhammad Adrisa Nur Syarif
 - Widia Puspitasari
 
 **Frontend Engineers**:
+
 - Christopher Jordan Lan Garcia
 - Egbert Felica Wibianto
 - Muhammad Umar
@@ -255,4 +288,3 @@ You can start editing the page by modifying `pages/index.tsx`. The page auto-upd
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
